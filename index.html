@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ShortsMinter™ — AI-Powered YouTube Shorts on Your Own PC</title>
+<meta name="description" content="ShortsMinter turns your long videos into viral YouTube Shorts using AI — running entirely on your own PC. No subscription. No cloud. No limits.">
+<meta property="og:title" content="ShortsMinter™ — AI-Powered Shorts on Your PC">
+<meta property="og:description" content="No subscription. No cloud. Your GPU. Your data. One time payment.">
+<meta property="og:url" content="https://shortsminter.com">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --gold:#f5c518;
+    --gold-dark:#b8860b;
+    --black:#08080f;
+    --panel:#0d0d14;
+    --panel2:#13141a;
+    --text:#dde1ec;
+    --sub:#5a5f72;
+    --border:#1e1e2e;
+    --danger:#ef4444;
+    --green:#22c55e;
+  }
+  html{scroll-behavior:smooth}
+  body{background:var(--black);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;font-size:16px;line-height:1.7}
+  a{color:var(--gold);text-decoration:none}
+  a:hover{text-decoration:underline}
+
+  /* NAV */
+  nav{background:var(--black);border-bottom:1px solid var(--border);padding:14px 40px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+  .nav-logo{display:flex;align-items:center;gap:12px}
+  .nav-mark{width:38px;height:38px;background:var(--panel);border:1.5px solid var(--gold);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--gold);font-weight:700;flex-shrink:0}
+  .nav-name{font-size:16px;font-weight:700;color:#fff}
+  .nav-sub{font-size:11px;color:var(--sub)}
+  .nav-btn{background:var(--gold);color:var(--black);border:none;padding:10px 24px;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;text-decoration:none;transition:opacity .2s}
+  .nav-btn:hover{opacity:.85;text-decoration:none}
+
+  /* HERO */
+  .hero{background:var(--black);padding:90px 40px 70px;text-align:center;border-bottom:1px solid var(--border)}
+  .badge{display:inline-block;background:#1a1600;border:1px solid var(--gold);color:var(--gold);font-size:11px;padding:5px 16px;border-radius:20px;margin-bottom:28px;letter-spacing:1.5px;font-weight:600}
+  .hero h1{font-size:52px;font-weight:800;color:#fff;line-height:1.1;margin-bottom:20px;max-width:800px;margin-left:auto;margin-right:auto}
+  .hero h1 span{color:var(--gold)}
+  .hero p{font-size:18px;color:#888;max-width:580px;margin:0 auto 40px;line-height:1.8}
+  .hero-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+  .btn-primary{background:var(--gold);color:var(--black);border:none;padding:16px 36px;border-radius:10px;font-size:16px;font-weight:700;cursor:pointer;text-decoration:none;transition:opacity .2s}
+  .btn-primary:hover{opacity:.85;text-decoration:none}
+  .btn-secondary{background:transparent;color:var(--gold);border:2px solid var(--gold);padding:16px 36px;border-radius:10px;font-size:16px;font-weight:700;cursor:pointer;text-decoration:none;transition:opacity .2s}
+  .btn-secondary:hover{opacity:.75;text-decoration:none}
+  .price-note{margin-top:18px;font-size:13px;color:var(--sub)}
+  .founding-note{margin-top:8px;font-size:12px;color:var(--gold);opacity:.7}
+
+  /* SECTIONS */
+  section{padding:70px 40px;border-bottom:1px solid var(--border)}
+  .section-label{text-align:center;font-size:11px;color:var(--gold);letter-spacing:3px;margin-bottom:12px;font-weight:600}
+  .section-title{text-align:center;font-size:32px;font-weight:700;color:#fff;margin-bottom:10px}
+  .section-sub{text-align:center;font-size:16px;color:#666;margin-bottom:48px}
+
+  /* COMPARISON */
+  .comparison{background:var(--panel)}
+  .comp-wrap{max-width:760px;margin:0 auto}
+  table{width:100%;border-collapse:collapse}
+  th{padding:12px 16px;font-size:12px;font-weight:600;color:#888;text-align:left;border-bottom:1px solid var(--border)}
+  th:not(:first-child){text-align:center}
+  td{padding:13px 16px;font-size:14px;color:#ccc;border-bottom:1px solid #0d0d14}
+  td:not(:first-child){text-align:center}
+  tr.highlight td{color:#fff}
+  tr.highlight td:first-child{color:var(--gold);font-weight:700}
+  .tick{color:var(--gold);font-size:16px;font-weight:700}
+  .cross{color:#333;font-size:16px}
+  .disclaimer{text-align:center;font-size:11px;color:var(--sub);margin-top:16px}
+
+  /* FEATURES */
+  .features{background:var(--black)}
+  .feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;max-width:900px;margin:0 auto}
+  .feat-card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:22px}
+  .feat-icon{font-size:28px;margin-bottom:12px}
+  .feat-card h3{font-size:15px;font-weight:700;color:#fff;margin-bottom:6px}
+  .feat-card p{font-size:13px;color:#666;line-height:1.6}
+
+  /* HARDWARE */
+  .hardware{background:var(--panel)}
+  .hw-box{max-width:680px;margin:0 auto;background:var(--black);border:1px solid var(--border);border-radius:16px;padding:32px;text-align:center}
+  .hw-line{font-family:'Cascadia Code','Courier New',monospace;font-size:13px;color:var(--gold);background:var(--panel2);padding:12px 20px;border-radius:8px;margin-bottom:12px;text-align:left}
+  .hw-note{font-size:13px;color:#555;margin-top:16px}
+
+  /* PRICING */
+  .pricing{background:var(--black)}
+  .price-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;max-width:760px;margin:0 auto}
+  .price-card{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:28px}
+  .price-card.featured{border:2px solid var(--gold)}
+  .price-badge{display:inline-block;background:#1a1600;color:var(--gold);font-size:10px;font-weight:700;padding:3px 10px;border-radius:4px;margin-bottom:10px;letter-spacing:1px}
+  .price-card h3{font-size:16px;font-weight:700;color:#fff;margin-bottom:4px}
+  .price-amount{font-size:42px;font-weight:800;color:var(--gold);margin:12px 0 4px}
+  .price-period{font-size:13px;color:var(--sub);margin-bottom:20px}
+  .price-card ul{list-style:none}
+  .price-card ul li{font-size:13px;color:#888;padding:6px 0;border-bottom:1px solid var(--border)}
+  .price-card ul li::before{content:"— ";color:var(--gold)}
+  .renewal-note{text-align:center;font-size:12px;color:var(--sub);margin-top:20px;max-width:560px;margin-left:auto;margin-right:auto}
+
+  /* SPECS */
+  .specs{background:var(--panel)}
+  .specs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;max-width:860px;margin:0 auto}
+  .spec-card{background:var(--black);border:1px solid var(--border);border-radius:10px;padding:18px}
+  .spec-tier{font-size:11px;font-weight:700;margin-bottom:10px;letter-spacing:1px}
+  .spec-card table{width:100%}
+  .spec-card td{font-size:12px;padding:4px 0;border:none;color:#888;text-align:left}
+  .spec-card td:first-child{color:var(--sub);width:70px}
+
+  /* CTA */
+  .cta{background:var(--black);text-align:center}
+  .cta h2{font-size:36px;font-weight:700;color:#fff;margin-bottom:12px}
+  .cta p{font-size:16px;color:#666;margin-bottom:36px}
+  .spots-left{font-size:13px;color:var(--gold);margin-top:14px;font-weight:600}
+
+  /* FOOTER */
+  footer{background:var(--black);border-top:1px solid var(--border);padding:28px 40px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+  footer p{font-size:12px;color:#333}
+  .footer-links{display:flex;gap:20px}
+  .footer-links a{font-size:12px;color:#444}
+  .footer-links a:hover{color:var(--gold)}
+
+  /* RESPONSIVE */
+  @media(max-width:640px){
+    nav{padding:12px 20px}
+    .hero{padding:60px 20px 50px}
+    .hero h1{font-size:34px}
+    section{padding:50px 20px}
+    .hero-btns{flex-direction:column;align-items:center}
+    footer{flex-direction:column;text-align:center}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <div class="nav-mark">S</div>
+    <div>
+      <div class="nav-name">ShortsMinter™</div>
+      <div class="nav-sub">by Masondogg Studios</div>
+    </div>
+  </div>
+  <a href="https://masondogg.gumroad.com" class="nav-btn" target="_blank">Get Early Access — $15</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="badge">FOUNDING MEMBER PRICING — FIRST 100 ONLY</div>
+  <h1>Turn long videos into<br><span>viral Shorts</span> — on your PC.</h1>
+  <p>AI finds your best moments, generates captions and exports ready-to-upload Shorts. No cloud. No subscription. No limits. Your hardware. Your data.</p>
+  <div class="hero-btns">
+    <a href="https://masondogg.gumroad.com" class="btn-primary" target="_blank">Get ShortsMinter — $15</a>
+    <a href="#features" class="btn-secondary">See Features</a>
+  </div>
+  <div class="price-note">One time payment &nbsp;·&nbsp; Lifetime license &nbsp;·&nbsp; Windows 10/11</div>
+  <div class="founding-note">⚡ Founding member price — goes to $49 at full launch</div>
+</div>
+
+<!-- COMPARISON -->
+<section class="comparison">
+  <div class="section-label">WHY SHORTSMINTER</div>
+  <div class="section-title">Stop renting software to edit your own videos.</div>
+  <div class="section-sub">The competition charges by the month. Forever.</div>
+  <div class="comp-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Tool</th>
+          <th>Price</th>
+          <th>Your data stays local</th>
+          <th>No export limits</th>
+          <th>Works offline</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="highlight">
+          <td>ShortsMinter™</td>
+          <td style="color:var(--gold);font-weight:700">$49 once</td>
+          <td><span class="tick">✓</span></td>
+          <td><span class="tick">✓</span></td>
+          <td><span class="tick">✓</span></td>
+        </tr>
+        <tr>
+          <td>Opus Clip</td>
+          <td>$29/mo = $348/yr</td>
+          <td><span class="cross">✗</span></td>
+          <td><span class="cross">✗</span></td>
+          <td><span class="cross">✗</span></td>
+        </tr>
+        <tr>
+          <td>CapCut Pro</td>
+          <td>$13/mo = $156/yr</td>
+          <td><span class="cross">✗</span></td>
+          <td><span class="cross">✗</span></td>
+          <td><span class="cross">✗</span></td>
+        </tr>
+        <tr>
+          <td>Vidyo.ai</td>
+          <td>$30/mo = $360/yr</td>
+          <td><span class="cross">✗</span></td>
+          <td><span class="cross">✗</span></td>
+          <td><span class="cross">✗</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="disclaimer">ShortsMinter doesn't just make Shorts — it shows you the power already sitting inside your PC.</p>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features" id="features">
+  <div class="section-label">FEATURES</div>
+  <div class="section-title">Everything you need. Nothing you don't.</div>
+  <div class="section-sub">Built for creators who want results, not complexity.</div>
+  <div class="feat-grid">
+    <div class="feat-card">
+      <div class="feat-icon">⚡</div>
+      <h3>AI clip finder</h3>
+      <p>Analyses your video and scores every moment to find what will perform best on Shorts.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">📝</div>
+      <h3>Auto captions</h3>
+      <p>Karaoke-style word-by-word captions powered by WhisperX. No manual editing needed.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">😀</div>
+      <h3>Smart emoji overlay</h3>
+      <p>AI picks the right emoji for each moment based on what is actually being said.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🖥</div>
+      <h3>Runs on your PC</h3>
+      <p>NVIDIA GPU accelerated. Your videos never leave your machine. No cloud fees ever.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">📦</div>
+      <h3>Batch export</h3>
+      <p>Queue unlimited clips and export overnight. No credit limits. No upload caps.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🎨</div>
+      <h3>Blurred backgrounds</h3>
+      <p>Auto-formats landscape video into vertical 9:16 with a cinematic blurred fill.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🔊</div>
+      <h3>Audio normalization</h3>
+      <p>Balances audio to -14 LUFS automatically. Every clip sounds professional.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">💻</div>
+      <h3>Hardware readout</h3>
+      <p>Shows your CPU, GPU, RAM type and speed. Know your machine like never before.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HARDWARE -->
+<section class="hardware">
+  <div class="section-label">YOUR HARDWARE. YOUR SOFTWARE.</div>
+  <div class="section-title">ShortsMinter knows your machine.</div>
+  <div class="section-sub">The moment it launches — it reads your hardware and puts it to work.</div>
+  <div class="hw-box">
+    <div class="hw-line">RAM: 32.0 GB DDR5 6000MHz &nbsp;|&nbsp; CPU: Intel Core i9-14900K</div>
+    <div class="hw-line">✓ NVIDIA GeForce RTX 4070 Ti (12.0 GB VRAM) &nbsp;|&nbsp; Whisper:✓ &nbsp;|&nbsp; FFmpeg:✓</div>
+    <p class="hw-note">Your actual specs shown live every time you launch. No guessing what your PC can handle.</p>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="section-label">PRICING</div>
+  <div class="section-title">Simple. Honest. One time.</div>
+  <div class="section-sub">Your license works forever. Updates funded by people who love the app.</div>
+  <div style="max-width:480px;margin:0 auto">
+    <div class="price-card featured" style="text-align:center">
+      <div class="price-badge">FOUNDING MEMBER — FIRST 100 ONLY</div>
+      <h3>Early Access License</h3>
+      <div class="price-amount">$15</div>
+      <div class="price-period">one time payment · lifetime license</div>
+      <ul style="text-align:left;margin-bottom:24px">
+        <li>Full app — zero limitations</li>
+        <li>Lifetime free updates — forever</li>
+        <li>Founding member badge in app</li>
+        <li>Your name in the founders page</li>
+        <li>Direct feedback channel to developer</li>
+        <li>Shape the future of ShortsMinter</li>
+      </ul>
+      <a href="https://masondogg.gumroad.com" class="btn-primary" target="_blank" style="display:block;text-align:center;padding:14px;font-size:16px">Get Founding Access — $15</a>
+      <p style="font-size:12px;color:var(--sub);margin-top:12px">Price goes to $49 after founding 100 spots are filled.</p>
+    </div>
+  </div>
+  <p class="renewal-note" style="margin-top:24px">Full release pricing announced after the founding member phase closes. Get in now before the price goes up.</p>
+</section>
+
+<!-- SPECS -->
+<section class="specs">
+  <div class="section-label">SYSTEM REQUIREMENTS</div>
+  <div class="section-title">What do you need to run it?</div>
+  <div class="section-sub">ShortsMinter scales from modest hardware to gaming rigs.</div>
+  <div class="specs-grid">
+    <div class="spec-card">
+      <div class="spec-tier" style="color:#f59e0b">⚠ BARE MINIMUM</div>
+      <table>
+        <tr><td>OS</td><td>Windows 10 64-bit</td></tr>
+        <tr><td>CPU</td><td>i5 8th gen / Ryzen 5</td></tr>
+        <tr><td>RAM</td><td>8 GB</td></tr>
+        <tr><td>GPU</td><td>GTX 1060 NVIDIA</td></tr>
+        <tr><td>Storage</td><td>10 GB free</td></tr>
+      </table>
+    </div>
+    <div class="spec-card">
+      <div class="spec-tier" style="color:var(--gold)">✅ RECOMMENDED</div>
+      <table>
+        <tr><td>OS</td><td>Windows 10/11 64-bit</td></tr>
+        <tr><td>CPU</td><td>i7 10th gen / Ryzen 7</td></tr>
+        <tr><td>RAM</td><td>16 GB</td></tr>
+        <tr><td>GPU</td><td>RTX 2060 NVIDIA+</td></tr>
+        <tr><td>Storage</td><td>25 GB free</td></tr>
+      </table>
+    </div>
+    <div class="spec-card">
+      <div class="spec-tier" style="color:#60a5fa">🚀 IDEAL</div>
+      <table>
+        <tr><td>OS</td><td>Windows 11 64-bit</td></tr>
+        <tr><td>CPU</td><td>i9 14th / Ryzen 9</td></tr>
+        <tr><td>RAM</td><td>32 GB+</td></tr>
+        <tr><td>GPU</td><td>RTX 4070 Ti+ NVIDIA</td></tr>
+        <tr><td>Storage</td><td>SSD 50 GB+</td></tr>
+      </table>
+    </div>
+  </div>
+  <p style="text-align:center;font-size:12px;color:#444;margin-top:20px">GPU acceleration requires NVIDIA GPU with NVENC. AMD and Intel GPU users run on CPU encoding automatically.</p>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <h2>Ready to mint your first Short?</h2>
+  <p>Join the first 100 founding members at the early access price.</p>
+  <a href="https://masondogg.gumroad.com" class="btn-primary" target="_blank" style="font-size:17px;padding:18px 44px">Get Early Access — $15</a>
+  <div class="spots-left">⚡ Founding member price — limited to 100 licenses</div>
+  <div class="price-note" style="margin-top:10px">Windows 10/11 &nbsp;·&nbsp; NVIDIA GPU recommended &nbsp;·&nbsp; Python required</div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Masondogg Studios, LLC &nbsp;·&nbsp; ShortsMinter™</p>
+  <div class="footer-links">
+    <a href="terms.html">Terms of Use</a>
+    <a href="/cdn-cgi/l/email-protection#4d3e383d3d223f390d3e25223f393e20242339283f632e2220">Support</a>
+    <a href="https://masondogg.gumroad.com" target="_blank">B
