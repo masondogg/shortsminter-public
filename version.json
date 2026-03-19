@@ -1,0 +1,34 @@
+{
+  "version": "1.0b",
+  "app_version": "V3.4c",
+  "url": "https://shortsminter.com",
+  "runtime_version": "1.0",
+  "message": "Beta — Founding Member Release",
+  "tiers": {
+    "founding": {
+      "label": "Founding Member",
+      "badge": "⚡ Founding Member",
+      "updates": "lifetime",
+      "expires": false
+    },
+    "ambassador": {
+      "label": "Ambassador",
+      "badge": "🎖 Ambassador",
+      "updates": "365days",
+      "expires": true,
+      "expiry_days": 365
+    },
+    "standard": {
+      "label": "Standard",
+      "badge": "✅ Licensed",
+      "updates": "365days",
+      "expires": false
+    },
+    "dev": {
+      "label": "Developer",
+      "badge": "🔧 Developer",
+      "updates": "unlimited",
+      "expires": false
+    }
+  }
+}
