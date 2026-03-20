@@ -84,6 +84,61 @@ footer p{font-size:12px;color:#333}
 
 <div class="container">
 
+  <!-- Live Founders Feed -->
+  <div class="section">
+    <div class="section-label">FOUNDING MEMBERS</div>
+    <h2>The first 100 — live</h2>
+    <p>These are the people who believed in ShortsMinter before anyone else.</p>
+    <div style="background:var(--panel2);border:1px solid var(--border);border-radius:14px;padding:28px;text-align:center;margin:20px 0">
+      <div style="font-size:48px;font-weight:800;color:var(--gold)" id="founders-count">—</div>
+      <div style="font-size:13px;color:#555;margin-top:4px">of 100 founding spots claimed</div>
+      <div style="background:var(--border);border-radius:4px;height:6px;margin:16px 0;overflow:hidden">
+        <div style="background:var(--gold);height:100%;border-radius:4px;transition:width .8s ease" id="founders-bar"></div>
+      </div>
+    </div>
+    <div style="background:var(--panel2);border:2px solid var(--gold);border-radius:14px;overflow:hidden">
+      <div style="background:#1a1600;padding:12px 20px;border-bottom:1px solid var(--border)">
+        <span style="font-size:11px;color:var(--gold);letter-spacing:2px;font-weight:700">⚡ FOUNDING MEMBER ROLL CALL</span>
+      </div>
+      <div id="founders-list" style="padding:24px;min-height:120px">
+        <div style="text-align:center;padding:16px">
+          <div style="font-size:32px;margin-bottom:12px">⚡</div>
+          <div style="color:#666;font-size:14px;font-weight:600;margin-bottom:8px">Founding member names will appear here</div>
+          <div style="color:#444;font-size:13px;line-height:1.6">Names are added when members activate their license key.<br>Be among the first — your name lives here forever.</div>
+        </div>
+      </div>
+      <div style="background:#0d0d14;padding:10px 20px;border-top:1px solid var(--border);text-align:center">
+        <span style="font-size:11px;color:#444">Updates live as founding members activate · Limited to 100</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  fetch('https://raw.githubusercontent.com/masondogg/shortsminter-public/main/founders.json')
+    .then(r=>r.json())
+    .then(data=>{
+      const founders=data.founders||[];
+      const total=data.total||founders.length;
+      const max=data.max_founders||100;
+      document.getElementById('founders-count').textContent=total;
+      document.getElementById('founders-bar').style.width=(total/max*100)+'%';
+      if(founders.length>0){
+        document.getElementById('founders-list').innerHTML=founders
+          .map((f,i)=>'<span style="display:inline-block;background:#08080f;border:1px solid #1e1e2e;border-radius:6px;padding:4px 10px;margin:3px;font-size:12px;color:#888">⚡ '+f.name+'</span>')
+          .join('');
+      } else {
+        document.getElementById('founders-list').innerHTML=
+          '<div style="color:#333;font-size:13px;text-align:center;padding:16px">No founding members yet. Be the first.</div>';
+      }
+    }).catch(()=>{
+      document.getElementById('founders-count').textContent='0';
+      document.getElementById('founders-bar').style.width='0%';
+      document.getElementById('founders-list').innerHTML=
+        '<div style="color:#333;font-size:13px;text-align:center;padding:16px">Be the first founding member.</div>';
+    });
+  </script>
+
+
   <!-- What You Get -->
   <div class="section">
     <div class="section-label">YOUR LICENSE</div>
@@ -214,60 +269,6 @@ footer p{font-size:12px;color:#333}
 
 
   <hr class="divider">
-
-  <!-- Live Founders Feed -->
-  <div class="section">
-    <div class="section-label">FOUNDING MEMBERS</div>
-    <h2>The first 100 — live</h2>
-    <p>These are the people who believed in ShortsMinter before anyone else.</p>
-    <div style="background:var(--panel2);border:1px solid var(--border);border-radius:14px;padding:28px;text-align:center;margin:20px 0">
-      <div style="font-size:48px;font-weight:800;color:var(--gold)" id="founders-count">—</div>
-      <div style="font-size:13px;color:#555;margin-top:4px">of 100 founding spots claimed</div>
-      <div style="background:var(--border);border-radius:4px;height:6px;margin:16px 0;overflow:hidden">
-        <div style="background:var(--gold);height:100%;border-radius:4px;transition:width .8s ease" id="founders-bar"></div>
-      </div>
-    </div>
-    <div style="background:var(--panel2);border:2px solid var(--gold);border-radius:14px;overflow:hidden">
-      <div style="background:#1a1600;padding:12px 20px;border-bottom:1px solid var(--border)">
-        <span style="font-size:11px;color:var(--gold);letter-spacing:2px;font-weight:700">⚡ FOUNDING MEMBER ROLL CALL</span>
-      </div>
-      <div id="founders-list" style="padding:24px;min-height:120px">
-        <div style="text-align:center;padding:16px">
-          <div style="font-size:32px;margin-bottom:12px">⚡</div>
-          <div style="color:#666;font-size:14px;font-weight:600;margin-bottom:8px">Founding member names will appear here</div>
-          <div style="color:#444;font-size:13px;line-height:1.6">Names are added when members activate their license key.<br>Be among the first — your name lives here forever.</div>
-        </div>
-      </div>
-      <div style="background:#0d0d14;padding:10px 20px;border-top:1px solid var(--border);text-align:center">
-        <span style="font-size:11px;color:#444">Updates live as founding members activate · Limited to 100</span>
-      </div>
-    </div>
-  </div>
-
-  <script>
-  fetch('https://raw.githubusercontent.com/masondogg/shortsminter-public/main/founders.json')
-    .then(r=>r.json())
-    .then(data=>{
-      const founders=data.founders||[];
-      const total=data.total||founders.length;
-      const max=data.max_founders||100;
-      document.getElementById('founders-count').textContent=total;
-      document.getElementById('founders-bar').style.width=(total/max*100)+'%';
-      if(founders.length>0){
-        document.getElementById('founders-list').innerHTML=founders
-          .map((f,i)=>'<span style="display:inline-block;background:#08080f;border:1px solid #1e1e2e;border-radius:6px;padding:4px 10px;margin:3px;font-size:12px;color:#888">⚡ '+f.name+'</span>')
-          .join('');
-      } else {
-        document.getElementById('founders-list').innerHTML=
-          '<div style="color:#333;font-size:13px;text-align:center;padding:16px">No founding members yet. Be the first.</div>';
-      }
-    }).catch(()=>{
-      document.getElementById('founders-count').textContent='0';
-      document.getElementById('founders-bar').style.width='0%';
-      document.getElementById('founders-list').innerHTML=
-        '<div style="color:#333;font-size:13px;text-align:center;padding:16px">Be the first founding member.</div>';
-    });
-  </script>
 
   <div class="thank-you">
     <h2>Thank you for believing early. ⚡</h2>
