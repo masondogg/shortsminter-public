@@ -1,8 +1,9 @@
-<link rel="icon" type="image/x-icon" href="favicon.ico">
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ShortsMinter™ — AI-Powered YouTube Shorts on Your Own PC</title>
 <meta name="description" content="ShortsMinter turns your long videos into viral YouTube Shorts using AI — running entirely on your own PC. No subscription. No cloud. No limits.">
@@ -338,6 +339,62 @@
   <p style="text-align:center;font-size:12px;color:#444;margin-top:20px">GPU acceleration requires NVIDIA GPU with NVENC. AMD and Intel GPU users run on CPU encoding automatically.</p>
 </section>
 
+
+<!-- FOUNDERS SECTION -->
+<section style="background:var(--panel);padding:60px 40px;border-bottom:1px solid var(--border)">
+  <div style="text-align:center;margin-bottom:32px">
+    <div style="font-size:11px;color:var(--gold);letter-spacing:3px;font-weight:600;margin-bottom:8px">FOUNDING MEMBERS</div>
+    <div style="font-size:28px;font-weight:700;color:#fff;margin-bottom:8px">The first 100.</div>
+    <div style="font-size:15px;color:#555;max-width:480px;margin:0 auto">These are the people who believed in ShortsMinter before anyone else. Founding spots are limited to 100.</div>
+  </div>
+  <div style="max-width:560px;margin:0 auto">
+    <div style="background:var(--black);border:1px solid var(--border);border-radius:14px;padding:28px;text-align:center;margin-bottom:20px" id="founders-counter">
+      <div style="font-size:48px;font-weight:800;color:var(--gold)" id="founders-count">—</div>
+      <div style="font-size:13px;color:#555;margin-top:4px">of 100 founding spots claimed</div>
+      <div style="background:var(--border);border-radius:4px;height:6px;margin:16px 0;overflow:hidden">
+        <div style="background:var(--gold);height:100%;border-radius:4px;transition:width .8s ease" id="founders-bar"></div>
+      </div>
+      <div style="font-size:12px;color:#444" id="founders-spots">Loading...</div>
+    </div>
+    <div style="background:var(--black);border:1px solid var(--border);border-radius:14px;padding:20px;min-height:80px;text-align:center" id="founders-list">
+      <div style="color:#333;font-size:13px">Loading founders...</div>
+    </div>
+    <div style="text-align:center;margin-top:20px">
+      <a href="https://masondoggs.gumroad.com/l/founding" class="btn-primary" target="_blank">Claim Your Founding Spot — $15</a>
+    </div>
+  </div>
+</section>
+
+<script>
+fetch('https://raw.githubusercontent.com/masondogg/shortsminter-public/main/founders.json')
+  .then(r=>r.json())
+  .then(data=>{
+    const founders = data.founders || [];
+    const total = data.total || founders.length;
+    const max = data.max_founders || 100;
+    const remaining = max - total;
+    document.getElementById('founders-count').textContent = total;
+    document.getElementById('founders-bar').style.width = (total/max*100)+'%';
+    document.getElementById('founders-spots').textContent = remaining > 0
+      ? remaining + ' spots remaining — price goes to $49 after'
+      : 'All founding spots claimed';
+    if(founders.length > 0){
+      document.getElementById('founders-list').innerHTML = founders
+        .map((f,i)=>'<span style="display:inline-block;background:#0d0d14;border:1px solid #1e1e2e;border-radius:6px;padding:4px 10px;margin:3px;font-size:12px;color:#888">⚡ '+f.name+'</span>')
+        .join('');
+    } else {
+      document.getElementById('founders-list').innerHTML =
+        '<div style="color:#333;font-size:13px;padding:16px">Be the first founding member — your name appears here.</div>';
+    }
+  }).catch(()=>{
+    document.getElementById('founders-count').textContent = '0';
+    document.getElementById('founders-bar').style.width = '0%';
+    document.getElementById('founders-spots').textContent = '100 spots available';
+    document.getElementById('founders-list').innerHTML =
+      '<div style="color:#333;font-size:13px;padding:16px">Be the first founding member.</div>';
+  });
+</script>
+
 <!-- CTA -->
 <section class="cta">
   <h2>Ready to mint your first Short?</h2>
@@ -353,5 +410,5 @@
   <div class="footer-links">
     <a href="terms.html">Terms of Use</a>
     <a href="founders_beta.html">Founders &amp; Beta</a>
-    <a href="mailto:masondoggstudios@gmail.com">Support</a>
-    <a href="https://masondoggs.gumroad.com/l/founding" target="_blank">Buy Now
+    <a href="/cdn-cgi/l/email-protection#bfd2deccd0d1dbd0d8d8cccbcadbd6d0ccffd8d2ded6d391dcd0d2">Support</a>
+    <a href="https://masondogg
