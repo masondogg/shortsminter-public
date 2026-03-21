@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <link rel="icon" type="image/x-icon" href="favicon.ico">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Terms of Use — ShortsMinter™</title>
 <meta name="description" content="ShortsMinter Terms of Use — Masondogg Studios, LLC">
@@ -13,23 +12,30 @@
 body{background:var(--black);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;font-size:16px;line-height:1.8}
 a{color:var(--gold);text-decoration:none}
 a:hover{text-decoration:underline}
-nav{background:var(--black);border-bottom:1px solid var(--border);padding:14px 40px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+nav{background:var(--black);border-bottom:1px solid var(--border);padding:14px 40px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;flex-wrap:wrap;gap:12px}
 .nav-logo{display:flex;align-items:center;gap:12px}
 .nav-mark{width:38px;height:38px;background:var(--panel);border:1.5px solid var(--gold);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--gold);font-weight:700}
 .nav-name{font-size:16px;font-weight:700;color:#fff}
 .nav-sub{font-size:11px;color:var(--sub)}
+.nav-links{display:flex;gap:24px;align-items:center}
+.nav-links a{font-size:13px;color:#666}
+.nav-links a:hover{color:var(--gold);text-decoration:none}
+.nav-links a.active{color:var(--gold)}
 .container{max-width:780px;margin:0 auto;padding:60px 40px}
 h1{font-size:32px;font-weight:800;color:var(--gold);margin-bottom:8px}
 .meta{font-size:13px;color:var(--sub);margin-bottom:40px;padding-bottom:20px;border-bottom:1px solid var(--border)}
 h2{font-size:16px;font-weight:700;color:#fff;margin:32px 0 10px}
 p{font-size:15px;color:#aaa;margin-bottom:16px;line-height:1.8}
-.back{display:inline-block;margin-bottom:32px;font-size:14px;color:var(--gold)}
-footer{border-top:1px solid var(--border);padding:28px 40px;text-align:center}
+footer{border-top:1px solid var(--border);padding:28px 40px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
 footer p{font-size:12px;color:#333}
-@media(max-width:640px){.container{padding:40px 20px}nav{padding:12px 20px}}
+.footer-links{display:flex;gap:20px;flex-wrap:wrap}
+.footer-links a{font-size:12px;color:#444}
+.footer-links a:hover{color:var(--gold)}
+@media(max-width:640px){.container{padding:40px 20px}nav{padding:12px 20px}.nav-links{gap:14px}}
 </style>
 </head>
 <body>
+
 <nav>
   <div class="nav-logo">
     <div class="nav-mark">S</div>
@@ -38,7 +44,13 @@ footer p{font-size:12px;color:#333}
       <div class="nav-sub">by Masondogg Studios</div>
     </div>
   </div>
-  <a href="index.html" style="color:var(--gold);font-size:14px">← Back to Home</a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="founders_beta.html">Founders</a>
+    <a href="support.html">Support</a>
+    <a href="terms.html" class="active">Terms</a>
+    <a href="https://masondoggs.gumroad.com/l/founding" target="_blank" style="color:var(--gold);font-weight:700">Get ShortsMinter →</a>
+  </div>
 </nav>
 
 <div class="container">
@@ -52,7 +64,7 @@ footer p{font-size:12px;color:#333}
   <p>By installing, activating or using ShortsMinter™ you agree to be bound by these Terms of Use. If you do not agree, do not install or use the software. Your purchase or activation of a license constitutes acceptance of these terms.</p>
 
   <h2>2. License Grant</h2>
-  <p>Masondogg Studios, LLC grants you a single user, non-transferable, non-exclusive license to install and use ShortsMinter™ on one personal computer. You may not resell, redistribute, sublicense or share your license key with any other person or entity.</p>
+  <p>Masondogg Studios, LLC grants you a personal, non-transferable, non-exclusive license to install and use ShortsMinter™ on up to three personal computers owned by you. You may not resell, redistribute, sublicense or share your license key with any other person or entity. Sharing your license key is a violation of these terms and may result in immediate license revocation without refund.</p>
 
   <h2>3. Software Provided As-Is</h2>
   <p>ShortsMinter™ is provided "as is" without warranty of any kind, express or implied. Masondogg Studios, LLC makes no representations or warranties regarding fitness for a particular purpose, merchantability, accuracy of AI-generated results, or uninterrupted operation.</p>
@@ -73,10 +85,10 @@ footer p{font-size:12px;color:#333}
   <p>Any modifications you make to performance or resource settings within ShortsMinter™ are made at your own risk. Masondogg Studios, LLC accepts no liability for any consequences resulting from user-modified settings.</p>
 
   <h2>9. Refund Policy</h2>
-  <p>Refunds are available within 7 days of purchase if ShortsMinter™ fails to launch on your system and our support team is unable to resolve the issue. No refunds will be issued after 7 days from purchase or after a successful export has been completed. Refund requests must be submitted through the official ShortsMinter™ website.</p>
+  <p>Refunds are available within 7 days of purchase if ShortsMinter™ fails to launch on your system and our support team is unable to resolve the issue. No refunds will be issued after 7 days from purchase or after a successful export has been completed. Refund requests must be submitted through the official ShortsMinter™ support page at shortsminter.com/support.html</p>
 
   <h2>10. License Revocation</h2>
-  <p>Masondogg Studios, LLC reserves the right to revoke your license without refund if you violate these terms, attempt to circumvent license validation, redistribute the software, or use the software for unlawful purposes.</p>
+  <p>Masondogg Studios, LLC reserves the right to revoke your license without refund if you violate these terms, attempt to circumvent license validation, redistribute the software, share your license key, or use the software for unlawful purposes.</p>
 
   <h2>11. Updates and Modifications</h2>
   <p>Masondogg Studios, LLC may release updates to ShortsMinter™ at its discretion. Features may be added, modified or removed. Continued use of the software constitutes acceptance of any updated terms.</p>
@@ -88,7 +100,19 @@ footer p{font-size:12px;color:#333}
   <p>These Terms of Use are governed by the laws of the State of Georgia, United States. Any disputes shall be resolved in the courts of Georgia.</p>
 
   <h2>14. Contact</h2>
-  <p>For support, refund requests or legal inquiries visit <a href="https://shortsminter.com">shortsminter.com</a> or email <a href="mailto:masondoggstudios@gmail.com">masondoggstudios@gmail.com</a></p>
+  <p>For support, refund requests or legal inquiries visit <a href="https://shortsminter.com">shortsminter.com</a>, visit our <a href="support.html">support page</a>, or email <a href="mailto:masondoggstudios@gmail.com">masondoggstudios@gmail.com</a></p>
 </div>
 
-<f
+<footer>
+  <p>© 2026 Masondogg Studios, LLC &nbsp;·&nbsp; ShortsMinter™</p>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="founders_beta.html">Founders</a>
+    <a href="support.html">Support</a>
+    <a href="terms.html">Terms of Use</a>
+    <a href="mailto:masondoggstudios@gmail.com">Contact</a>
+  </div>
+</footer>
+
+</body>
+</html>
