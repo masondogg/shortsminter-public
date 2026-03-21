@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ShortsMinter™ — User Guide V1.0b</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+  :root {
+    --bg: #0b0c10;
+    --panel: #13141a;
+    --header: #0d0e14;
+    --accent: #f5c518;
+    --accent2: #00c47a;
+    --text: #dde1ec;
+    --sub: #5a5f72;
+    --entry: #1c1d26;
+    --border: #1e2030;
+    --danger: #7f1d1d;
+    --warn: #f59e0b;
+    --mono: 'Space Mono', monospace;
+    --body: 'DM Sans', sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--body);
+    font-size: 15px;
+    line-height: 1.75;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 48px 32px 80px;
+  }
+
+  /* ── COVER PAGE ─────────────────────────────── */
+  .cover {
+    text-align: center;
+    padding: 80px 0 60px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 60px;
+    page-break-after: always;
+  }
+  .cover .bolt {
+    font-size: 72px;
+    display: block;
+    margin-bottom: 16px;
+    filter: drop-shadow(0 0 24px #f5c51880);
+  }
+  .cover h1 {
+    font-family: var(--mono);
+    font-size: 36px;
+    color: var(--accent);
+    letter-spacing: -1px;
+    margin-bottom: 8px;
+  }
+  .cover .tagline {
+    font-size: 14px;
+    color: var(--sub);
+    font-family: var(--mono);
+    margin-bottom: 32px;
+  }
+  .cover .badge-row {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+  }
+  .cover .badge {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 8px 20px;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--sub);
+  }
+  .cover .badge span { color: var(--accent); }
+  .cover .divider {
+    width: 60px;
+    height: 2px;
+    background: var(--accent);
+    margin: 0 auto 24px;
+  }
+  .cover .cover-note {
+    font-size: 13px;
+    color: var(--sub);
+    max-width: 440px;
+    margin: 0 auto;
+  }
+
+  /* ── TABLE OF CONTENTS ──────────────────────── */
+  .toc {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 8px;
+    padding: 28px 32px;
+    margin-bottom: 60px;
+    page-break-after: always;
+  }
+  .toc h2 {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .toc ol {
+    padding-left: 20px;
+  }
+  .toc li {
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: var(--text);
+  }
+  .toc li a {
+    color: var(--text);
+    text-decoration: none;
+  }
+  .toc li a:hover { color: var(--accent); }
+  .toc .toc-sub {
+    list-style: none;
+    padding-left: 16px;
+    margin-top: 4px;
+  }
+  .toc .toc-sub li {
+    font-size: 12px;
+    color: var(--sub);
+    margin-bottom: 3px;
+  }
+
+  /* ── SECTION HEADERS ────────────────────────── */
+  .section {
+    margin-bottom: 56px;
+    page-break-inside: avoid;
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-number {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    background: var(--panel);
+    border: 1px solid var(--accent);
+    border-radius: 4px;
+    padding: 2px 10px;
+    white-space: nowrap;
+  }
+  h2.section-title {
+    font-family: var(--mono);
+    font-size: 20px;
+    color: var(--accent);
+    letter-spacing: -0.5px;
+  }
+
+  /* ── SUB HEADERS ────────────────────────────── */
+  h3 {
+    font-family: var(--mono);
+    font-size: 14px;
+    color: var(--accent2);
+    margin: 28px 0 10px;
+    letter-spacing: 0.5px;
+  }
+  h4 {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--warn);
+    margin: 20px 0 8px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* ── BODY TEXT ──────────────────────────────── */
+  p {
+    margin-bottom: 14px;
+    font-size: 14.5px;
+    color: var(--text);
+    font-weight: 300;
+  }
+  p strong {
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  /* ── CALLOUT BOXES ──────────────────────────── */
+  .callout {
+    background: var(--panel);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 6px 6px 0;
+    padding: 14px 18px;
+    margin: 16px 0;
+    font-size: 13.5px;
+  }
+  .callout.tip { border-left-color: var(--accent2); }
+  .callout.warn { border-left-color: var(--warn); background: #1a1500; }
+  .callout.info { border-left-color: #60a5fa; }
+  .callout-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .callout.tip .callout-label { color: var(--accent2); }
+  .callout.warn .callout-label { color: var(--warn); }
+  .callout.info .callout-label { color: #60a5fa; }
+
+  /* ── FEATURE CARDS ──────────────────────────── */
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 14px;
+    margin: 16px 0;
+  }
+  .feature-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+  }
+  .feature-card .fc-icon {
+    font-size: 22px;
+    margin-bottom: 8px;
+    display: block;
+  }
+  .feature-card .fc-title {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--accent);
+    margin-bottom: 6px;
+    font-weight: 700;
+  }
+  .feature-card p {
+    font-size: 13px;
+    color: var(--sub);
+    margin: 0;
+  }
+
+  /* ── STEP LIST ──────────────────────────────── */
+  .step-list {
+    list-style: none;
+    padding: 0;
+    margin: 16px 0;
+  }
+  .step-list li {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 16px;
+    align-items: flex-start;
+  }
+  .step-num {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    background: var(--accent);
+    color: #000;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 700;
+    margin-top: 2px;
+  }
+  .step-list li .step-body {
+    flex: 1;
+    font-size: 14px;
+  }
+  .step-list li .step-body strong {
+    color: var(--accent);
+    font-weight: 600;
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  /* ── SETTINGS TABLE ─────────────────────────── */
+  .settings-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0 24px;
+    font-size: 13.5px;
+  }
+  .settings-table th {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-align: left;
+    padding: 10px 14px;
+    background: var(--panel);
+    border-bottom: 1px solid var(--border);
+  }
+  .settings-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    color: var(--text);
+  }
+  .settings-table td:first-child {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--accent2);
+    white-space: nowrap;
+    width: 180px;
+  }
+  .settings-table tr:hover td { background: var(--entry); }
+
+  /* ── SPEC TABLE ─────────────────────────────── */
+  .spec-block {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 14px 0;
+  }
+  .spec-block-header {
+    padding: 10px 16px;
+    background: var(--entry);
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--accent);
+    letter-spacing: 1px;
+  }
+  .spec-row {
+    display: flex;
+    padding: 9px 16px;
+    border-bottom: 1px solid var(--border);
+    font-size: 13.5px;
+  }
+  .spec-row:last-child { border-bottom: none; }
+  .spec-key {
+    width: 120px;
+    flex-shrink: 0;
+    color: var(--sub);
+    font-family: var(--mono);
+    font-size: 12px;
+  }
+  .spec-val { color: var(--text); }
+
+  /* ── INLINE BADGE ───────────────────────────── */
+  .badge-inline {
+    display: inline-block;
+    background: var(--entry);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 1px 8px;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+
+  /* ── TIER BADGES ────────────────────────────── */
+  .tier-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 16px 0;
+  }
+  .tier-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    text-align: center;
+  }
+  .tier-card .tier-icon { font-size: 28px; display: block; margin-bottom: 8px; }
+  .tier-card .tier-name {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .tier-card p { font-size: 12px; color: var(--sub); margin: 0; }
+
+  /* ── DIVIDER ────────────────────────────────── */
+  .divider-line {
+    height: 1px;
+    background: var(--border);
+    margin: 40px 0;
+  }
+
+  /* ── FOOTER ─────────────────────────────────── */
+  .doc-footer {
+    text-align: center;
+    padding-top: 40px;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--sub);
+    font-family: var(--mono);
+  }
+  .doc-footer span { color: var(--accent); }
+
+  /* ── PRINT STYLES ───────────────────────────── */
+  @media print {
+    * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+    body {
+      background: #ffffff !important;
+      color: #111111 !important;
+      font-size: 11pt;
+      padding: 0;
+      max-width: 100%;
+    }
+    .cover { padding: 40px 0; }
+    .cover h1 { color: #c09000 !important; }
+    .cover .bolt { filter: none; }
+    .cover .tagline, .cover .cover-note { color: #555 !important; }
+    .cover .badge { background: #f5f5f5 !important; border-color: #ddd !important; color: #555 !important; }
+    .cover .badge span { color: #c09000 !important; }
+    .toc { background: #f9f9f9 !important; border-color: #ddd !important; border-left-color: #c09000 !important; }
+    .toc h2 { color: #c09000 !important; }
+    .toc li { color: #111 !important; }
+    .toc li a { color: #111 !important; }
+    .toc .toc-sub li { color: #555 !important; }
+    h2.section-title { color: #c09000 !important; }
+    h3 { color: #007a4a !important; }
+    h4 { color: #a07000 !important; }
+    .section-number { background: #f9f9f9 !important; border-color: #c09000 !important; color: #c09000 !important; }
+    p { color: #222 !important; }
+    p strong { color: #c09000 !important; }
+    .callout { background: #f9f9f9 !important; border-color: #c09000 !important; }
+    .callout.tip { border-color: #007a4a !important; }
+    .callout.warn { background: #fffbea !important; border-color: #a07000 !important; }
+    .callout.info { border-color: #2563eb !important; }
+    .callout-label { color: #c09000 !important; }
+    .callout.tip .callout-label { color: #007a4a !important; }
+    .callout.warn .callout-label { color: #a07000 !important; }
+    .callout.info .callout-label { color: #2563eb !important; }
+    .feature-card { background: #f9f9f9 !important; border-color: #ddd !important; }
+    .feature-card .fc-title { color: #c09000 !important; }
+    .feature-card p { color: #555 !important; }
+    .step-num { background: #c09000 !important; color: #fff !important; }
+    .step-list li .step-body strong { color: #c09000 !important; }
+    .settings-table th { background: #f0f0f0 !important; color: #c09000 !important; border-color: #ddd !important; }
+    .settings-table td { border-color: #eee !important; color: #222 !important; }
+    .settings-table td:first-child { color: #007a4a !important; }
+    .spec-block { background: #f9f9f9 !important; border-color: #ddd !important; }
+    .spec-block-header { background: #eee !important; color: #c09000 !important; }
+    .spec-key { color: #555 !important; }
+    .spec-val { color: #222 !important; }
+    .badge-inline { background: #eee !important; color: #c09000 !important; border-color: #ddd !important; }
+    .tier-card { background: #f9f9f9 !important; border-color: #ddd !important; }
+    .tier-card .tier-name { color: #c09000 !important; }
+    .tier-card p { color: #555 !important; }
+    .divider-line { background: #ddd !important; }
+    .doc-footer { color: #555 !important; border-color: #ddd !important; }
+    .doc-footer span { color: #c09000 !important; }
+    .section { page-break-inside: avoid; }
+    .callout { page-break-inside: avoid; }
+    .spec-block { page-break-inside: avoid; }
+    .feature-card { page-break-inside: avoid; }
+    a { color: inherit !important; text-decoration: none; }
+  }
+
+  @media (max-width: 600px) {
+    body { padding: 24px 16px; }
+    .tier-grid { grid-template-columns: 1fr; }
+    .feature-grid { grid-template-columns: 1fr; }
+    .settings-table td:first-child { width: 120px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════ COVER ═══ -->
+<div class="cover">
+  <span class="bolt">⚡</span>
+  <h1>ShortsMinter™</h1>
+  <div class="tagline">Official User Guide</div>
+  <div class="divider"></div>
+  <div class="badge-row">
+    <div class="badge">Version <span>V3.4c / V1.0b</span></div>
+    <div class="badge">Platform <span>Windows 10 / 11</span></div>
+    <div class="badge">Date <span>March 2026</span></div>
+  </div>
+  <p class="cover-note">This guide covers everything you need to know to use ShortsMinter™ — from first launch all the way to exporting your first batch of Shorts. Keep it open while you work or print it for reference.</p>
+</div>
+
+<!-- ══════════════════════════════════════════════ TOC ═══ -->
+<div class="toc">
+  <h2>📋 Table of Contents</h2>
+  <ol>
+    <li><a href="#s1">What Is ShortsMinter?</a></li>
+    <li><a href="#s2">System Requirements</a></li>
+    <li><a href="#s3">First Launch &amp; License Activation</a></li>
+    <li><a href="#s4">The App at a Glance</a></li>
+    <li><a href="#s5">Home Page</a></li>
+    <li><a href="#s6">Editor Page — The Full Workflow</a>
+      <ul class="toc-sub">
+        <li>① Load Your Video</li>
+        <li>② AI Settings</li>
+        <li>③ Supercharge Whisper</li>
+        <li>④ Manual Clip Timing</li>
+        <li>⑤ Analyse &amp; Find Best Clips</li>
+        <li>Clip Options Tabs (Captions, Emoji, Text, Metadata, Export)</li>
+        <li>⑥ Clip Queue &amp; Queue Actions</li>
+        <li>Export &amp; Live Log</li>
+      </ul>
+    </li>
+    <li><a href="#s7">Projects Page</a></li>
+    <li><a href="#s8">Settings Panel</a></li>
+    <li><a href="#s9">Voice Profile</a></li>
+    <li><a href="#s10">Tips for Best Results</a></li>
+    <li><a href="#s11">Getting Help</a></li>
+  </ol>
+</div>
+
+<!-- ══════════════════════════════════════════════ S1 ═══ -->
+<div class="section" id="s1">
+  <div class="section-header">
+    <div class="section-number">01</div>
+    <h2 class="section-title">What Is ShortsMinter?</h2>
+  </div>
+
+  <p>ShortsMinter™ is an AI-powered YouTube Shorts creator that runs entirely on your own PC. You point it at a long-form video, it transcribes the audio, scores every moment for energy and engagement, and automatically finds the best clips to turn into polished 9:16 vertical Shorts.</p>
+
+  <p>Everything happens locally on your machine. <strong>No cloud. No subscription. No data leaving your PC.</strong> Your videos and transcripts stay private.</p>
+
+  <div class="feature-grid">
+    <div class="feature-card">
+      <span class="fc-icon">🧠</span>
+      <div class="fc-title">AI CLIP SELECTION</div>
+      <p>Whisper AI transcribes your video and a scoring engine finds your most engaging moments automatically.</p>
+    </div>
+    <div class="feature-card">
+      <span class="fc-icon">🎤</span>
+      <div class="fc-title">AUTO CAPTIONS</div>
+      <p>Word-by-word captions with styles, highlights, and karaoke mode — all burned into the video.</p>
+    </div>
+    <div class="feature-card">
+      <span class="fc-icon">😊</span>
+      <div class="fc-title">EMOJI &amp; TEXT OVERLAYS</div>
+      <p>Auto or manual emoji overlays. Hook text banners. All customizable per clip.</p>
+    </div>
+    <div class="feature-card">
+      <span class="fc-icon">🚀</span>
+      <div class="fc-title">FAST GPU EXPORT</div>
+      <p>NVIDIA GPU encoding via NVENC. Batch export all clips at once with a single button.</p>
+    </div>
+    <div class="feature-card">
+      <span class="fc-icon">📊</span>
+      <div class="fc-title">AUTO METADATA</div>
+      <p>Generates titles, descriptions, and tags for YouTube, TikTok, Instagram and more.</p>
+    </div>
+    <div class="feature-card">
+      <span class="fc-icon">🔒</span>
+      <div class="fc-title">100% LOCAL</div>
+      <p>Runs offline. Your videos never leave your machine. Windows 10 and 11 only.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ S2 ═══ -->
+<div class="section" id="s2">
+  <div class="section-header">
+    <div class="section-number">02</div>
+    <h2 class="section-title">System Requirements</h2>
+  </div>
+
+  <p>ShortsMinter is built for Windows only. Below are the three tiers of system specs. The app will run on Bare Minimum hardware but you'll get the best experience on Recommended or above.</p>
+
+  <div class="spec-block">
+    <div class="spec-block-header">⚠️ BARE MINIMUM — Will work, slower experience</div>
+    <div class="spec-row"><div class="spec-key">OS</div><div class="spec-val">Windows 10 64-bit (version 1903 or newer)</div></div>
+    <div class="spec-row"><div class="spec-key">CPU</div><div class="spec-val">Intel i5 8th gen or AMD Ryzen 5 2000 series (4 cores)</div></div>
+    <div class="spec-row"><div class="spec-key">RAM</div><div class="spec-val">8 GB</div></div>
+    <div class="spec-row"><div class="spec-key">GPU</div><div class="spec-val">NVIDIA GTX 1060 4 GB (no NVIDIA = CPU encoding, much slower)</div></div>
+    <div class="spec-row"><div class="spec-key">Storage</div><div class="spec-val">10 GB free</div></div>
+  </div>
+
+  <div class="spec-block">
+    <div class="spec-block-header">✅ RECOMMENDED — Smooth, fast experience</div>
+    <div class="spec-row"><div class="spec-key">OS</div><div class="spec-val">Windows 10 or 11 64-bit</div></div>
+    <div class="spec-row"><div class="spec-key">CPU</div><div class="spec-val">Intel i7 10th gen or AMD Ryzen 7 3000 series (8 cores)</div></div>
+    <div class="spec-row"><div class="spec-key">RAM</div><div class="spec-val">16 GB</div></div>
+    <div class="spec-row"><div class="spec-key">GPU</div><div class="spec-val">NVIDIA RTX 2060 8 GB or newer</div></div>
+    <div class="spec-row"><div class="spec-key">Storage</div><div class="spec-val">25 GB free</div></div>
+  </div>
+
+  <div class="spec-block">
+    <div class="spec-block-header">🚀 IDEAL — Maximum performance</div>
+    <div class="spec-row"><div class="spec-key">OS</div><div class="spec-val">Windows 11 64-bit</div></div>
+    <div class="spec-row"><div class="spec-key">CPU</div><div class="spec-val">Intel i9 14th gen or AMD Ryzen 9 7000 series</div></div>
+    <div class="spec-row"><div class="spec-key">RAM</div><div class="spec-val">32 GB or more</div></div>
+    <div class="spec-row"><div class="spec-key">GPU</div><div class="spec-val">NVIDIA RTX 4070 Ti or 5070 Ti — 12 GB+ VRAM</div></div>
+    <div class="spec-row"><div class="spec-key">Storage</div><div class="spec-val">SSD with 50 GB+ free</div></div>
+  </div>
+
+  <div class="callout warn">
+    <div class="callout-label">⚠ Important — GPU Note</div>
+    GPU acceleration in ShortsMinter is built exclusively for <strong>NVIDIA GPUs using NVENC</strong>. If you have an AMD or Intel GPU, ShortsMinter will automatically fall back to CPU encoding — it still works, just slower. Make sure "Use GPU encoding" is disabled in your Export settings if you don't have an NVIDIA GPU.
+  </div>
+
+  <div class="callout tip">
+    <div class="callout-label">💡 Whisper Model &amp; VRAM</div>
+    The Whisper <strong>base</strong> model runs on any system. The <strong>medium</strong> model needs 8 GB+ VRAM and the <strong>large</strong> model needs 10 GB+ VRAM. Start with base if you're unsure.
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ S3 ═══ -->
+<div class="section" id="s3">
+  <div class="section-header">
+    <div class="section-number">03</div>
+    <h2 class="section-title">First Launch &amp; License Activation</h2>
+  </div>
+
+  <p>The very first time you launch ShortsMinter, you'll be greeted by the License Activation screen. This only appears once — after successful activation the app opens directly every time.</p>
+
+  <h3>Activating Your License</h3>
+  <ol class="step-list">
+    <li>
+      <div class="step-num">1</div>
+      <div class="step-body"><strong>Find Your License Key</strong>Check your email inbox for the receipt from Gumroad — your license key is included in that email. It will look like a string of letters and numbers.</div>
+    </li>
+    <li>
+      <div class="step-num">2</div>
+      <div class="step-body"><strong>Enter the Key</strong>Paste or type your license key into the entry field on the activation screen. Then click <span class="badge-inline">⚡ Activate License</span>.</div>
+    </li>
+    <li>
+      <div class="step-num">3</div>
+      <div class="step-body"><strong>Wait for Validation</strong>ShortsMinter checks your key online. This takes just a few seconds. Make sure you're connected to the internet for first activation.</div>
+    </li>
+    <li>
+      <div class="step-num">4</div>
+      <div class="step-body"><strong>Welcome Screen</strong>Once validated, a welcome screen appears showing your license tier and activation date. Click through to enter the app.</div>
+    </li>
+  </ol>
+
+  <div class="callout info">
+    <div class="callout-label">ℹ After First Activation</div>
+    Your license is stored securely on your PC. On every future launch, ShortsMinter verifies your license quietly in the background. If you're offline, the app will work normally for up to 72 hours using a local cache. After that a connection is required.
+  </div>
+
+  <h3>Your License Tier &amp; Badge</h3>
+  <p>Your license tier shows in the top bar of the app and in <strong>Settings → About</strong>. The badge indicates which tier you belong to.</p>
+
+  <div class="tier-grid">
+    <div class="tier-card">
+      <span class="tier-icon">⚡</span>
+      <div class="tier-name">FOUNDING MEMBER</div>
+      <p>One-time purchase. Lifetime access and all future updates included. The exclusive founding badge.</p>
+    </div>
+    <div class="tier-card">
+      <span class="tier-icon">🎖</span>
+      <div class="tier-name">AMBASSADOR</div>
+      <p>Gifted access for 365 days. Shows expiry date in About. Can upgrade to Standard when it expires.</p>
+    </div>
+    <div class="tier-card">
+      <span class="tier-icon">✅</span>
+      <div class="tier-name">LICENSED</div>
+      <p>Standard one-time purchase. 12 months of updates included. App works forever even after updates expire.</p>
+    </div>
+  </div>
+
+  <div class="callout warn">
+    <div class="callout-label">⚠ Can't Find Your Key?</div>
+    Check your spam folder or search your email for "Gumroad." You can also log into gumroad.com/library to view all your purchases and retrieve your key. If you still need help, contact us at <strong>shortsmintersupport@gmail.com</strong>.
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ S4 ═══ -->
+<div class="section" id="s4">
+  <div class="section-header">
+    <div class="section-number">04</div>
+    <h2 class="section-title">The App at a Glance</h2>
+  </div>
+
+  <p>Once activated, ShortsMinter opens to a clean interface with a consistent layout across all pages. Here's what each area of the screen does.</p>
+
+  <h3>Top Bar</h3>
+  <table class="settings-table">
+    <tr><th>Element</th><th>What It Does</th></tr>
+    <tr><td>⚡ ShortsMinter™</td><td>App title and branding. Always visible.</td></tr>
+    <tr><td>Hardware Display</td><td>Shows your RAM, CPU, GPU, Whisper status and license badge at a glance on the right side of the top bar.</td></tr>
+    <tr><td>⚙ Settings</td><td>Opens the full Settings panel. See Section 8 for details.</td></tr>
+    <tr><td>💻 Specs</td><td>Shows the recommended system specs popup with your hardware compared to requirements.</td></tr>
+  </table>
+
+  <h3>Navigation Bar</h3>
+  <p>Three buttons switch between the main pages of the app.</p>
+  <table class="settings-table">
+    <tr><th>Page</th><th>Purpose</th></tr>
+    <tr><td>🏠 Home</td><td>Dashboard with quick-access cards and your Voice Profile status.</td></tr>
+    <tr><td>✂ Editor</td><td>The main workspace where you load videos, run AI analysis, configure clips and export.</td></tr>
+    <tr><td>📁 Projects</td><td>Browse, open and manage all your previously exported Shorts.</td></tr>
+  </table>
+
+  <h3>Resource Bar</h3>
+  <p>The thin bar beneath navigation shows your current Whisper device (CPU or GPU) and encoding engine (NVENC or CPU). This updates automatically based on your hardware and settings.</p>
+
+  <h3>Status Bar &amp; Export Bar</h3>
+  <p>The bottom of the app shows a progress bar, a status message, and the export controls — <span class="badge-inline">🚀 EXPORT ALL CLIPS</span> and <span class="badge-inline">⛔ STOP</span>. These are only shown on the Editor page.</p>
+</div>
+
+<!-- ══════════════════════════════════════════════ S5 ═══ -->
+<div class="section" id="s5">
+  <div class="section-header">
+    <div class="section-number">05</div>
+    <h2 class="section-title">Home Page</h2>
+  </div>
+
+  <p>The Home page is your launchpad. It appears every time you open the app and gives you quick access to the two most common actions.</p>
+
+  <h3>Quick Action Cards</h3>
+  <table class="settings-table">
+    <tr><th>Card</th><th>What It Does</th></tr>
+    <tr><td>✂ New Project</td><td>Takes you directly to the Editor page to start creating clips from a new video.</td></tr>
+    <tr><td>📁 My Projects</td><td>Takes you to the Projects page to browse and manage your exported Shorts.</td></tr>
+  </table>
+
+  <h3>Voice Profile Card</h3>
+  <p>The Voice Profile card shows whether you've recorded a voice sample to personalize Whisper's transcription for your voice. If you haven't set one up yet, it shows a prompt to do so. See <a href="#s9">Section 9</a> for full Voice Profile instructions.</p>
+
+  <div class="callout tip">
+    <div class="callout-label">💡 Tip</div>
+    Setting up your Voice Profile before running your first analysis improves transcription accuracy, especially if you have an accent or speak quickly. It only takes about 30 seconds to record.
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ S6 ═══ -->
+<div class="section" id="s6">
+  <div class="section-header">
+    <div class="section-number">06</div>
+    <h2 class="section-title">Editor Page — The Full Workflow</h2>
+  </div>
+
+  <p>The Editor page is where all the magic happens. Work through the numbered steps from top to bottom — the app is designed to guide you through the workflow in order.</p>
+
+  <h3>① Load Your Video</h3>
+  <p>Click <span class="badge-inline">📂 Load Video</span> and select any video file from your PC. ShortsMinter accepts common formats including MP4, MKV, MOV and AVI. Once loaded, the app shows the video filename, duration, resolution and frame rate.</p>
+
+  <div class="callout tip">
+    <div class="callout-label">💡 Best Source Videos</div>
+    Long-form content works best — gaming sessions, podcasts, commentary, vlogs, reaction videos, tutorials. The longer the source, the more clips the AI can find. Aim for at least 10–20 minutes for the best results.
+  </div>
+
+  <h3>② AI Settings</h3>
+  <p>These four settings control how the AI finds and selects clips from your video. Configure these before clicking Analyse.</p>
+
+  <table class="settings-table">
+    <tr><th>Setting</th><th>What It Controls</th></tr>
+    <tr><td>AI Engine</td><td>Chooses the clip-selection brain. <strong>Local only</strong> uses a built-in scoring engine — fast, no API key needed. You can also connect Claude or ChatGPT APIs for even smarter selection.</td></tr>
+    <tr><td>Transcribe (Whisper Model)</td><td>The model used to transcribe speech. <strong>base</strong> is fast and accurate for most content. <strong>small</strong> and <strong>medium</strong> are more accurate but slower. See Section 2 for VRAM requirements.</td></tr>
+    <tr><td>Number of Clips</td><td>How many Shorts to extract. Check <strong>Auto</strong> to let the app calculate the maximum possible for your video length and clip duration.</td></tr>
+    <tr><td>Clip Duration</td><td>Target length for each Short in seconds. YouTube Shorts must be 60 seconds or under. 30–45 seconds is the sweet spot for engagement.</td></tr>
+  </table>
+
+  <h4>AI Engine Options Explained</h4>
+  <table class="settings-table">
+    <tr><th>Engine</th><th>What It Does</th></tr>
+    <tr><td>Local only (fast, no API key)</td><td>Built-in energy and engagement scoring. No API key needed. Great starting point for most users.</td></tr>
+    <tr><td>Local + Claude API</td><td>Combines local scoring with Claude AI for smarter clip ranking. Requires a Claude API key.</td></tr>
+    <tr><td>Local + ChatGPT API</td><td>Same as above but uses OpenAI's ChatGPT. Requires an OpenAI API key.</td></tr>
+    <tr><td>Local + Both APIs</td><td>Uses all three — local scoring plus both AI engines. Most thorough selection.</td></tr>
+    <tr><td>Claude + ChatGPT (no local)</td><td>Skips local scoring entirely and uses both AI APIs only.</td></tr>
+  </table>
+
+  <h3>③ Supercharge Whisper</h3>
+  <p>The <span class="badge-inline">🔬 Supercharge Whisper</span> button unlocks advanced speaker separation (diarization) using a free HuggingFace account token. This is completely optional — the app works great without it. If you process content with multiple speakers and want them labelled separately in transcripts, set this up first. Follow the instructions in the popup to get your free token.</p>
+
+  <h3>④ Manual Clip Timing</h3>
+  <p>If you want to manually define exactly where a clip starts and ends instead of using AI selection, use the manual timing fields. Enter a start time and end time in <strong>HH:MM:SS</strong> or seconds format, then click <span class="badge-inline">Add Manual Clip</span>. Manual clips are added directly to the Clip Queue and skip the AI analysis step.</p>
+
+  <h3>⑤ Analyse &amp; Find Best Clips</h3>
+  <p>Once you've configured settings ①–④, click <span class="badge-inline">🧠 ANALYSE &amp; FIND BEST CLIPS</span>. This is the main AI button. Here's what happens:</p>
+
+  <ol class="step-list">
+    <li>
+      <div class="step-num">1</div>
+      <div class="step-body"><strong>Audio Extraction</strong>ShortsMinter extracts the audio track from your video.</div>
+    </li>
+    <li>
+      <div class="step-num">2</div>
+      <div class="step-body"><strong>Transcription</strong>Whisper AI transcribes every word spoken, with timestamps. This is the longest step — progress shows in the Live Log.</div>
+    </li>
+    <li>
+      <div class="step-num">3</div>
+      <div class="step-body"><strong>Clip Scoring</strong>The app scores every possible window of your video for energy, reactions, hype moments, tips, and engagement.</div>
+    </li>
+    <li>
+      <div class="step-num">4</div>
+      <div class="step-body"><strong>AI Ranking (if enabled)</strong>If you selected a Claude or ChatGPT engine, those APIs rank the top candidates and select the best.</div>
+    </li>
+    <li>
+      <div class="step-num">5</div>
+      <div class="step-body"><strong>Clips Added to Queue</strong>The best clips appear in the Clip Queue on the right side of the Editor, ready for you to review and export.</div>
+    </li>
+  </ol>
+
+  <div class="callout">
+    <div class="callout-label">💡 While Analysing</div>
+    Watch the <strong>Live Log</strong> at the bottom right for detailed progress. Transcription time depends on your Whisper model and hardware — base on a good GPU takes 1–3 minutes per hour of video.
+  </div>
+
+  <!-- ── CLIP OPTIONS TABS ── -->
+  <div class="divider-line"></div>
+  <h3>⑤ Clip Options Tabs</h3>
+  <p>Below the Analyse button are five tabs that control how your clips are prepared for export. Set these <strong>before</strong> clicking Export. The settings here become your permanent defaults — you can save them in Settings later.</p>
+
+  <h4>🎤 Captions Tab</h4>
+  <table class="settings-table">
+    <tr><th>Option</th><th>What It Does</th></tr>
+    <tr><td>Enable Auto-Captions</td><td>Turns on Whisper AI captioning. Word-by-word subtitles are burned into the exported video. AI clips enable this automatically.</td></tr>
+    <tr><td>Caption Style</td><td>The visual look of captions. Options include Classic (White + Shadow), Bold Yellow, Netflix (White Bold), Minimal White, and Gaming (Cyan Glow). Gaming and Bold Yellow are great for high-energy content.</td></tr>
+    <tr><td>Font Size</td><td>Size of caption text in pixels. Default is 72. Larger sizes are more readable on small screens.</td></tr>
+    <tr><td>Highlight Energetic Words</td><td>Scans captions for hype words and highlights them in a contrasting colour matching your caption style. Makes key moments pop.</td></tr>
+    <tr><td>Karaoke Mode</td><td>Highlights each word as it is spoken, one word at a time. Requires AI analysis for word-level timestamps. Very engaging for commentary content.</td></tr>
+    <tr><td>Dynamic Emoji (with captions)</td><td>Automatically adds a relevant emoji next to each caption segment based on the energy and content of what's being said.</td></tr>
+    <tr><td>Use GPU for Transcription</td><td>Uses your NVIDIA GPU to speed up Whisper transcription. Only available with NVIDIA CUDA. On by default if a GPU is detected.</td></tr>
+  </table>
+
+  <h4>😊 Emoji Tab</h4>
+  <table class="settings-table">
+    <tr><th>Option</th><th>What It Does</th></tr>
+    <tr><td>Add Emoji Overlay</td><td>Adds a single emoji overlaid on the video. Different from Dynamic Emoji — this is one persistent emoji for the clip.</td></tr>
+    <tr><td>Auto-select emoji from speech</td><td>ShortsMinter picks the best emoji based on what's being said in the clip. Recommended — leave this on.</td></tr>
+    <tr><td>Manual emoji picker</td><td>Disable Auto to pick your own emoji. Browse by category (Hype, Funny, Gaming, Gestures, etc.) and click any emoji to select it.</td></tr>
+    <tr><td>Position</td><td>Where on the video the emoji appears — top-right, top-left, bottom-right, bottom-left, or center.</td></tr>
+    <tr><td>Size (px)</td><td>Emoji display size in pixels. Default is 150.</td></tr>
+    <tr><td>Show from / Show until</td><td>Time range (in seconds from clip start) during which the emoji is visible. Leave at 0–99 to show for the full clip.</td></tr>
+  </table>
+
+  <h4>📝 Text / Hook Tab</h4>
+  <table class="settings-table">
+    <tr><th>Option</th><th>What It Does</th></tr>
+    <tr><td>Add Text / Hook Overlay</td><td>Adds a text banner to the video. Great for hooks like "Wait for it... 👀" that grab attention in the first second.</td></tr>
+    <tr><td>Text field</td><td>The actual text to display. Long text auto-wraps and shrinks to fit the frame.</td></tr>
+    <tr><td>Position</td><td>Top, Center, or Bottom. Top is recommended to avoid covering faces.</td></tr>
+    <tr><td>Font Size</td><td>Text size in pixels. Auto-reduces if the text is too long.</td></tr>
+    <tr><td>Show for (s)</td><td>How many seconds the text stays on screen. 3–5 seconds is ideal for a hook.</td></tr>
+    <tr><td>Color</td><td>Text colour. Click Pick to open a colour chooser.</td></tr>
+    <tr><td>Bold / Underline</td><td>Style options for the text overlay.</td></tr>
+  </table>
+
+  <h4>📊 Metadata Tab</h4>
+  <p>ShortsMinter can auto-generate titles, descriptions, and hashtags/tags from each clip's transcript and export them alongside your video.</p>
+  <table class="settings-table">
+    <tr><th>Option</th><th>What It Does</th></tr>
+    <tr><td>Export Mode</td><td><strong>Disabled</strong> — no metadata. <strong>Export as .txt per clip</strong> — saves a text file next to each clip. <strong>Embed in MP4</strong> — bakes metadata into the video file. <strong>Both</strong> — does both.</td></tr>
+    <tr><td>Platforms</td><td>Check the platforms you'll post to — YouTube, TikTok, Instagram, Facebook, Twitch. Each platform uses its own character limits for titles and descriptions.</td></tr>
+  </table>
+
+  <h4>⚙ Export Tab</h4>
+  <table class="settings-table">
+    <tr><th>Option</th><th>What It Does</th></tr>
+    <tr><td>Output Folder</td><td>Where exported clips are saved. Click <strong>...</strong> to browse and choose a folder. Default is a ShortsMinter folder in your home directory.</td></tr>
+    <tr><td>Output Format</td><td>How your video is resized to 9:16 vertical. <strong>Fit with blurred background</strong> (recommended) — pads the sides with a blurred version of the video. <strong>Crop to 9:16</strong> — fills the frame by cropping edges. <strong>Fit with letterbox/pillarbox</strong> — adds black bars.</td></tr>
+    <tr><td>GPU Preset</td><td>Encoding speed vs quality tradeoff. Fast, Balanced, High Quality, Max Quality. Balanced is recommended for most users.</td></tr>
+    <tr><td>Bitrate</td><td>Output video quality in Mbps. <strong>20 Mbps (Recommended)</strong> matches YouTube's target for Shorts. Higher = better quality, larger file.</td></tr>
+    <tr><td>FPS</td><td>Frames per second. 60fps is smoothest for gaming. 30fps is standard. 24fps gives a cinematic look.</td></tr>
+    <tr><td>Fade in/out</td><td>Adds a 0.4 second fade at the start and end of each clip. Makes clips feel polished.</td></tr>
+    <tr><td>Normalize audio</td><td>Balances audio loudness to a consistent level (-14 LUFS). Prevents clips from being too quiet or too loud on YouTube.</td></tr>
+    <tr><td>Use GPU encoding</td><td>Uses your NVIDIA GPU (NVENC) to encode video — much faster than CPU. Only available if an NVIDIA GPU is detected.</td></tr>
+  </table>
+
+  <div class="callout warn">
+    <div class="callout-label">⚠ GPU Encoding Warning — NVIDIA Only</div>
+    GPU acceleration is built exclusively for NVIDIA GPUs. If you have an AMD or Intel GPU, disable GPU encoding in the Export tab to avoid errors. If your screen flickers briefly during export (TDR event), this is Windows restarting the GPU driver — it is not a hardware failure. The current clip may need to be re-queued. This is normal under heavy GPU load.
+  </div>
+
+  <!-- ── CLIP QUEUE ── -->
+  <div class="divider-line"></div>
+  <h3>⑥ Clip Queue</h3>
+  <p>After AI analysis, all found clips appear in the Clip Queue on the right side of the Editor. Each row shows the clip name, start/end time, duration, and current status. You can select any clip by clicking it.</p>
+
+  <h4>Clip Queue Columns</h4>
+  <table class="settings-table">
+    <tr><th>Column</th><th>Meaning</th></tr>
+    <tr><td>Name</td><td>Auto-generated clip filename based on your Filename settings.</td></tr>
+    <tr><td>Start / End</td><td>Timestamps for the clip in your source video.</td></tr>
+    <tr><td>Length</td><td>Duration of the clip in seconds.</td></tr>
+    <tr><td>CC</td><td>Whether captions are enabled for this clip.</td></tr>
+    <tr><td>Emoji</td><td>Which emoji is assigned, if any.</td></tr>
+    <tr><td>Text</td><td>Whether a text hook overlay is set.</td></tr>
+    <tr><td>Status</td><td>Current state — ⏳ Queued, 🔄 Processing, ✅ Done, or ❌ Failed.</td></tr>
+  </table>
+
+  <h4>Queue Action Buttons</h4>
+  <p>Select a clip in the queue first, then use these buttons:</p>
+  <table class="settings-table">
+    <tr><th>Button</th><th>What It Does</th></tr>
+    <tr><td>👁 Preview</td><td>Opens the selected clip's source section in your default media player so you can check the timing before exporting.</td></tr>
+    <tr><td>✏ Captions</td><td>Opens a caption editor for the selected clip. You can manually fix any words Whisper transcribed incorrectly. Changes apply on the next export.</td></tr>
+    <tr><td>😀 Emojis</td><td>Opens the emoji editor for a clip that has already been exported. Fine-tune which emoji appears on each caption segment. The clip must be exported first before using this.</td></tr>
+    <tr><td>📋 Detail</td><td>Shows full information about the selected clip — timestamps, duration, all settings applied, and the transcript.</td></tr>
+    <tr><td>🔁 Re-queue</td><td>Resets a completed or failed clip back to Queued status so it will be exported again on the next run.</td></tr>
+    <tr><td>📝 Notes</td><td>Add personal notes to the clip — useful for flagging clips to review, noting which platform to post to, or any other reminders.</td></tr>
+    <tr><td>⏸ Pause / ▶ Resume</td><td>Pauses the export batch between clips. The current clip finishes before pausing. Click again to resume. Only active while export is running.</td></tr>
+  </table>
+
+  <h3>Export All Clips</h3>
+  <p>When you're happy with your clip queue and all settings, click <span class="badge-inline">🚀 EXPORT ALL CLIPS</span> at the bottom of the screen. ShortsMinter processes every queued clip one by one, burning in captions, emoji, text overlays, and applying all your export settings. Watch the <strong>Live Log</strong> for real-time progress on each clip.</p>
+
+  <p>Click <span class="badge-inline">⛔ STOP</span> at any time to stop after the current clip finishes. Already-completed clips are kept — only the remaining queue is cancelled.</p>
+
+  <h3>Live Log</h3>
+  <p>The Live Log at the bottom right of the Editor shows timestamped messages for every action — clip detection, transcription progress, export steps, errors, and completions. If something goes wrong, the log is the first place to look. You can copy the log from <strong>Settings → Support → Copy App Log</strong> to paste into a bug report.</p>
+
+  <div class="callout tip">
+    <div class="callout-label">💡 Filename Settings</div>
+    You can customize how exported clips are named. In Settings, the Filename section lets you choose a mode and set a prefix. Clips can be named with a date, format tag, duration, and sequence number — all configurable with drag-and-drop chip ordering.
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ S7 ═══ -->
+<div class="section" id="s7">
+  <div class="section-header">
+    <div class="section-number">07</div>
+    <h2 class="section-title">Projects Page</h2>
+  </div>
+
+  <p>The Projects page shows all previously exported Shorts saved in your output folder. Navigate to it using the <span class="badge-inline">📁 Projects</span> button in the navigation bar.</p>
+
+  <p>From here you can browse your clips, open the output folder in Windows Explorer, and manage your exported files. The page refreshes automatically whenever you navigate to it, so newly exported clips appear right away.</p>
+
+  <div class="callout tip">
+    <div class="callout-label">💡 Tip</div>
+    Your output folder location is set in the Export tab or in Settings. The default is a folder called <strong>ShortsMinter</strong> inside your Windows home directory. You can change this to any folder you like.
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ S8 ═══ -->
+<div class="section" id="s8">
+  <div class="section-header">
+    <div class="section-number">08</div>
+    <h2 class="section-title">Settings Panel</h2>
+  </div>
+
+  <p>Open Settings by clicking <span class="badge-inline">⚙ Settings</span> in the top bar. Settings are organized across tabs. Changes take effect after saving — some require a restart to fully apply.</p>
+
+  <h3>🎨 Appearance</h3>
+  <table class="settings-table">
+    <tr><th>Setting</th><th>What It Does</th></tr>
+    <tr><td>Theme</td><td>Switch between <strong>dark</strong> (default) and <strong>light</strong> mode. Requires restart to fully apply.</td></tr>
+    <tr><td>Accent Color</td><td>Change the highlight colour used throughout the app. Click Pick to open a colour chooser. The default is ShortsMinter gold (#f5c518).</td></tr>
+    <tr><td>Text Size</td><td>Coming in a future update — currently shown as a preview placeholder.</td></tr>
+  </table>
+
+  <h3>⚡ Resources</h3>
+  <p>Controls how much of your system's resources ShortsMinter is allowed to use during analysis and export. Each slider goes from 0% to 80%. Lower values leave more headroom for other apps; higher values give ShortsMinter more speed.</p>
+  <table class="settings-table">
+    <tr><th>Limit</th><th>What It Controls</th></tr>
+    <tr><td>RAM Limit</td><td>Maximum percentage of your total system RAM ShortsMinter can use.</td></tr>
+    <tr><td>VRAM Limit</td><td>Maximum percentage of your GPU's video memory that can be used.</td></tr>
+    <tr><td>CPU Thread Limit</td><td>How many CPU threads are made available for transcription and processing.</td></tr>
+    <tr><td>GPU Usage Limit</td><td>Maximum GPU workload percentage allowed during encoding.</td></tr>
+  </table>
+
+  <div class="callout tip">
+    <div class="callout-label">💡 Recommended</div>
+    The safe zone is <strong>60% or below</strong> for all sliders. 61–74% is caution territory. Above 75% is maximum — fine for dedicated export machines, but may cause slowdowns on your main PC if other apps are running.
+  </div>
+
+  <h3>📤 Export Defaults</h3>
+  <p>This tab mirrors the Export tab in the Editor and lets you permanently save your preferred output folder, format, GPU preset, bitrate, FPS, captions settings, and more. Any changes here become the defaults every time you start a new project.</p>
+
+  <h3>🤖 AI &amp; API Keys</h3>
+  <p>If you want to use Claude or ChatGPT for AI clip ranking, enter your API keys here. Keys are stored securely in Windows Credential Manager — they are never saved in plain text files. You can clear a key by deleting the text and saving.</p>
+  <table class="settings-table">
+    <tr><th>Key</th><th>Where to Get It</th></tr>
+    <tr><td>Claude API Key</td><td>console.anthropic.com — must start with sk-ant-</td></tr>
+    <tr><td>OpenAI API Key</td><td>platform.openai.com — must start with sk- or sk-proj-</td></tr>
+  </table>
+
+  <div class="callout info">
+    <div class="callout-label">ℹ API Keys Are Optional</div>
+    API keys are completely optional. The <strong>Local only</strong> engine works without any API key and produces great results for most content. API keys only enhance clip ranking — they do not affect transcription or export quality.
+  </div>
+
+  <h3>ℹ About</h3>
+  <p>Shows your app version, license tier, badge, activation date, and expiry date (for Ambassador members). Also includes links to ShortsMinter's social media channels and the Third Party Licenses list.</p>
+
+  <h3>🆘 Support</h3>
+  <table class="settings-table">
+    <tr><th>Feature</th><th>What It Does</th></tr>
+    <tr><td>📋 Copy System Report</td><td>Copies a full report of your hardware, software versions and settings to clipboard — paste this into any bug report for faster support.</td></tr>
+    <tr><td>📄 Copy App Log</td><td>Copies the current session's Live Log to clipboard.</td></tr>
+    <tr><td>⭐ Share Feedback</td><td>Opens the feedback form in your browser. Share your experience, suggestions or testimonials.</td></tr>
+    <tr><td>🐛 Report a Bug</td><td>Opens the bug report form. Include your system report and app log for fastest resolution.</td></tr>
+    <tr><td>👥 View Founders</td><td>Shows the current Founding Members list and counter.</td></tr>
+    <tr><td>📧 Contact</td><td>Direct email to shortsmintersupport@gmail.com for anything not covered by the forms.</td></tr>
+  </table>
+</div>
+
+<!-- ══════════════════════════════════════════════ S9 ═══ -->
+<div class="section" id="s9">
+  <div class="section-header">
+    <div class="section-number">09</div>
+    <h2 class="section-title">Voice Profile</h2>
+  </div>
+
+  <p>The Voice Profile feature lets you record a short sample of your voice so Whisper can personalize its transcription model for the way you speak. This is entirely optional but can noticeably improve transcription accuracy, especially if you have a regional accent, speak fast, or use a lot of domain-specific language.</p>
+
+  <h3>Recording Your Voice Profile</h3>
+  <ol class="step-list">
+    <li>
+      <div class="step-num">1</div>
+      <div class="step-body"><strong>Open the Voice Profile</strong>On the Home page, click <span class="badge-inline">🎙 Set Up Voice Profile</span>, or go to <strong>Settings → Data &amp; Cache → Record Voice Profile</strong>.</div>
+    </li>
+    <li>
+      <div class="step-num">2</div>
+      <div class="step-body"><strong>Read the Prompt</strong>A short paragraph of text is shown on screen. Read it aloud naturally — don't rush. The recording takes about 20–30 seconds.</div>
+    </li>
+    <li>
+      <div class="step-num">3</div>
+      <div class="step-body"><strong>Save</strong>When done, click Stop and Save. Your voice profile is stored locally. Whisper will use it to improve accuracy on your next analysis.</div>
+    </li>
+  </ol>
+
+  <h3>Deleting Your Voice Profile</h3>
+  <p>To remove your voice profile, go to <strong>Settings → Data &amp; Cache → Delete Profile</strong>. This permanently removes both the recording and the speech pattern cache. Whisper reverts to standard mode immediately.</p>
+
+  <div class="callout tip">
+    <div class="callout-label">💡 Tip</div>
+    Re-record your Voice Profile any time — for example if you get a new microphone or notice transcription accuracy has drifted. The new recording replaces the old one.
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ S10 ═══ -->
+<div class="section" id="s10">
+  <div class="section-header">
+    <div class="section-number">10</div>
+    <h2 class="section-title">Tips for Best Results</h2>
+  </div>
+
+  <h3>Recommended Starting Settings</h3>
+  <table class="settings-table">
+    <tr><th>Setting</th><th>Recommended</th></tr>
+    <tr><td>Whisper Model</td><td>base — upgrade to small or medium once you're comfortable</td></tr>
+    <tr><td>Clip Duration</td><td>30–45 seconds for most content</td></tr>
+    <tr><td>Output Format</td><td>Fit with blurred background — works for all source ratios</td></tr>
+    <tr><td>Bitrate</td><td>20 Mbps — YouTube's recommended target</td></tr>
+    <tr><td>Caption Style</td><td>Bold Yellow or Gaming (Cyan Glow) for high-energy content; Classic for talks and tutorials</td></tr>
+    <tr><td>Fade in/out</td><td>On — always makes clips feel more professional</td></tr>
+    <tr><td>Normalize audio</td><td>On — prevents clips from being too quiet or too loud</td></tr>
+  </table>
+
+  <h3>What Makes a Great Short</h3>
+  <p>ShortsMinter scores clips based on energy, reactions, hype language, funny moments, and useful tips. To help the AI find the best clips from your content, consider these things:</p>
+
+  <div class="feature-grid">
+    <div class="feature-card">
+      <span class="fc-icon">⚡</span>
+      <div class="fc-title">HIGH ENERGY MOMENTS</div>
+      <p>Clips with hype reactions, celebrations, wins, funny moments and strong emotions score highest. Gaming and commentary content is ideal.</p>
+    </div>
+    <div class="feature-card">
+      <span class="fc-icon">💡</span>
+      <div class="fc-title">TIPS &amp; TUTORIALS</div>
+      <p>Moments where you say "pro tip," "here's how," or "you should" are scored as high-value clips for tutorial and educational content.</p>
+    </div>
+    <div class="feature-card">
+      <span class="fc-icon">📢</span>
+      <div class="fc-title">CLEAN SENTENCES</div>
+      <p>The AI prefers clips that end on a complete sentence. Make sure your source audio is clear and you're not trailing off mid-sentence.</p>
+    </div>
+  </div>
+
+  <h3>Caption Editing — Fix Whisper Mistakes</h3>
+  <p>If Whisper misheard a word — especially proper nouns, names, or slang — select the clip in the queue and click <span class="badge-inline">✏ Captions</span> to open the caption editor. Fix any incorrect words and click Save. The corrected captions will be used on the next export. You don't need to re-run the whole analysis.</p>
+
+  <h3>What Is a TDR? (Screen Flicker During Export)</h3>
+  <p>If your screens briefly go black and come back during export, this is called a <strong>TDR — Timeout Detection &amp; Recovery</strong>. Windows detected that your GPU driver stopped responding and restarted it automatically. This is <strong>not a hardware failure</strong> and is normal under heavy GPU load during video encoding. The clip being processed at that moment may fail and need to be re-queued. If TDRs happen very frequently, check your GPU temperatures and make sure your NVIDIA drivers are up to date.</p>
+
+  <div class="callout tip">
+    <div class="callout-label">💡 Reduce TDR Risk</div>
+    Close other GPU-intensive applications (games, video players, browsers with hardware acceleration) during a large export batch. This gives ShortsMinter the most headroom.
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ S11 ═══ -->
+<div class="section" id="s11">
+  <div class="section-header">
+    <div class="section-number">11</div>
+    <h2 class="section-title">Getting Help</h2>
+  </div>
+
+  <p>ShortsMinter has several ways to get support. Always start with the support website — most common questions are covered in the FAQ.</p>
+
+  <div class="feature-grid">
+    <div class="feature-card">
+      <span class="fc-icon">🌐</span>
+      <div class="fc-title">SUPPORT WEBSITE</div>
+      <p>Visit <strong>shortsminter.com/support.html</strong> for the FAQ, guides, and all support resources.</p>
+    </div>
+    <div class="feature-card">
+      <span class="fc-icon">🐛</span>
+      <div class="fc-title">BUG REPORT FORM</div>
+      <p>Found a bug? Use the Bug Report form in <strong>Settings → Support → Report a Bug</strong>. Include your System Report and App Log for fastest resolution.</p>
+    </div>
+    <div class="feature-card">
+      <span class="fc-icon">⭐</span>
+      <div class="fc-title">FEEDBACK FORM</div>
+      <p>Share suggestions, testimonials, or feature requests via <strong>Settings → Support → Share Feedback</strong>. We read every submission.</p>
+    </div>
+    <div class="feature-card">
+      <span class="fc-icon">📧</span>
+      <div class="fc-title">EMAIL SUPPORT</div>
+      <p>For anything not covered by the forms, email us directly at <strong>shortsmintersupport@gmail.com</strong>.</p>
+    </div>
+  </div>
+
+  <h3>Before Contacting Support</h3>
+  <ol class="step-list">
+    <li>
+      <div class="step-num">1</div>
+      <div class="step-body"><strong>Check the FAQ</strong>Visit shortsminter.com/support.html — most issues are covered there.</div>
+    </li>
+    <li>
+      <div class="step-num">2</div>
+      <div class="step-body"><strong>Copy Your System Report</strong>Go to Settings → Support → Copy System Report. This gives us your hardware and software info instantly.</div>
+    </li>
+    <li>
+      <div class="step-num">3</div>
+      <div class="step-body"><strong>Copy Your App Log</strong>Go to Settings → Support → Copy App Log. The log shows exactly what happened before the error.</div>
+    </li>
+    <li>
+      <div class="step-num">4</div>
+      <div class="step-body"><strong>Submit a Bug Report</strong>Use the bug form and paste both reports into the description. We fix fast.</div>
+    </li>
+  </ol>
+
+  <div class="callout">
+    <div class="callout-label">📌 ShortsMinter Links</div>
+    Website: <strong>shortsminter.com</strong><br>
+    Support: <strong>shortsminter.com/support.html</strong><br>
+    Email: <strong>shortsmintersupport@gmail.com</strong><br>
+    YouTube: <strong>youtube.com/@ShortsMinter</strong><br>
+    Twitter/X: <strong>x.com/ShortsMinter</strong><br>
+    TikTok: <strong>tiktok.com/@shortsminter</strong><br>
+    Instagram: <strong>instagram.com/shortsminter/</strong>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ FOOTER ═══ -->
+<div class="doc-footer">
+  <p>ShortsMinter™ User Guide — <span>V1.0b / V3.4c</span></p>
+  <p>© 2026 <span>Masondogg Studios, LLC</span> — All rights reserved.</p>
+  <p style="margin-top:8px;">Unauthorized copying or distribution of this software is prohibited.</p>
+  <p style="margin-top:4px;"><span>shortsminter.com</span></p>
+</div>
+
+</body>
+</html>
