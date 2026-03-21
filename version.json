@@ -2,11 +2,21 @@
   "version": "1.0b",
   "app_version": "V3.4c",
   "message": "Beta — Founding Member Release",
+  "support_email": "shortsmintersupport@gmail.com",
   "urls": {
     "gumroad_verify": "https://api.gumroad.com/v2/licenses/verify",
+    "gumroad_founding": "https://masondoggs.gumroad.com/l/founding",
+    "gumroad_ambassador": "https://masondoggs.gumroad.com/l/ambassadors",
+    "gumroad_standard": "https://masondoggs.gumroad.com/l/standard",
     "blacklist": "https://raw.githubusercontent.com/masondogg/shortsminter-public/main/blocked_keys.json",
+    "founders_json": "https://raw.githubusercontent.com/masondogg/shortsminter-public/main/founders.json",
     "support": "https://shortsminter.com/support.html",
-    "website": "https://shortsminter.com"
+    "website": "https://shortsminter.com",
+    "feedback_form": "https://docs.google.com/forms/d/e/1FAIpQLSdYe7bb-vWA3wnuiq05zQRoY4qkHjWXUMAKt5prAwh-zPBohA/viewform",
+    "bug_form": "https://docs.google.com/forms/d/e/1FAIpQLSd7GOvmas47PARMjtD6-0_k9VFAx2x2ADqKmh2bIIgk9eoAqg/viewform",
+    "discord": "",
+    "youtube": "https://www.youtube.com/@ShortsMinter",
+    "twitter": "https://x.com/ShortsMinter"
   },
   "tiers": {
     "founding": {
