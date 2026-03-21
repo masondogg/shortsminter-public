@@ -1,9 +1,13 @@
 {
   "version": "1.0b",
   "app_version": "V3.4c",
-  "url": "https://shortsminter.com",
-  "runtime_version": "1.0",
   "message": "Beta — Founding Member Release",
+  "urls": {
+    "gumroad_verify": "https://api.gumroad.com/v2/licenses/verify",
+    "blacklist": "https://raw.githubusercontent.com/masondogg/shortsminter-public/main/blocked_keys.json",
+    "support": "https://shortsminter.com/support.html",
+    "website": "https://shortsminter.com"
+  },
   "tiers": {
     "founding": {
       "label": "Founding Member",
@@ -11,7 +15,7 @@
       "updates": "lifetime",
       "expires": false
     },
-    "ambassador": {
+    "ambassadors": {
       "label": "Ambassador",
       "badge": "🎖 Ambassador",
       "updates": "365days",
@@ -19,7 +23,7 @@
       "expiry_days": 365
     },
     "standard": {
-      "label": "Standard",
+      "label": "Licensed",
       "badge": "✅ Licensed",
       "updates": "365days",
       "expires": false
