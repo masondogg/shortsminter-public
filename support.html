@@ -122,6 +122,28 @@ footer p{font-size:12px;color:#333}
       <div class="faq-q">🔴 Export failed or video not processing</div>
       <div class="faq-a">Check that your source video is a supported format (MP4, MOV, MKV). Make sure your output folder exists and you have write permissions. If the issue persists, copy your App Log from Settings → Support → Copy App Log and include it in a bug report.</div>
     </div>
+
+    <div class="faq-item">
+      <div class="faq-q">🔴 License key fails with "No internet connection" error</div>
+      <div class="faq-a">ShortsMinter requires internet access to validate your license on first launch. If you have internet but still see this error, your firewall or security software is likely blocking the app. See the firewall fix below — allow ShortsMinter through Windows Firewall or your third party security software, then try again.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">🔴 Windows Firewall blocking ShortsMinter</div>
+      <div class="faq-a">On first launch Windows Firewall may block ShortsMinter from accessing the internet. Follow these steps exactly:<br><br>
+      1. <strong style="color:#fff">Close ShortsMinter completely first</strong> — firewall changes do not apply to a running app.<br>
+      2. Open <strong style="color:#fff">Windows Security → Firewall &amp; network protection → Allow an app through firewall</strong>.<br>
+      3. Click <strong style="color:#fff">Change settings</strong> → <strong style="color:#fff">Allow another app</strong> → Browse → find ShortsMinter.exe in your install folder → Add.<br>
+      4. Make sure both <strong style="color:#fff">Private and Public</strong> boxes are checked for ShortsMinter.<br>
+      5. Click OK to save.<br>
+      6. <strong style="color:#fff">Reopen ShortsMinter</strong> and enter your license key.<br><br>
+      Important: always close the app fully before saving firewall settings, then reopen it fresh.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">🔴 McAfee, Norton, Bitdefender or other security software blocking ShortsMinter</div>
+      <div class="faq-a">Third party antivirus and security suites sometimes block new independent software from making network connections. ShortsMinter is completely safe — it only connects to Gumroad to validate your license and GitHub to check for updates. To fix: open your security software and add ShortsMinter.exe as a trusted application or exclusion. The exact steps vary by software — search for "add exclusion" or "add trusted app" in your security software's help. Once added, relaunch ShortsMinter and activate your license normally.</div>
+    </div>
   </div>
 
   <hr class="divider">
