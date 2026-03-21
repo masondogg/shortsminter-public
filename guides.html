@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ShortsMinter™ — User Guides</title>
+<meta name="description" content="Official ShortsMinter user guides. Find the guide that matches your version.">
+<style>
+  :root {
+    --bg: #0b0c10;
+    --panel: #13141a;
+    --header: #0d0e14;
+    --accent: #f5c518;
+    --accent2: #00c47a;
+    --text: #dde1ec;
+    --sub: #5a5f72;
+    --entry: #1c1d26;
+    --border: #1e2030;
+    --warn: #f59e0b;
+    --mono: 'Cascadia Code', 'Fira Code', monospace;
+    --body: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--body);
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* ── NAV ── */
+  nav {
+    background: var(--header);
+    border-bottom: 1px solid var(--border);
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .nav-brand {
+    font-family: var(--mono);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--accent);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .nav-links {
+    display: flex;
+    gap: 6px;
+    list-style: none;
+  }
+  .nav-links a {
+    color: var(--sub);
+    text-decoration: none;
+    font-size: 13px;
+    padding: 6px 12px;
+    border-radius: 5px;
+    transition: color 0.15s, background 0.15s;
+  }
+  .nav-links a:hover { color: var(--text); background: var(--entry); }
+  .nav-links a.active { color: var(--accent); }
+  .nav-cta {
+    background: var(--accent);
+    color: #000 !important;
+    font-weight: 600;
+    border-radius: 5px;
+  }
+  .nav-cta:hover { background: #e0b000 !important; }
+
+  /* ── PAGE HEADER ── */
+  .page-hero {
+    background: var(--panel);
+    border-bottom: 1px solid var(--border);
+    padding: 56px 40px 48px;
+    text-align: center;
+  }
+  .page-hero .icon { font-size: 48px; display: block; margin-bottom: 16px; }
+  .page-hero h1 {
+    font-family: var(--mono);
+    font-size: 28px;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .page-hero p {
+    color: var(--sub);
+    font-size: 14px;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  /* ── MAIN CONTENT ── */
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 48px 32px 80px;
+  }
+
+  /* ── CALLOUT ── */
+  .callout {
+    background: var(--panel);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 6px 6px 0;
+    padding: 14px 18px;
+    margin-bottom: 36px;
+    font-size: 13.5px;
+    color: var(--sub);
+  }
+  .callout strong { color: var(--text); }
+
+  /* ── VERSION LABEL ── */
+  .section-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* ── GUIDE CARD ── */
+  .guide-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px 28px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    transition: border-color 0.15s;
+  }
+  .guide-card:hover { border-color: var(--accent); }
+  .guide-card .gc-left { flex-shrink: 0; text-align: center; min-width: 90px; }
+  .guide-card .gc-version {
+    font-family: var(--mono);
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 4px;
+  }
+  .guide-card .gc-date {
+    font-size: 11px;
+    color: var(--sub);
+    font-family: var(--mono);
+  }
+  .guide-card .gc-body { flex: 1; }
+  .guide-card .gc-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .guide-card .gc-desc {
+    font-size: 13px;
+    color: var(--sub);
+    margin-bottom: 14px;
+  }
+  .guide-card .gc-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .tag {
+    background: var(--entry);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 2px 10px;
+    color: var(--sub);
+  }
+  .tag.green { color: var(--accent2); border-color: #00c47a30; }
+  .tag.yellow { color: var(--accent); border-color: #f5c51830; }
+  .guide-card .gc-actions { display: flex; gap: 10px; }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 18px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background 0.15s;
+    font-family: var(--body);
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: #000;
+  }
+  .btn-primary:hover { background: #e0b000; }
+  .btn-sec {
+    background: var(--entry);
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+  .btn-sec:hover { background: var(--border); }
+
+  /* ── EMPTY STATE (future versions) ── */
+  .empty-note {
+    background: var(--entry);
+    border: 1px dashed var(--border);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin-top: 16px;
+    font-size: 13px;
+    color: var(--sub);
+    text-align: center;
+  }
+
+  /* ── BACK TO SUPPORT ── */
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--sub);
+    text-decoration: none;
+    font-size: 13px;
+    margin-bottom: 32px;
+    transition: color 0.15s;
+  }
+  .back-link:hover { color: var(--accent); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--header);
+    border-top: 1px solid var(--border);
+    padding: 32px 40px;
+    text-align: center;
+  }
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+  }
+  .footer-links a {
+    color: var(--sub);
+    text-decoration: none;
+    font-size: 13px;
+    transition: color 0.15s;
+  }
+  .footer-links a:hover { color: var(--accent); }
+  footer p {
+    font-size: 12px;
+    color: var(--sub);
+  }
+  footer span { color: var(--accent); }
+
+  @media (max-width: 600px) {
+    nav { padding: 0 16px; }
+    .page-hero { padding: 40px 20px; }
+    .container { padding: 32px 16px 60px; }
+    .guide-card { flex-direction: column; gap: 12px; }
+    .guide-card .gc-left { text-align: left; min-width: auto; display: flex; align-items: center; gap: 12px; }
+    .nav-links { display: none; }
+    footer { padding: 24px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-brand">⚡ ShortsMinter™</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="founders_beta.html">Founders</a></li>
+    <li><a href="support.html">Support</a></li>
+    <li><a href="guides.html" class="active">Guides</a></li>
+    <li><a href="terms.html">Terms</a></li>
+    <li><a href="https://masondoggs.gumroad.com/l/founding" class="nav-cta" target="_blank">Get ShortsMinter →</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero">
+  <span class="icon">📖</span>
+  <h1>User Guides</h1>
+  <p>Official guides for every version of ShortsMinter. Find the one that matches your app version and keep it open while you work.</p>
+</div>
+
+<!-- MAIN -->
+<div class="container">
+
+  <a href="support.html" class="back-link">← Back to Support</a>
+
+  <div class="callout">
+    <strong>Which guide do I need?</strong> Check your app version in <strong>Settings → About</strong>. It shows as <em>Version V3.4c</em> or similar. Match that to the guide below. Older guides are kept permanently so you can always find the right one.
+  </div>
+
+  <!-- CURRENT -->
+  <div class="section-label">Current Release</div>
+
+  <div class="guide-card">
+    <div class="gc-left">
+      <span class="gc-version">V1.0b</span>
+      <div class="gc-date">March 2026</div>
+    </div>
+    <div class="gc-body">
+      <div class="gc-title">ShortsMinter™ Official User Guide — V1.0b</div>
+      <div class="gc-desc">Complete user guide for the Founding Member beta release. Covers every feature from license activation to exporting your first batch of Shorts. Includes Editor workflow, Settings, Voice Profile, and tips for best results.</div>
+      <div class="gc-tags">
+        <span class="tag yellow">App V3.4c</span>
+        <span class="tag yellow">V1.0b Beta</span>
+        <span class="tag green">Current</span>
+        <span class="tag">Windows 10 / 11</span>
+        <span class="tag">Founding Member Release</span>
+      </div>
+      <div class="gc-actions">
+        <a href="shortsminter_guide_v1_0b.html" class="btn btn-primary" target="_blank">📖 View Guide</a>
+        <a href="shortsminter_guide_v1_0b.html" class="btn btn-sec" target="_blank" onclick="window.print()">🖨 Print / Save PDF</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FUTURE PLACEHOLDER -->
+  <div class="section-label" style="margin-top:48px;">Previous Versions</div>
+  <div class="empty-note">
+    Previous version guides will appear here as ShortsMinter updates. Older guides are never removed — you can always find the guide for your version.
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="founders_beta.html">Founders</a>
+    <a href="support.html">Support</a>
+    <a href="guides.html">Guides</a>
+    <a href="terms.html">Terms</a>
+    <a href="https://www.youtube.com/@ShortsMinter" target="_blank">YouTube</a>
+    <a href="https://x.com/ShortsMinter" target="_blank">Twitter/X</a>
+    <a href="https://www.tiktok.com/@shortsminter" target="_blank">TikTok</a>
+    <a href="https://www.instagram.com/shortsminter/" target="_blank">Instagram</a>
+  </div>
+  <p>© 2026 <span>Masondogg Studios, LLC</span> · All rights reserved · <a href="mailto:shortsmintersupport@gmail.com" style="color:var(--sub);text-decoration:none;">shortsmintersupport@gmail.com</a></p>
+</footer>
+
+</body>
+</html>
