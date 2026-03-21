@@ -1,0 +1,68 @@
+# ══════════════════════════════════════════════════════
+# ShortsMinter™ — .gitignore
+# Masondogg Studios, LLC
+#
+# Files and types listed here are NEVER pushed to GitHub
+# regardless of what deploy.bat does.
+# ══════════════════════════════════════════════════════
+
+
+# ── Dev Scripts (local tools — never public) ──────────
+*.py
+*.bat
+
+
+# ── Certificates & Keys (NEVER push these) ────────────
+*.pfx
+*.pem
+*.key
+*.p12
+*.cer
+*.crt
+
+
+# ── Compiled App Files (too large, not for web repo) ──
+*.exe
+*.dll
+*.pyd
+*.nuitka
+
+
+# ── Python Build Artifacts ────────────────────────────
+__pycache__/
+*.pyc
+*.pyo
+build/
+dist/
+
+
+# ── OS Junk ───────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+
+# ── Editor Junk ───────────────────────────────────────
+*.swp
+*.swo
+.vscode/
+.idea/
+
+
+# ── Logs & Temp Files ─────────────────────────────────
+*.log
+*.tmp
+*.temp
+
+
+# ══════════════════════════════════════════════════════
+# WHAT DOES GET PUSHED (everything not listed above):
+#   ✅ .html files
+#   ✅ .json files
+#   ✅ .ico files
+#   ✅ .png / .jpg / .gif images
+#   ✅ .css files
+#   ✅ .js files
+#   ✅ .txt files
+#   ✅ .md files
+# ══════════════════════════════════════════════════════
