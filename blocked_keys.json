@@ -6,29 +6,3 @@
     "example": "a1b2c3d4e5f6..."
   }
 }
-```
-
-**Google Form entry IDs:**
-```
-entry.1756104864 = key_hash
-entry.2050289455 = machine_hash
-entry.2105222370 = sale_id_hash
-entry.1799345210 = tier
-entry.791842817  = app_version
-entry.1491479340 = timestamp
-entry.1481500169 = secret
-```
-
-**Google Form submission URL:**
-```
-https://docs.google.com/forms/d/e/1FAIpQLSdZu2rerijCHCisMOnhkxhr3GYYsX7-ssuPVDbsqWOoB8H1sw/formResponse
-```
-
-**Secret value:**
-```
-SM2026LAUNCH
-```
-
-**GitHub repo for blocked_keys.json:**
-```
-masondogg/shortsminter-public
