@@ -7,9 +7,50 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ShortsMinter™ — AI-Powered YouTube Shorts on Your Own PC</title>
 <meta name="description" content="ShortsMinter turns your long videos into viral YouTube Shorts using AI — running entirely on your own PC. No subscription. No cloud. No limits.">
-<meta property="og:title" content="ShortsMinter™ — AI-Powered Shorts on Your PC">
-<meta property="og:description" content="No subscription. No cloud. Your GPU. Your data. One time payment.">
+<meta name="keywords" content="YouTube Shorts creator, AI Shorts maker, YouTube Shorts software, auto captions, video editing software, WhisperX, GPU encoding, Masondogg Studios, ShortsMinter">
+<meta name="author" content="Masondogg Studios, LLC">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://shortsminter.com">
+<meta property="og:title" content="ShortsMinter™ — AI-Powered YouTube Shorts on Your Own PC">
+<meta property="og:description" content="Turn long videos into viral YouTube Shorts using AI — on your own PC. No subscription. No cloud. No limits. Built for YouTubers, by a YouTuber.">
 <meta property="og:url" content="https://shortsminter.com">
+<meta property="og:image" content="https://shortsminter.com/og-image.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ShortsMinter™">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@ShortsMinter">
+<meta name="twitter:title" content="ShortsMinter™ — AI-Powered YouTube Shorts on Your Own PC">
+<meta name="twitter:description" content="Turn long videos into viral YouTube Shorts using AI — on your own PC. No subscription. No cloud. No limits.">
+<meta name="twitter:image" content="https://shortsminter.com/og-image.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "ShortsMinter™",
+  "operatingSystem": "Windows 10, Windows 11",
+  "applicationCategory": "VideoApplication",
+  "offers": [
+    {
+      "@type": "Offer",
+      "name": "Founding Member",
+      "price": "15.00",
+      "priceCurrency": "USD"
+    },
+    {
+      "@type": "Offer",
+      "name": "Standard",
+      "price": "49.00",
+      "priceCurrency": "USD"
+    }
+  ],
+  "description": "AI-powered YouTube Shorts creator that runs entirely on your own PC. No cloud. No subscription. No data leaving your machine.",
+  "url": "https://shortsminter.com",
+  "author": {
+    "@type": "Organization",
+    "name": "Masondogg Studios, LLC"
+  }
+}
+</script>
 <style>
   *{margin:0;padding:0;box-sizing:border-box}
   :root{
@@ -123,13 +164,45 @@
   .footer-links a:hover{color:var(--gold)}
 
   /* RESPONSIVE */
-  @media(max-width:640px){
-    nav{padding:12px 20px}
-    .hero{padding:60px 20px 50px}
-    .hero h1{font-size:34px}
-    section{padding:50px 20px}
-    .hero-btns{flex-direction:column;align-items:center}
+  @media(max-width:1024px){
+    .hero h1{font-size:44px}
+    .price-cards{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+    .specs-grid{grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+  }
+  @media(max-width:768px){
+    nav{padding:12px 24px}
+    .hero{padding:70px 24px 50px}
+    .hero h1{font-size:38px}
+    .hero p{font-size:16px}
+    section{padding:50px 24px}
+    .section-title{font-size:26px}
+    .price-cards{grid-template-columns:1fr}
+    .specs-grid{grid-template-columns:repeat(2,1fr)}
+    .comp-wrap{overflow-x:auto}
+    .cta h2{font-size:28px}
     footer{flex-direction:column;text-align:center}
+    .footer-links{justify-content:center;flex-wrap:wrap;gap:14px}
+  }
+  @media(max-width:480px){
+    nav{padding:10px 16px}
+    .nav-links{display:none}
+    .hero{padding:50px 16px 40px}
+    .hero h1{font-size:30px;line-height:1.2}
+    .hero p{font-size:15px}
+    .hero-btns{flex-direction:column;align-items:stretch;padding:0 16px}
+    .btn-primary,.btn-secondary{text-align:center;padding:14px 24px;font-size:15px}
+    section{padding:40px 16px}
+    .section-title{font-size:22px}
+    .section-sub{font-size:14px}
+    .feat-grid{grid-template-columns:1fr}
+    .price-cards{grid-template-columns:1fr}
+    .specs-grid{grid-template-columns:1fr}
+    .hw-box{padding:20px 16px}
+    .hw-line{font-size:11px;padding:10px 14px}
+    .cta h2{font-size:24px}
+    .cta p{font-size:14px}
+    footer{flex-direction:column;text-align:center;padding:20px 16px}
+    .footer-links{justify-content:center;flex-wrap:wrap;gap:12px}
   }
 .nav-links{display:flex;gap:24px;align-items:center}
 .nav-links a{font-size:13px;color:var(--sub)}
