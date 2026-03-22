@@ -1,0 +1,10 @@
+{
+  "warned_keys": [],
+  "last_updated": "2026-03-22",
+  "notes": {
+    "instructions": "Add SHA256 hashed keys to warned_keys array. Do NOT add raw license keys.",
+    "effect": "Shows warning screen to user but does not block app access. Use blocked_keys.json to fully revoke.",
+    "example": "a1b2c3d4e5f6...",
+    "two_stage_process": "Step 1 = add hash here (warning). Step 2 = move hash to blocked_keys.json (revoke)."
+  }
+}
