@@ -129,6 +129,31 @@ footer p{font-size:12px;color:#333}
     </div>
 
     <div class="faq-item">
+      <div class="faq-q">💡 Why do caption and transcription results vary?</div>
+      <div class="faq-a">Transcription quality and processing speed are directly influenced by your PC hardware — this is completely normal and expected across all hardware levels. Here is how each component plays a role:<br><br>
+      <strong style="color:#fff">Storage (biggest impact on speed):</strong><br>
+      &nbsp;&nbsp;→ HDD (spinning disk) — slowest. Model files load noticeably slower, especially on first run.<br>
+      &nbsp;&nbsp;→ Standard SATA SSD — significantly faster. Good experience across all Whisper models.<br>
+      &nbsp;&nbsp;→ NVMe M.2 SSD — fastest available. Models load nearly instantly, storage is no longer a bottleneck.<br><br>
+      <strong style="color:#fff">GPU and VRAM:</strong><br>
+      &nbsp;&nbsp;→ No NVIDIA GPU — transcription falls back to CPU only (much slower).<br>
+      &nbsp;&nbsp;→ 4 GB VRAM — limited to smaller Whisper models (tiny, base).<br>
+      &nbsp;&nbsp;→ 8 GB+ VRAM — can run medium model for noticeably better accuracy.<br>
+      &nbsp;&nbsp;→ 10 GB+ VRAM — can run large model for best possible accuracy.<br><br>
+      <strong style="color:#fff">GPU Drivers:</strong><br>
+      &nbsp;&nbsp;→ Outdated NVIDIA drivers can cause CUDA errors or silent fallback to CPU.<br>
+      &nbsp;&nbsp;→ Always keep NVIDIA drivers up to date for best results.<br><br>
+      <strong style="color:#fff">CPU:</strong><br>
+      &nbsp;&nbsp;→ More cores and faster clock speed improve transcription when running on CPU.<br><br>
+      <strong style="color:#fff">Getting the best results regardless of hardware:</strong><br>
+      &nbsp;&nbsp;→ Generate more clips than you need and pick the best ones.<br>
+      &nbsp;&nbsp;→ Use manual timestamps to target specific moments in your video.<br>
+      &nbsp;&nbsp;→ Use the Caption Editor in the app to fix any misheard words before exporting.<br>
+      &nbsp;&nbsp;→ Use the Emoji Editor after export to fine-tune emoji assignments per segment.<br>
+      &nbsp;&nbsp;→ Try a higher Whisper model in AI Settings if your GPU has enough VRAM.</div>
+    </div>
+
+    <div class="faq-item">
       <div class="faq-q">🔴 License key fails with "No internet connection" error</div>
       <div class="faq-a">ShortsMinter requires internet access to validate your license on first launch. If you have internet but still see this error, your firewall or security software is likely blocking the app. See the firewall fix below — allow ShortsMinter through Windows Firewall or your third party security software, then try again.</div>
     </div>
