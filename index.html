@@ -204,7 +204,7 @@
     footer{flex-direction:column;text-align:center;padding:20px 16px}
     .footer-links{justify-content:center;flex-wrap:wrap;gap:12px}
   }
-.nav-links{display:flex;gap:24px;align-items:center}
+.nav-links{display:none}
 .nav-links a{font-size:13px;color:var(--sub)}
 .nav-links a:hover{color:var(--gold)}
 .nav-links a.active{color:var(--gold)}
@@ -213,6 +213,7 @@
 .footer-links{display:flex;gap:20px;flex-wrap:wrap}
 .footer-links a{font-size:12px;color:#444}
 .footer-links a:hover{color:var(--gold)}
+@media(min-width:481px){.nav-links{display:flex;gap:24px;align-items:center}}
 
 /* ── BOLT BURST MOBILE MENU ───────────────────────────── */
 .mob-trigger{display:none;align-items:center;justify-content:center;width:40px;height:40px;background:transparent;border:1.5px solid var(--gold);border-radius:8px;cursor:pointer;font-size:20px;color:var(--gold);animation:bolt-glow 2.5s ease-in-out infinite;flex-shrink:0}
