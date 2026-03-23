@@ -1,0 +1,72 @@
+{
+  "version": "1.0",
+  "effective_date": "March 19, 2026",
+  "published_by": "Masondogg Studios, LLC — Georgia, USA",
+  "key_points": [
+    "ShortsMinter\u2122 is provided as-is with no warranty",
+    "You are responsible for your source video content",
+    "Not liable for hardware stress from encoding operations",
+    "Not liable for lost or corrupted files \u2014 back up your work",
+    "1 license covers 3 machines \u2014 yours alone, not for sharing or resale",
+    "Refunds within 7 days if app fails to launch",
+    "Governed by the laws of Georgia, USA"
+  ],
+  "sections": [
+    {
+      "title": "1. ACCEPTANCE OF TERMS",
+      "body": "By installing, activating or using ShortsMinter\u2122 you agree to be bound by these Terms of Use. If you do not agree, do not install or use the software. Your purchase or activation of a license constitutes acceptance of these terms."
+    },
+    {
+      "title": "2. LICENSE GRANT",
+      "body": "Masondogg Studios, LLC grants you a personal, non-transferable, non-exclusive license to install and use ShortsMinter\u2122 on up to three personal computers owned by you. You may not resell, redistribute, sublicense or share your license key with any other person or entity. Sharing your license key is a violation of these terms and may result in immediate license revocation without refund.\n\nPurchasing multiple licenses for the purpose of resale or redistribution is strictly prohibited and will result in revocation of all associated licenses without refund. Each license is intended for personal use only by the original purchaser."
+    },
+    {
+      "title": "3. SOFTWARE PROVIDED AS-IS",
+      "body": "ShortsMinter\u2122 is provided \"as is\" without warranty of any kind, express or implied. Masondogg Studios, LLC makes no representations or warranties regarding fitness for a particular purpose, merchantability, accuracy of AI-generated results, or uninterrupted operation."
+    },
+    {
+      "title": "4. HARDWARE AND SYSTEM LIABILITY",
+      "body": "You acknowledge that video encoding, AI transcription and resource-intensive operations may place significant load on your hardware. Masondogg Studios, LLC is not liable for any hardware damage, overheating, system instability, or reduced hardware lifespan resulting from use of ShortsMinter\u2122. You accept full responsibility for your hardware and system configuration."
+    },
+    {
+      "title": "5. DATA AND FILE LIABILITY",
+      "body": "Masondogg Studios, LLC is not responsible for lost, corrupted or failed exports, or any loss of data resulting from use of ShortsMinter\u2122. You are solely responsible for maintaining backups of your source files and exported content."
+    },
+    {
+      "title": "6. CONTENT RESPONSIBILITY",
+      "body": "You are solely responsible for all content you create using ShortsMinter\u2122. You confirm that you own or have the legal right to use any source video you process. Masondogg Studios, LLC accepts no liability for copyright infringement, defamation, or any other legal claim arising from content you create."
+    },
+    {
+      "title": "7. THIRD PARTY SERVICES AND APIs",
+      "body": "ShortsMinter\u2122 optionally integrates with third party services including Anthropic Claude, OpenAI, and HuggingFace. These services are governed by their own terms of use. You are solely responsible for your API keys, associated costs, and compliance with each service's terms. Masondogg Studios, LLC is not affiliated with or liable for these third party services."
+    },
+    {
+      "title": "8. RESOURCE AND PERFORMANCE SETTINGS",
+      "body": "Any modifications you make to performance or resource settings within ShortsMinter\u2122 are made at your own risk. Masondogg Studios, LLC accepts no liability for any consequences resulting from user-modified settings."
+    },
+    {
+      "title": "9. REFUND POLICY",
+      "body": "Refunds are available within 7 days of purchase if ShortsMinter\u2122 fails to launch on your system and our support team is unable to resolve the issue. No refunds will be issued after 7 days from purchase or after a successful export has been completed. Refund requests must be submitted through the official ShortsMinter\u2122 support page at shortsminter.com/support.html"
+    },
+    {
+      "title": "10. LICENSE REVOCATION",
+      "body": "Masondogg Studios, LLC reserves the right to revoke your license without refund if you violate these terms, attempt to circumvent license validation, redistribute the software, share your license key, purchase licenses for resale, or use the software for unlawful purposes."
+    },
+    {
+      "title": "11. UPDATES AND MODIFICATIONS",
+      "body": "Masondogg Studios, LLC may release updates to ShortsMinter\u2122 at its discretion. Features may be added, modified or removed. All V1.x updates are included with your license. Major version upgrades are optional and announced separately. Continued use of the software constitutes acceptance of any updated terms."
+    },
+    {
+      "title": "12. LIMITATION OF LIABILITY",
+      "body": "To the maximum extent permitted by Georgia law, Masondogg Studios, LLC's total liability to you for any claim arising from use of ShortsMinter\u2122 shall not exceed the amount you paid for your license. In no event shall Masondogg Studios, LLC be liable for indirect, incidental, consequential, or punitive damages of any kind."
+    },
+    {
+      "title": "13. GOVERNING LAW",
+      "body": "These Terms of Use are governed by the laws of the State of Georgia, United States. Any disputes shall be resolved in the courts of Georgia."
+    },
+    {
+      "title": "14. CONTACT",
+      "body": "For support, refund requests or legal inquiries visit shortsminter.com/support.html or email shortsmintersupport@gmail.com"
+    }
+  ]
+}
