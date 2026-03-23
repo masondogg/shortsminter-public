@@ -1,0 +1,36 @@
+# .gitignore — ShortsMinter Repo
+# v4 — added TEMPLATE_*.html exclusion (local Captain reference only)
+# Previous entries unchanged
+
+*.py
+*.bat
+*.pfx
+*.pem
+*.key
+*.p12
+*.cer
+*.crt
+*.exe
+*.dll
+*.pyd
+*.log
+*.tmp
+*.temp
+*.pyc
+*.pyo
+__pycache__/
+build/
+dist/
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+
+# ShortsMinter Manager — added v3
+manager_config.json
+
+# HTML page template — local Captain reference only, never a live page
+# Location: G:\Video Editing\ShortsMinter\TEMPLATE_shortsminter_page.html
+# Captain: always ask Commander for this file before building any new .html page
+TEMPLATE_*.html
