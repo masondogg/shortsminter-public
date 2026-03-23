@@ -1,3 +1,8 @@
+# .gitignore — ShortsMinter Repo
+# v3 — updated for ShortsMinter Manager
+# Added: manager_config.json (stores Sheet IDs — must never be public)
+# Previous entries unchanged from your original
+
 *.py
 *.bat
 *.pfx
@@ -22,3 +27,6 @@ Thumbs.db
 desktop.ini
 .vscode/
 .idea/
+
+# ShortsMinter Manager — added v3
+manager_config.json
