@@ -213,6 +213,34 @@
 .footer-links{display:flex;gap:20px;flex-wrap:wrap}
 .footer-links a{font-size:12px;color:#444}
 .footer-links a:hover{color:var(--gold)}
+
+/* ── BOLT BURST MOBILE MENU ───────────────────────────── */
+.mob-trigger{display:none;align-items:center;justify-content:center;width:40px;height:40px;background:transparent;border:1.5px solid var(--gold);border-radius:8px;cursor:pointer;font-size:20px;color:var(--gold);animation:bolt-glow 2.5s ease-in-out infinite;flex-shrink:0}
+@keyframes bolt-glow{0%,100%{box-shadow:0 0 0 0 rgba(245,197,24,0)}50%{box-shadow:0 0 0 6px rgba(245,197,24,0.18)}}
+.bolt-overlay{position:fixed;inset:0;background:rgba(8,8,15,0.97);z-index:999;display:flex;flex-direction:column;transform:translateY(100%);transition:transform 0.45s cubic-bezier(0.16,1,0.3,1);visibility:hidden}
+.bolt-overlay::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(245,197,24,0.035) 1px,transparent 1px),linear-gradient(90deg,rgba(245,197,24,0.035) 1px,transparent 1px);background-size:44px 44px;pointer-events:none}
+.bolt-overlay.open{transform:translateY(0);visibility:visible}
+.bolt-close{position:absolute;top:18px;right:20px;background:transparent;border:none;color:#5a5f72;font-size:26px;cursor:pointer;padding:8px;line-height:1;transition:color 0.2s}
+.bolt-close:hover{color:#f5c518}
+.bolt-nav{display:flex;flex-direction:column;justify-content:center;flex:1;padding:70px 36px 16px;gap:4px}
+.bolt-nav a{display:flex;align-items:center;justify-content:space-between;padding:15px 0 15px 14px;font-size:21px;font-weight:700;color:#dde1ec;text-decoration:none;border-bottom:1px solid #1e1e2e;border-left:2px solid transparent;opacity:0;transform:translateX(50px);transition:color 0.2s,border-left-color 0.2s}
+.bolt-nav a::after{content:'→';font-size:14px;color:#5a5f72;transition:color 0.2s,transform 0.2s}
+.bolt-nav a:hover,.bolt-nav a.active{color:#f5c518;border-left-color:#f5c518}
+.bolt-nav a:hover::after{color:#f5c518;transform:translateX(4px)}
+.bolt-overlay.open .bolt-nav a{animation:bolt-link-in 0.4s cubic-bezier(0.16,1,0.3,1) forwards}
+.bolt-overlay.open .bolt-nav a:nth-child(1){animation-delay:0.06s}
+.bolt-overlay.open .bolt-nav a:nth-child(2){animation-delay:0.12s}
+.bolt-overlay.open .bolt-nav a:nth-child(3){animation-delay:0.18s}
+.bolt-overlay.open .bolt-nav a:nth-child(4){animation-delay:0.24s}
+.bolt-overlay.open .bolt-nav a:nth-child(5){animation-delay:0.30s}
+@keyframes bolt-link-in{to{opacity:1;transform:translateX(0)}}
+.bolt-cta{display:block;margin:12px 36px 0;padding:16px;background:#f5c518;color:#000!important;font-size:16px;font-weight:700;text-align:center;text-decoration:none!important;border-radius:10px;opacity:0;transform:translateY(12px)}
+.bolt-overlay.open .bolt-cta{animation:bolt-link-in 0.4s cubic-bezier(0.16,1,0.3,1) 0.36s forwards}
+.bolt-socials{display:flex;justify-content:center;gap:28px;padding:18px 36px 28px;opacity:0}
+.bolt-overlay.open .bolt-socials{animation:bolt-link-in 0.4s cubic-bezier(0.16,1,0.3,1) 0.42s forwards}
+.bolt-socials a{color:#5a5f72;font-size:22px;text-decoration:none;transition:color 0.2s;transform:scale(1);display:inline-block}
+.bolt-socials a:hover{color:#f5c518;transform:scale(1.2)}
+@media(max-width:480px){.mob-trigger{display:flex}}
 </style>
 </head>
 <body>
@@ -234,7 +262,26 @@
     <a href="terms.html">Terms</a>
     <a href="https://masondoggs.gumroad.com/l/founding" target="_blank" class="nav-btn">Get Early Access — $15</a>
   </div>
+  <button class="mob-trigger" id="boltTrigger" aria-label="Open menu">⚡</button>
 </nav>
+
+<div class="bolt-overlay" id="boltOverlay">
+  <button class="bolt-close" id="boltClose" aria-label="Close menu">✕</button>
+  <nav class="bolt-nav">
+    <a href="index.html" class="active">Home</a>
+    <a href="founders_beta.html">Founders</a>
+    <a href="support.html">Support</a>
+    <a href="guides.html">Guides</a>
+    <a href="terms.html">Terms</a>
+  </nav>
+  <a href="https://masondoggs.gumroad.com/l/founding" class="bolt-cta" target="_blank">⚡ Get ShortsMinter →</a>
+  <div class="bolt-socials">
+    <a href="https://www.youtube.com/@ShortsMinter" target="_blank" title="YouTube">🎬</a>
+    <a href="https://x.com/ShortsMinter" target="_blank" title="Twitter/X">🐦</a>
+    <a href="https://www.tiktok.com/@shortsminter" target="_blank" title="TikTok">🎵</a>
+    <a href="https://www.instagram.com/shortsminter/" target="_blank" title="Instagram">📸</a>
+  </div>
+</div>
 
 <!-- HERO -->
 <div class="hero">
@@ -537,6 +584,20 @@ fetch('https://raw.githubusercontent.com/masondogg/shortsminter-public/main/foun
     <a href="https://www.instagram.com/shortsminter/" target="_blank">📸 Instagram</a>
   </div>
 </footer>
+
+<script>
+(function(){
+  var trigger=document.getElementById('boltTrigger');
+  var overlay=document.getElementById('boltOverlay');
+  var close=document.getElementById('boltClose');
+  function open(){overlay.classList.add('open');document.body.style.overflow='hidden'}
+  function shut(){overlay.classList.remove('open');document.body.style.overflow=''}
+  if(trigger)trigger.addEventListener('click',open);
+  if(close)close.addEventListener('click',shut);
+  if(overlay)overlay.addEventListener('click',function(e){if(e.target===overlay)shut()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')shut()});
+})();
+</script>
 
 </body>
 </html>
