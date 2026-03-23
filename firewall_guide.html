@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Allow ShortsMinter Through Windows Firewall — Guide</title>
+<meta name="description" content="How to allow ShortsMinter through Windows Defender Firewall — quick step-by-step guide by Masondogg Studios.">
+<meta name="author" content="Masondogg Studios, LLC">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --gold:#f5c518;
+  --gold-dim:rgba(245,197,24,0.1);
+  --gold-border:rgba(245,197,24,0.28);
+  --black:#08080f;
+  --panel:#0d0d14;
+  --panel2:#13141a;
+  --text:#dde1ec;
+  --sub:#5a5f72;
+  --border:#1e1e2e;
+  --green:#22c55e;
+  --radius:12px;
+}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;font-size:16px;line-height:1.75}
+a{color:var(--gold);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* ── NAV ── */
+nav{background:var(--black);border-bottom:1px solid var(--border);padding:14px 40px;display:flex;align-items:center;position:sticky;top:0;z-index:100}
+.nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none}
+.nav-logo:hover{text-decoration:none}
+.nav-mark{width:38px;height:38px;background:var(--panel);border:1.5px solid var(--gold);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--gold);font-weight:700;flex-shrink:0}
+.nav-name{font-size:16px;font-weight:700;color:#fff}
+.nav-sub{font-size:11px;color:var(--sub)}
+
+/* ── HERO ── */
+.hero{background:var(--black);padding:68px 40px 52px;text-align:center;border-bottom:1px solid var(--border);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(245,197,24,0.022) 1px,transparent 1px),linear-gradient(90deg,rgba(245,197,24,0.022) 1px,transparent 1px);background-size:48px 48px;pointer-events:none}
+.badge{display:inline-block;background:#1a1600;border:1px solid var(--gold);color:var(--gold);font-size:11px;padding:5px 18px;border-radius:20px;margin-bottom:24px;letter-spacing:2px;font-weight:600}
+.hero h1{font-size:42px;font-weight:800;color:#fff;line-height:1.15;margin-bottom:14px;max-width:700px;margin-left:auto;margin-right:auto}
+.hero h1 span{color:var(--gold)}
+.hero-sub{font-size:16px;color:#666;max-width:520px;margin:0 auto 30px;line-height:1.8}
+.hero-chips{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.chip{display:flex;align-items:center;gap:6px;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:6px 13px;font-size:12px;color:#666}
+.chip em{color:var(--gold);font-style:normal}
+
+/* ── LAYOUT ── */
+.container{max-width:820px;margin:0 auto;padding:56px 40px}
+@media(max-width:768px){.container{padding:40px 20px}.hero{padding:48px 20px 40px}.hero h1{font-size:28px}nav{padding:12px 20px}}
+@media(max-width:480px){.hero h1{font-size:22px}}
+
+/* ── STEP BLOCK ── */
+.step-block{margin-bottom:48px}
+.step-header{display:flex;align-items:flex-start;gap:16px;margin-bottom:18px}
+.step-num{min-width:40px;height:40px;background:var(--gold);color:var(--black);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;flex-shrink:0}
+.step-title{font-size:19px;font-weight:700;color:#fff;margin-bottom:3px}
+.step-desc{font-size:13px;color:#555;line-height:1.6}
+
+.step-body{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+.step-img{border-bottom:1px solid var(--border);background:var(--panel2)}
+.step-img svg{width:100%;display:block}
+.step-notes{padding:18px 22px}
+.step-notes p{font-size:14px;color:#777;line-height:1.75;margin-bottom:10px}
+.step-notes p:last-child{margin-bottom:0}
+.step-notes strong{color:#dde1ec}
+
+/* ── CONNECTOR ── */
+.connector{display:flex;flex-direction:column;align-items:center;height:28px;margin-bottom:20px;padding-left:20px}
+.connector::before{content:'';width:2px;height:100%;background:linear-gradient(to bottom,rgba(245,197,24,0.4),transparent);border-radius:2px}
+
+/* ── CALLOUT ── */
+.callout{display:flex;gap:12px;align-items:flex-start;background:rgba(245,197,24,0.05);border:1px solid var(--gold-border);border-left:3px solid var(--gold);border-radius:8px;padding:13px 16px;margin:12px 0}
+.callout-icon{font-size:16px;flex-shrink:0;margin-top:1px}
+.callout p{font-size:13px;color:#888;margin:0;line-height:1.7}
+.callout strong{color:var(--gold)}
+.callout code{background:var(--panel2);color:var(--gold);border:1px solid var(--border);padding:1px 6px;border-radius:4px;font-size:12px;font-family:'Cascadia Code','Courier New',monospace}
+
+/* ── PATH BOX ── */
+.path-box{display:flex;align-items:center;gap:10px;background:var(--panel2);border:1px solid var(--border);border-radius:8px;padding:11px 16px;margin:10px 0}
+.path-box code{font-family:'Cascadia Code','Courier New',monospace;font-size:12px;color:var(--gold);flex:1;word-break:break-all}
+.copy-btn{background:transparent;border:1px solid var(--border);color:#555;font-size:11px;padding:3px 10px;border-radius:5px;cursor:pointer;white-space:nowrap;transition:all .2s;font-family:inherit;flex-shrink:0}
+.copy-btn:hover{border-color:var(--gold);color:var(--gold)}
+
+/* ── SECTION LABEL ── */
+.section-label{font-size:10px;color:var(--gold);letter-spacing:3px;font-weight:700;margin-bottom:5px}
+
+/* ── SUPPORT BANNER ── */
+.support-banner{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:36px 32px;text-align:center;margin-top:52px;position:relative;overflow:hidden}
+.support-banner::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(245,197,24,0.07) 0%,transparent 65%);pointer-events:none}
+.support-banner h3{font-size:22px;font-weight:800;color:#fff;margin-bottom:8px}
+.support-banner p{font-size:14px;color:#555;max-width:420px;margin:0 auto 24px;line-height:1.7}
+.btn-bolt{display:inline-flex;align-items:center;gap:10px;background:var(--gold);color:var(--black);padding:14px 30px;border-radius:10px;font-size:15px;font-weight:800;text-decoration:none;transition:opacity .2s}
+.btn-bolt:hover{opacity:.85;text-decoration:none}
+.btn-bolt-icon{animation:zap .8s ease-in-out infinite alternate}
+@keyframes zap{from{transform:scale(1) rotate(-5deg)}to{transform:scale(1.2) rotate(5deg)}}
+.btn-outline{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--gold);border:2px solid var(--gold-border);padding:13px 26px;border-radius:10px;font-size:14px;font-weight:700;text-decoration:none;transition:all .2s;margin-left:10px}
+.btn-outline:hover{border-color:var(--gold);opacity:.8;text-decoration:none}
+
+/* ── FOOTER ── */
+footer{border-top:1px solid var(--border);padding:20px 40px;display:flex;align-items:center}
+footer p{font-size:12px;color:#333}
+@media(max-width:768px){footer{padding:16px 20px}}
+
+/* ── TOAST ── */
+.toast{position:fixed;bottom:24px;right:24px;background:#1a1600;border:1px solid var(--gold);color:var(--gold);padding:10px 18px;border-radius:8px;font-size:13px;font-weight:600;opacity:0;transform:translateY(8px);transition:all .25s;z-index:999;pointer-events:none}
+.toast.show{opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="nav-mark">⚡</div>
+    <div>
+      <div class="nav-name">ShortsMinter™</div>
+      <div class="nav-sub">by Masondogg Studios</div>
+    </div>
+  </a>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="badge">⚡ SETUP GUIDE</div>
+  <h1>Allow ShortsMinter Through<br><span>Windows Defender Firewall</span></h1>
+  <p class="hero-sub">Windows sometimes blocks new apps by default. This quick guide walks you through adding ShortsMinter to your firewall's allowed list — no advanced settings needed.</p>
+  <div class="hero-chips">
+    <div class="chip"><em>🪟</em> Windows 10 / 11</div>
+    <div class="chip"><em>⏱</em> 2–3 minutes</div>
+    <div class="chip"><em>🎯</em> ShortsMinter.exe</div>
+  </div>
+</section>
+
+<!-- ── CONTENT ── -->
+<div class="container">
+
+  <!-- STEP 1 -->
+  <div class="step-block" id="step1">
+    <div class="step-header">
+      <div class="step-num">1</div>
+      <div>
+        <div class="step-title">Find Your ShortsMinter.exe</div>
+        <div class="step-desc">Locate the application on your desktop or in the install folder — you'll need to know where it is for Step 7.</div>
+      </div>
+    </div>
+    <div class="step-body">
+      <div class="step-img">
+        <svg viewBox="0 0 720 260" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <rect width="720" height="260" fill="#13141a"/>
+          <!-- Desktop bg -->
+          <rect width="720" height="220" fill="#1a1a2e"/>
+          <!-- Subtle grid -->
+          <line x1="0" y1="110" x2="720" y2="110" stroke="#1e1e2e" stroke-width="1"/>
+          <line x1="360" y1="0" x2="360" y2="220" stroke="#1e1e2e" stroke-width="1"/>
+          <!-- Desktop icon - real ShortsMinter icon via clipPath for rounded corners -->
+          <defs>
+            <clipPath id="iconClip">
+              <rect x="320" y="68" width="80" height="80" rx="14"/>
+            </clipPath>
+          </defs>
+          <image href="shortsminter_icon_128.png" x="320" y="68" width="80" height="80" clip-path="url(#iconClip)"/>
+          <!-- Icon label -->
+          <text x="360" y="162" text-anchor="middle" font-size="12" fill="#dde1ec" font-family="Segoe UI,sans-serif" font-weight="600">ShortsMinter</text>
+          <!-- Right-click cursor + context menu hint -->
+          <circle cx="400" cy="108" r="12" fill="rgba(245,197,24,0.15)" stroke="#f5c518" stroke-width="1.5"/>
+          <text x="400" y="113" text-anchor="middle" font-size="12" fill="#f5c518">↗</text>
+          <!-- Context menu preview -->
+          <rect x="408" y="72" width="178" height="74" rx="6" fill="#1a1a2a" stroke="#333" stroke-width="1"/>
+          <text x="420" y="92" font-size="11" fill="#888" font-family="Segoe UI,sans-serif">Open</text>
+          <line x1="416" y1="98" x2="580" y2="98" stroke="#1e1e2e"/>
+          <text x="420" y="114" font-size="11" fill="#f5c518" font-weight="600" font-family="Segoe UI,sans-serif">Properties</text>
+          <text x="420" y="134" font-size="10" fill="#555" font-family="Segoe UI,sans-serif">→ Open File Location</text>
+          <!-- Taskbar -->
+          <rect x="0" y="220" width="720" height="40" fill="#111118"/>
+          <rect x="8" y="228" width="36" height="24" rx="6" fill="#1e1e2e"/>
+          <text x="26" y="244" text-anchor="middle" font-size="14" fill="#888">⊞</text>
+          <!-- Clock -->
+          <text x="680" y="244" text-anchor="middle" font-size="11" fill="#555" font-family="Segoe UI,sans-serif">12:00</text>
+        </svg>
+      </div>
+      <div class="step-notes">
+        <p>Find the <strong>ShortsMinter</strong> icon on your desktop. You'll need the exact file path for Step 7 — the quickest way to get it is to <strong>right-click the icon → Properties → Open File Location</strong>. The folder that opens is where <code>ShortsMinter.exe</code> lives.</p>
+        <div class="callout">
+          <div class="callout-icon">📁</div>
+          <p><strong>Default install path:</strong> Unless you changed it during installation, ShortsMinter is located at <code>C:\Program Files\Masondogg Studios\ShortsMinter\ShortsMinter.exe</code> — keep that handy for Step 7.</p>
+        </div>
+        <p>You can also <strong>launch ShortsMinter</strong> first — if Windows shows a firewall prompt when the app opens, dismiss it for now and come back to this guide. That pop-up is what we're here to fix.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="connector"></div>
+
+  <!-- STEP 2 -->
+  <div class="step-block" id="step2">
+    <div class="step-header">
+      <div class="step-num">2</div>
+      <div>
+        <div class="step-title">Open Windows Security</div>
+        <div class="step-desc">Navigate to Windows Security from the Start menu or system tray.</div>
+      </div>
+    </div>
+    <div class="step-body">
+      <div class="step-img">
+        <svg viewBox="0 0 720 270" xmlns="http://www.w3.org/2000/svg">
+          <rect width="720" height="270" fill="#13141a"/>
+          <!-- Start menu panel -->
+          <rect x="40" y="20" width="360" height="230" rx="10" fill="#111118" stroke="#1e1e2e" stroke-width="1"/>
+          <!-- Search bar -->
+          <rect x="60" y="36" width="320" height="32" rx="8" fill="#1a1a2a" stroke="#1e1e2e"/>
+          <text x="80" y="57" font-size="12" fill="#888" font-family="Segoe UI,sans-serif">🔍  Windows Security</text>
+          <!-- Search results -->
+          <rect x="60" y="80" width="320" height="44" rx="6" fill="rgba(245,197,24,0.08)" stroke="#f5c518" stroke-width="1.5"/>
+          <text x="80" y="98" font-size="13" fill="#fff" font-weight="600" font-family="Segoe UI,sans-serif">🛡  Windows Security</text>
+          <text x="80" y="114" font-size="11" fill="#666" font-family="Segoe UI,sans-serif">App  ·  System</text>
+          <!-- Other results (dimmed) -->
+          <rect x="60" y="132" width="320" height="36" rx="6" fill="#1a1a2a"/>
+          <text x="80" y="155" font-size="12" fill="#444" font-family="Segoe UI,sans-serif">⚙  Windows Security Settings</text>
+          <rect x="60" y="176" width="320" height="36" rx="6" fill="#1a1a2a"/>
+          <text x="80" y="199" font-size="12" fill="#444" font-family="Segoe UI,sans-serif">🛡  Firewall &amp; network protection</text>
+          <!-- Arrow pointing at top result -->
+          <polygon points="386,102 396,97 396,107" fill="#f5c518"/>
+          <text x="402" y="106" font-size="11" fill="#f5c518" font-family="Segoe UI,sans-serif">← Press Enter</text>
+        </svg>
+      </div>
+      <div class="step-notes">
+        <p>Press the <strong>Windows key</strong> on your keyboard, type <strong>"Windows Security"</strong>, and press <strong>Enter</strong> — or click the top result when it appears. You can also click the shield icon in your system tray (bottom-right of the taskbar).</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="connector"></div>
+
+  <!-- STEP 3 -->
+  <div class="step-block" id="step3">
+    <div class="step-header">
+      <div class="step-num">3</div>
+      <div>
+        <div class="step-title">Go to Firewall &amp; Network Protection</div>
+        <div class="step-desc">Inside Windows Security, locate the Firewall section.</div>
+      </div>
+    </div>
+    <div class="step-body">
+      <div class="step-img">
+        <svg viewBox="0 0 720 300" xmlns="http://www.w3.org/2000/svg">
+          <rect width="720" height="300" fill="#13141a"/>
+          <rect width="720" height="300" fill="#1a1a2a" rx="0"/>
+          <rect width="720" height="34" fill="#111118"/>
+          <text x="14" y="22" font-size="12" fill="#888" font-family="Segoe UI,sans-serif">Windows Security</text>
+          <circle cx="702" cy="17" r="5" fill="#ef4444" opacity=".7"/>
+          <circle cx="686" cy="17" r="5" fill="#444" opacity=".7"/>
+          <circle cx="670" cy="17" r="5" fill="#444" opacity=".7"/>
+          <!-- Left nav -->
+          <rect x="0" y="34" width="188" height="266" fill="#111118"/>
+          <text x="16" y="62" font-size="13" fill="#aaa" font-weight="700" font-family="Segoe UI,sans-serif">🛡  Windows Security</text>
+          <text x="20" y="92" font-size="12" fill="#555" font-family="Segoe UI,sans-serif">🏠  Home</text>
+          <text x="20" y="116" font-size="12" fill="#555" font-family="Segoe UI,sans-serif">🦠  Virus &amp; threat</text>
+          <text x="20" y="140" font-size="12" fill="#555" font-family="Segoe UI,sans-serif">👤  Account protection</text>
+          <!-- Firewall - highlighted -->
+          <rect x="6" y="150" width="176" height="28" rx="6" fill="rgba(245,197,24,0.12)" stroke="#f5c518" stroke-width="1"/>
+          <text x="20" y="168" font-size="12" fill="#f5c518" font-weight="600" font-family="Segoe UI,sans-serif">🔥  Firewall &amp; network</text>
+          <polygon points="184,164 192,160 192,168" fill="#f5c518"/>
+          <text x="20" y="200" font-size="12" fill="#555" font-family="Segoe UI,sans-serif">📱  App &amp; browser control</text>
+          <text x="20" y="224" font-size="12" fill="#555" font-family="Segoe UI,sans-serif">🖥  Device security</text>
+          <!-- Main content -->
+          <rect x="188" y="34" width="532" height="266" fill="#1a1a2a"/>
+          <text x="210" y="74" font-size="18" font-weight="700" fill="#fff" font-family="Segoe UI,sans-serif">Firewall &amp; network protection</text>
+          <rect x="210" y="90" width="490" height="52" rx="8" fill="#13141a" stroke="#1e1e2e"/>
+          <text x="228" y="112" font-size="12" fill="#888" font-family="Segoe UI,sans-serif">Domain network</text>
+          <text x="228" y="130" font-size="11" fill="#22c55e" font-family="Segoe UI,sans-serif">Firewall on</text>
+          <rect x="210" y="150" width="490" height="52" rx="8" fill="#13141a" stroke="#1e1e2e"/>
+          <text x="228" y="172" font-size="12" fill="#fff" font-weight="600" font-family="Segoe UI,sans-serif">Private network (active)</text>
+          <text x="228" y="190" font-size="11" fill="#22c55e" font-family="Segoe UI,sans-serif">Firewall on</text>
+          <rect x="210" y="210" width="490" height="52" rx="8" fill="#13141a" stroke="#1e1e2e"/>
+          <text x="228" y="232" font-size="12" fill="#888" font-family="Segoe UI,sans-serif">Public network</text>
+          <text x="228" y="250" font-size="11" fill="#22c55e" font-family="Segoe UI,sans-serif">Firewall on</text>
+        </svg>
+      </div>
+      <div class="step-notes">
+        <p>In the Windows Security home screen, click <strong>Firewall &amp; network protection</strong> in the left sidebar. You'll land on a page showing your network profiles — domain, private, and public.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="connector"></div>
+
+  <!-- STEP 4 -->
+  <div class="step-block" id="step4">
+    <div class="step-header">
+      <div class="step-num">4</div>
+      <div>
+        <div class="step-title">Click "Allow an app through firewall"</div>
+        <div class="step-desc">Scroll down to find the link that opens the allowed apps list.</div>
+      </div>
+    </div>
+    <div class="step-body">
+      <div class="step-img">
+        <svg viewBox="0 0 720 260" xmlns="http://www.w3.org/2000/svg">
+          <rect width="720" height="260" fill="#1a1a2a"/>
+          <rect width="720" height="34" fill="#111118"/>
+          <text x="14" y="22" font-size="12" fill="#888" font-family="Segoe UI,sans-serif">Windows Security — Firewall &amp; network protection</text>
+          <!-- Left nav -->
+          <rect x="0" y="34" width="188" height="226" fill="#111118"/>
+          <text x="20" y="68" font-size="12" fill="#555" font-family="Segoe UI,sans-serif">🔥  Firewall &amp; network</text>
+          <!-- Main content -->
+          <rect x="188" y="34" width="532" height="226" fill="#1a1a2a"/>
+          <!-- Scrolled down view - showing links -->
+          <text x="210" y="68" font-size="13" fill="#777" font-family="Segoe UI,sans-serif">Firewall notification settings</text>
+          <line x1="210" y1="78" x2="700" y2="78" stroke="#1e1e2e"/>
+          <!-- THE key link - highlighted -->
+          <rect x="206" y="88" width="506" height="38" rx="7" fill="rgba(245,197,24,0.1)" stroke="#f5c518" stroke-width="1.5"/>
+          <text x="226" y="112" font-size="14" fill="#f5c518" font-weight="600" font-family="Segoe UI,sans-serif">🔗  Allow an app through firewall</text>
+          <!-- Click pulse -->
+          <circle cx="695" cy="107" r="14" fill="none" stroke="#f5c518" stroke-width="1.5" opacity=".5">
+            <animate attributeName="r" values="10;18;10" dur="1.4s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values=".7;0;.7" dur="1.4s" repeatCount="indefinite"/>
+          </circle>
+          <text x="595" y="112" font-size="11" fill="#f5c518" font-family="Segoe UI,sans-serif">Click this link →</text>
+          <line x1="210" y1="136" x2="700" y2="136" stroke="#1e1e2e"/>
+          <text x="210" y="160" font-size="13" fill="#555" font-family="Segoe UI,sans-serif">Network and Internet troubleshooter</text>
+          <line x1="210" y1="174" x2="700" y2="174" stroke="#1e1e2e"/>
+          <text x="210" y="198" font-size="13" fill="#555" font-family="Segoe UI,sans-serif">Windows Defender Firewall</text>
+          <line x1="210" y1="212" x2="700" y2="212" stroke="#1e1e2e"/>
+          <text x="210" y="235" font-size="12" fill="#444" font-family="Segoe UI,sans-serif" font-style="italic">Scroll down to find this option on the Firewall page</text>
+        </svg>
+      </div>
+      <div class="step-notes">
+        <p>Scroll down on the <strong>Firewall &amp; network protection</strong> page until you see <strong>Allow an app through firewall</strong>. Click it. This is the direct route — no need to go into Advanced Settings.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="connector"></div>
+
+  <!-- STEP 5 -->
+  <div class="step-block" id="step5">
+    <div class="step-header">
+      <div class="step-num">5</div>
+      <div>
+        <div class="step-title">Click "Change Settings"</div>
+        <div class="step-desc">The allowed apps list opens. You need to unlock it before you can make changes.</div>
+      </div>
+    </div>
+    <div class="step-body">
+      <div class="step-img">
+        <svg viewBox="0 0 720 290" xmlns="http://www.w3.org/2000/svg">
+          <rect width="720" height="290" fill="#1a1a2a"/>
+          <rect width="720" height="34" fill="#111118"/>
+          <text x="14" y="22" font-size="12" fill="#888" font-family="Segoe UI,sans-serif">Allowed apps — Windows Defender Firewall</text>
+          <circle cx="702" cy="17" r="5" fill="#ef4444" opacity=".7"/>
+          <!-- Window body -->
+          <rect x="20" y="44" width="680" height="230" rx="8" fill="#131320" stroke="#1e1e2e"/>
+          <text x="40" y="72" font-size="14" font-weight="700" fill="#fff" font-family="Segoe UI,sans-serif">Allowed apps and features</text>
+          <text x="40" y="92" font-size="12" fill="#555" font-family="Segoe UI,sans-serif">Allow apps to communicate through Windows Defender Firewall.</text>
+          <!-- Change settings button - HIGHLIGHTED -->
+          <rect x="470" y="104" width="210" height="32" rx="6" fill="rgba(245,197,24,0.12)" stroke="#f5c518" stroke-width="1.5"/>
+          <text x="528" y="124" font-size="12" fill="#f5c518" font-weight="600" font-family="Segoe UI,sans-serif">🔒  Change settings</text>
+          <!-- Arrow -->
+          <polygon points="460,120 452,115 452,125" fill="#f5c518"/>
+          <text x="360" y="124" font-size="11" fill="#f5c518" font-family="Segoe UI,sans-serif">Click here first →</text>
+          <!-- Column headers -->
+          <rect x="36" y="146" width="648" height="22" fill="#1a1a2a"/>
+          <text x="52" y="161" font-size="11" fill="#555" font-family="Segoe UI,sans-serif">Name</text>
+          <text x="530" y="161" font-size="11" fill="#555" font-family="Segoe UI,sans-serif">Private</text>
+          <text x="610" y="161" font-size="11" fill="#555" font-family="Segoe UI,sans-serif">Public</text>
+          <!-- Existing apps (blurred/dimmed) -->
+          <g opacity=".35" filter="url(#blur3)">
+            <rect x="36" y="168" width="648" height="22" fill="#1e1e2e" rx="3"/>
+            <text x="52" y="183" font-size="11" fill="#888" font-family="Courier New,monospace">███████ Service Host</text>
+            <rect x="528" y="172" width="14" height="14" rx="3" fill="#1a1a2a" stroke="#333"/>
+            <rect x="608" y="172" width="14" height="14" rx="3" fill="#1a1a2a" stroke="#333"/>
+            <rect x="36" y="192" width="648" height="22" fill="#13141a" rx="3"/>
+            <text x="52" y="207" font-size="11" fill="#888" font-family="Courier New,monospace">████ Background Task</text>
+            <rect x="528" y="196" width="14" height="14" rx="3" fill="#f5c518"/>
+            <rect x="608" y="196" width="14" height="14" rx="3" fill="#1a1a2a" stroke="#333"/>
+            <rect x="36" y="216" width="648" height="22" fill="#1e1e2e" rx="3"/>
+            <text x="52" y="231" font-size="11" fill="#888" font-family="Courier New,monospace">████████ System Network</text>
+            <rect x="528" y="220" width="14" height="14" rx="3" fill="#f5c518"/>
+            <rect x="608" y="220" width="14" height="14" rx="3" fill="#f5c518"/>
+          </g>
+          <defs><filter id="blur3"><feGaussianBlur stdDeviation="2"/></filter></defs>
+          <text x="40" y="258" font-size="11" fill="#444" font-family="Segoe UI,sans-serif" font-style="italic">Other app entries blurred — ShortsMinter not yet listed</text>
+        </svg>
+      </div>
+      <div class="step-notes">
+        <p>The <strong>Allowed apps</strong> window opens showing all currently permitted apps. The list will be greyed out and locked. Click <strong>Change settings</strong> in the upper-right — Windows may ask for admin confirmation, click <strong>Yes</strong>.</p>
+        <p>Once unlocked, the list becomes interactive and the <strong>Allow another app…</strong> button at the bottom activates.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="connector"></div>
+
+  <!-- STEP 6 -->
+  <div class="step-block" id="step6">
+    <div class="step-header">
+      <div class="step-num">6</div>
+      <div>
+        <div class="step-title">Click "Allow another app…"</div>
+        <div class="step-desc">With settings unlocked, add ShortsMinter to the allowed list.</div>
+      </div>
+    </div>
+    <div class="step-body">
+      <div class="step-img">
+        <svg viewBox="0 0 720 280" xmlns="http://www.w3.org/2000/svg">
+          <rect width="720" height="280" fill="#1a1a2a"/>
+          <rect width="720" height="34" fill="#111118"/>
+          <text x="14" y="22" font-size="12" fill="#888" font-family="Segoe UI,sans-serif">Allowed apps — Windows Defender Firewall</text>
+          <circle cx="702" cy="17" r="5" fill="#ef4444" opacity=".7"/>
+          <rect x="20" y="44" width="680" height="220" rx="8" fill="#131320" stroke="#1e1e2e"/>
+          <!-- Settings now unlocked -->
+          <rect x="470" y="52" width="210" height="30" rx="6" fill="#1e1e2e" stroke="#333"/>
+          <text x="528" y="71" font-size="12" fill="#555" font-family="Segoe UI,sans-serif">🔓  Change settings</text>
+          <!-- Column headers -->
+          <rect x="36" y="92" width="648" height="20" fill="#1a1a2a"/>
+          <text x="52" y="106" font-size="11" fill="#555" font-family="Segoe UI,sans-serif">Name</text>
+          <text x="530" y="106" font-size="11" fill="#555" font-family="Segoe UI,sans-serif">Private</text>
+          <text x="610" y="106" font-size="11" fill="#555" font-family="Segoe UI,sans-serif">Public</text>
+          <!-- Apps (blurred) -->
+          <g opacity=".3" filter="url(#blur4)">
+            <rect x="36" y="112" width="648" height="20" fill="#1e1e2e" rx="2"/>
+            <text x="52" y="126" font-size="11" fill="#888" font-family="Courier New,monospace">████████ svchost.exe</text>
+            <rect x="36" y="134" width="648" height="20" fill="#13141a" rx="2"/>
+            <text x="52" y="148" font-size="11" fill="#888" font-family="Courier New,monospace">██████ winlogon.exe</text>
+            <rect x="36" y="156" width="648" height="20" fill="#1e1e2e" rx="2"/>
+            <text x="52" y="170" font-size="11" fill="#888" font-family="Courier New,monospace">████ lsass.exe</text>
+            <rect x="36" y="178" width="648" height="20" fill="#13141a" rx="2"/>
+            <text x="52" y="192" font-size="11" fill="#888" font-family="Courier New,monospace">████████ taskhostw.exe</text>
+          </g>
+          <defs><filter id="blur4"><feGaussianBlur stdDeviation="2.5"/></filter></defs>
+          <!-- Allow another app button - HIGHLIGHTED -->
+          <rect x="36" y="208" width="190" height="34" rx="7" fill="rgba(245,197,24,0.12)" stroke="#f5c518" stroke-width="1.5"/>
+          <text x="68" y="229" font-size="13" fill="#f5c518" font-weight="700" font-family="Segoe UI,sans-serif">+ Allow another app…</text>
+          <!-- Arrow indicator -->
+          <circle cx="250" cy="225" r="12" fill="none" stroke="#f5c518" stroke-width="1.5" opacity=".6">
+            <animate attributeName="r" values="9;16;9" dur="1.4s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values=".7;0;.7" dur="1.4s" repeatCount="indefinite"/>
+          </circle>
+          <text x="266" y="229" font-size="11" fill="#f5c518" font-family="Segoe UI,sans-serif">← Click this</text>
+          <rect x="420" y="212" width="80" height="26" rx="5" fill="#1e1e2e" stroke="#333"/>
+          <text x="444" y="229" font-size="12" fill="#555" font-family="Segoe UI,sans-serif">OK</text>
+          <rect x="510" y="212" width="80" height="26" rx="5" fill="#1e1e2e" stroke="#333"/>
+          <text x="530" y="229" font-size="12" fill="#555" font-family="Segoe UI,sans-serif">Cancel</text>
+        </svg>
+      </div>
+      <div class="step-notes">
+        <p>With the list now unlocked, scroll to the bottom of the window and click <strong>Allow another app…</strong> This opens a file browser dialog so you can point Windows to ShortsMinter.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="connector"></div>
+
+  <!-- STEP 7 -->
+  <div class="step-block" id="step7">
+    <div class="step-header">
+      <div class="step-num">7</div>
+      <div>
+        <div class="step-title">Browse to ShortsMinter.exe</div>
+        <div class="step-desc">Use the file browser to locate the ShortsMinter application file.</div>
+      </div>
+    </div>
+    <div class="step-body">
+      <div class="step-img">
+        <svg viewBox="0 0 720 290" xmlns="http://www.w3.org/2000/svg">
+          <rect width="720" height="290" fill="#1a1a2a"/>
+          <rect width="720" height="34" fill="#111118"/>
+          <text x="14" y="22" font-size="12" fill="#888" font-family="Segoe UI,sans-serif">Add an app</text>
+          <circle cx="702" cy="17" r="5" fill="#ef4444" opacity=".7"/>
+          <rect x="20" y="44" width="680" height="230" rx="8" fill="#131320" stroke="#1e1e2e"/>
+          <text x="40" y="72" font-size="14" font-weight="700" fill="#fff" font-family="Segoe UI,sans-serif">Add an app</text>
+          <text x="40" y="90" font-size="12" fill="#555" font-family="Segoe UI,sans-serif">Select the app you want to add, or click Browse to find it.</text>
+          <!-- App list area -->
+          <rect x="40" y="102" width="640" height="80" rx="6" fill="#1a1a2a" stroke="#1e1e2e"/>
+          <text x="56" y="148" font-size="12" fill="#444" font-family="Segoe UI,sans-serif" font-style="italic">ShortsMinter may appear here if recently run — or use Browse below</text>
+          <!-- Path field -->
+          <text x="40" y="202" font-size="12" fill="#888" font-family="Segoe UI,sans-serif">Path:</text>
+          <rect x="40" y="210" width="490" height="30" rx="5" fill="#1a1a2a" stroke="#f5c518" stroke-width="1.5"/>
+          <text x="54" y="229" font-size="11" fill="#f5c518" font-family="Courier New,monospace">C:\Program Files\Masondogg Studios\ShortsMinter\ShortsMinter.exe</text>
+          <!-- Browse button - highlighted -->
+          <rect x="542" y="210" width="118" height="30" rx="5" fill="rgba(245,197,24,0.12)" stroke="#f5c518" stroke-width="1.5"/>
+          <text x="575" y="229" font-size="12" fill="#f5c518" font-weight="600" font-family="Segoe UI,sans-serif">Browse…</text>
+          <!-- Bottom buttons -->
+          <rect x="520" y="252" width="80" height="28" rx="5" fill="#f5c518"/>
+          <text x="544" y="270" font-size="12" fill="#000" font-weight="700" font-family="Segoe UI,sans-serif">Add</text>
+          <rect x="614" y="252" width="80" height="28" rx="5" fill="#1e1e2e" stroke="#333"/>
+          <text x="636" y="270" font-size="12" fill="#555" font-family="Segoe UI,sans-serif">Cancel</text>
+        </svg>
+      </div>
+      <div class="step-notes">
+        <p>An <strong>Add an app</strong> dialog appears. Click <strong>Browse…</strong> and navigate to the ShortsMinter executable. The default install path is:</p>
+        <div class="path-box">
+          <code>C:\Program Files\Masondogg Studios\ShortsMinter\ShortsMinter.exe</code>
+          <button class="copy-btn" onclick="doCopy(this,'C:\\Program Files\\Masondogg Studios\\ShortsMinter\\ShortsMinter.exe')">Copy</button>
+        </div>
+        <div class="callout">
+          <div class="callout-icon">🖱️</div>
+          <p><strong>Can't find it?</strong> Right-click the ShortsMinter desktop icon → <strong>Properties</strong> → <strong>Open File Location</strong>. The folder that opens is where <code>ShortsMinter.exe</code> lives. Paste that folder path into the Browse dialog's address bar, then select <code>ShortsMinter.exe</code>.</p>
+        </div>
+        <p>Once ShortsMinter.exe is selected and the path is shown, click <strong>Add</strong>.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="connector"></div>
+
+  <!-- STEP 8 -->
+  <div class="step-block" id="step8">
+    <div class="step-header">
+      <div class="step-num">8</div>
+      <div>
+        <div class="step-title">Check Private &amp; Public — Then Click OK</div>
+        <div class="step-desc">ShortsMinter is now in the list. Make sure both network types are checked.</div>
+      </div>
+    </div>
+    <div class="step-body">
+      <div class="step-img">
+        <svg viewBox="0 0 720 290" xmlns="http://www.w3.org/2000/svg">
+          <rect width="720" height="290" fill="#1a1a2a"/>
+          <rect width="720" height="34" fill="#111118"/>
+          <text x="14" y="22" font-size="12" fill="#888" font-family="Segoe UI,sans-serif">Allowed apps — Windows Defender Firewall</text>
+          <circle cx="702" cy="17" r="5" fill="#ef4444" opacity=".7"/>
+          <rect x="20" y="44" width="680" height="228" rx="8" fill="#131320" stroke="#1e1e2e"/>
+          <!-- Column headers -->
+          <rect x="36" y="58" width="648" height="20" fill="#1a1a2a"/>
+          <text x="52" y="72" font-size="11" fill="#555" font-family="Segoe UI,sans-serif">Name</text>
+          <text x="530" y="72" font-size="11" fill="#555" font-family="Segoe UI,sans-serif">Private</text>
+          <text x="610" y="72" font-size="11" fill="#555" font-family="Segoe UI,sans-serif">Public</text>
+          <!-- Blurred other apps -->
+          <g opacity=".3" filter="url(#blur5)">
+            <rect x="36" y="80" width="648" height="20" fill="#1e1e2e" rx="2"/>
+            <text x="52" y="94" font-size="11" fill="#888" font-family="Courier New,monospace">████████ svchost.exe</text>
+            <rect x="36" y="102" width="648" height="20" fill="#13141a" rx="2"/>
+            <text x="52" y="116" font-size="11" fill="#888" font-family="Courier New,monospace">██████ winlogon.exe</text>
+            <rect x="36" y="124" width="648" height="20" fill="#1e1e2e" rx="2"/>
+            <text x="52" y="138" font-size="11" fill="#888" font-family="Courier New,monospace">████ lsass.exe</text>
+          </g>
+          <defs><filter id="blur5"><feGaussianBlur stdDeviation="2.5"/></filter></defs>
+          <!-- ShortsMinter row - highlighted -->
+          <rect x="36" y="148" width="648" height="30" rx="4" fill="rgba(245,197,24,0.08)" stroke="#f5c518" stroke-width="1"/>
+          <text x="52" y="168" font-size="12" fill="#fff" font-weight="600" font-family="Segoe UI,sans-serif">⚡  ShortsMinter</text>
+          <!-- Private checkbox checked -->
+          <rect x="526" y="153" width="18" height="18" rx="4" fill="#f5c518" stroke="#f5c518"/>
+          <text x="530" y="166" font-size="12" fill="#000" font-weight="800" font-family="Segoe UI,sans-serif">✓</text>
+          <!-- Public checkbox checked -->
+          <rect x="606" y="153" width="18" height="18" rx="4" fill="#f5c518" stroke="#f5c518"/>
+          <text x="610" y="166" font-size="12" fill="#000" font-weight="800" font-family="Segoe UI,sans-serif">✓</text>
+          <!-- Labels under checkboxes -->
+          <text x="515" y="194" font-size="10" fill="#f5c518" font-family="Segoe UI,sans-serif">✓ Private</text>
+          <text x="596" y="194" font-size="10" fill="#f5c518" font-family="Segoe UI,sans-serif">✓ Public</text>
+          <!-- OK button -->
+          <rect x="556" y="208" width="80" height="30" rx="6" fill="#f5c518"/>
+          <text x="580" y="227" font-size="13" fill="#000" font-weight="700" font-family="Segoe UI,sans-serif">OK</text>
+          <rect x="648" y="208" width="80" height="30" rx="6" fill="#1e1e2e" stroke="#333"/>
+          <text x="668" y="227" font-size="12" fill="#555" font-family="Segoe UI,sans-serif">Cancel</text>
+          <!-- Glow on OK -->
+          <rect x="556" y="208" width="80" height="30" rx="6" fill="none" stroke="#f5c518" stroke-width="1.5" opacity=".4">
+            <animate attributeName="opacity" values=".3;.9;.3" dur="1.5s" repeatCount="indefinite"/>
+          </rect>
+        </svg>
+      </div>
+      <div class="step-notes">
+        <p>ShortsMinter now appears in the allowed apps list. You'll see two checkboxes to its right — one for <strong>Private</strong> and one for <strong>Public</strong> networks. Make sure <strong>both are checked</strong>.</p>
+        <p>Click <strong>OK</strong> to save and close the window. That's it — ShortsMinter is now allowed through your firewall. ✅</p>
+        <div class="callout">
+          <div class="callout-icon">💡</div>
+          <p><strong>Why both?</strong> Private covers your home or office Wi-Fi. Public covers hotspots and other networks. Checking both means ShortsMinter works wherever you are without needing to revisit this screen.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="connector"></div>
+
+  <!-- STEP 9 - CONFIRM -->
+  <div class="step-block" id="step9">
+    <div class="step-header">
+      <div class="step-num">9</div>
+      <div>
+        <div class="step-title">Confirm &amp; You're Done</div>
+        <div class="step-desc">Verify ShortsMinter is in the allowed list, then close and launch the app.</div>
+      </div>
+    </div>
+    <div class="step-body">
+      <div class="step-img">
+        <svg viewBox="0 0 720 220" xmlns="http://www.w3.org/2000/svg">
+          <rect width="720" height="220" fill="#1a1a2a"/>
+          <rect width="720" height="34" fill="#111118"/>
+          <text x="14" y="22" font-size="12" fill="#888" font-family="Segoe UI,sans-serif">Allowed apps — Confirmed</text>
+          <circle cx="702" cy="17" r="5" fill="#22c55e" opacity=".8"/>
+          <!-- Success banner -->
+          <rect x="20" y="46" width="680" height="40" rx="8" fill="rgba(34,197,94,0.07)" stroke="#22c55e" stroke-width="1"/>
+          <text x="42" y="70" font-size="13" fill="#22c55e" font-weight="600" font-family="Segoe UI,sans-serif">✓  ShortsMinter successfully added to Windows Defender Firewall allowed list</text>
+          <!-- Row confirmation -->
+          <rect x="20" y="96" width="680" height="80" rx="8" fill="#131320" stroke="#1e1e2e"/>
+          <rect x="36" y="110" width="648" height="20" fill="#1a1a2a"/>
+          <text x="52" y="124" font-size="11" fill="#555" font-family="Segoe UI,sans-serif">Name</text>
+          <text x="530" y="124" font-size="11" fill="#555" font-family="Segoe UI,sans-serif">Private</text>
+          <text x="610" y="124" font-size="11" fill="#555" font-family="Segoe UI,sans-serif">Public</text>
+          <rect x="36" y="132" width="648" height="28" rx="4" fill="rgba(245,197,24,0.07)" stroke="#f5c518" stroke-width="1"/>
+          <text x="52" y="150" font-size="12" fill="#fff" font-weight="600" font-family="Segoe UI,sans-serif">⚡  ShortsMinter</text>
+          <text x="532" y="150" font-size="13" fill="#22c55e" font-weight="700" font-family="Segoe UI,sans-serif">✓</text>
+          <text x="612" y="150" font-size="13" fill="#22c55e" font-weight="700" font-family="Segoe UI,sans-serif">✓</text>
+          <!-- Bottom status -->
+          <text x="40" y="198" font-size="12" fill="#555" font-family="Segoe UI,sans-serif" font-style="italic">Close this window and launch ShortsMinter — no more firewall prompts.</text>
+        </svg>
+      </div>
+      <div class="step-notes">
+        <p>Close the Allowed Apps window. ShortsMinter is now on the approved list and Windows Defender Firewall will no longer block it.</p>
+        <p>Launch <strong>ShortsMinter</strong> from your desktop — it should open and operate normally without any firewall interruption or security prompts.</p>
+        <div class="callout">
+          <div class="callout-icon">🎯</div>
+          <p><strong>Still seeing a prompt?</strong> If Windows pops up a firewall alert when you launch ShortsMinter, click <strong>Allow access</strong> and both checkboxes (Private + Public) will be confirmed automatically — same result, different path.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUPPORT BANNER -->
+  <div class="support-banner" id="support">
+    <div style="font-size:10px;color:var(--gold);letter-spacing:3px;font-weight:700;margin-bottom:12px">STILL STUCK?</div>
+    <h3>Strike the bolt. We've got you.</h3>
+    <p>If something in this guide didn't work out — wrong path, missing file, still blocked — our support team is a click away. No ticket queue, no bots.</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+      <a href="support.html" class="btn-bolt">
+        <span class="btn-bolt-icon">⚡</span>
+        Hit the Lightning Bolt — Get Support
+      </a>
+      <a href="guides.html" class="btn-outline">📖 More Guides</a>
+    </div>
+    <div style="margin-top:18px;font-size:12px;color:#333">
+      <a href="https://x.com/ShortsMinter" style="color:#444">@ShortsMinter on X</a> &nbsp;·&nbsp;
+      <a href="https://www.youtube.com/@ShortsMinter" style="color:#444">YouTube</a> &nbsp;·&nbsp;
+      <a href="https://www.instagram.com/shortsminter/" style="color:#444">Instagram</a>
+    </div>
+  </div>
+
+</div><!-- /container -->
+
+<!-- ── FOOTER ── -->
+<footer>
+  <p>© 2026 Masondogg Studios, LLC &nbsp;·&nbsp; ShortsMinter™</p>
+</footer>
+
+<div class="toast" id="toast">✓ Copied!</div>
+
+<script>
+function doCopy(btn, text) {
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = 'Copied!';
+    btn.style.color = 'var(--gold)';
+    btn.style.borderColor = 'var(--gold)';
+    var t = document.getElementById('toast');
+    t.classList.add('show');
+    setTimeout(() => {
+      t.classList.remove('show');
+      btn.textContent = 'Copy';
+      btn.style.color = '';
+      btn.style.borderColor = '';
+    }, 2000);
+  });
+}
+</script>
+</body>
+</html>
