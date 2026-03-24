@@ -260,6 +260,40 @@ footer p{font-size:12px;color:#333}
 
   <hr class="divider">
 
+  <!-- Credential Manager -->
+  <div class="section">
+    <div class="section-label">CREDENTIAL MANAGER</div>
+    <h2>Windows Credential Manager — Required for ShortsMinter</h2>
+    <p>ShortsMinter uses Windows Credential Manager to securely store your license key, API keys, and session data. If it is unavailable on your machine, activation will not work — full stop.</p>
+
+    <div class="card" style="border-color:var(--gold)">
+      <h3>🔑 What it is and why ShortsMinter needs it</h3>
+      <p>Windows Credential Manager is a built-in Windows security vault that stores passwords and license data for applications. ShortsMinter uses it to save your license key, Claude API key, OpenAI API key, and HuggingFace token between sessions — securely, without writing them to any file. If Credential Manager is unavailable, ShortsMinter cannot store or retrieve any of this data. Activation will fail and API keys entered in Settings will disappear every time the app restarts.</p>
+    </div>
+
+    <div class="card">
+      <h3>💡 How to check if it is enabled on your PC</h3>
+      <p>Click the Windows Start button and search for <strong style="color:#fff">Credential Manager</strong>. It should open a Control Panel window showing "Web Credentials" and "Windows Credentials" tabs. If nothing opens or you get an error, it may be disabled on your machine.<br><br>
+      Microsoft's official guide: <a href="https://support.microsoft.com/en-us/windows/accessing-credential-manager-1b5c916a-6a16-889f-8581-fc16e8165ac0" target="_blank">Accessing Credential Manager on Windows →</a></p>
+    </div>
+
+    <div class="card" style="border-color:var(--red)">
+      <h3>🔴 Common causes and how to fix them</h3>
+      <p><strong style="color:#fff">1. Security software blocking it</strong><br>
+      Antivirus or security suites (Bitdefender, Kaspersky, some Norton configs) can block Credential Manager API calls as a security policy. Open your security software and add ShortsMinter.exe as a trusted application or exclusion, then relaunch ShortsMinter.<br><br>
+      <strong style="color:#fff">2. Windows optimization tools disabled it</strong><br>
+      Popular "debloater" scripts and optimization tools sometimes disable the Windows Credential Manager service (called VaultSvc) without warning. To re-enable it:<br>
+      &nbsp;&nbsp;1. Press <strong style="color:#fff">Windows + R</strong> → type <strong style="color:#fff">services.msc</strong> → press Enter<br>
+      &nbsp;&nbsp;2. Scroll down to <strong style="color:#fff">Credential Manager</strong><br>
+      &nbsp;&nbsp;3. Right-click → Properties → set Startup type to <strong style="color:#fff">Automatic</strong><br>
+      &nbsp;&nbsp;4. Click <strong style="color:#fff">Start</strong> → OK<br>
+      &nbsp;&nbsp;5. Restart your PC and relaunch ShortsMinter<br><br>
+      <strong style="color:#fff">3. App needs administrator permission</strong><br>
+      ShortsMinter will detect this automatically and offer a one-click relaunch as Administrator. If that does not resolve it, right-click the ShortsMinter desktop shortcut and select <strong style="color:#fff">Run as administrator</strong>.<br><br>
+      If none of the above resolves the issue, use the bug report form below and include your system report — we will diagnose it fast.</p>
+    </div>
+  </div>
+
   <!-- Forms -->
   <div class="section">
     <div class="section-label">GET HELP</div>
