@@ -169,16 +169,151 @@ nav{background:rgba(8,8,15,0.92);backdrop-filter:blur(12px);border-bottom:1px so
   animation:fade-up 0.8s ease both;
 }
 
+/* ============================================================
+   THOR MODE - Hero Bolt FX
+   Desktop: full corona, rings, crackle, pulse
+   Mobile: simplified - glow only, no rings (performance)
+   ============================================================ */
+.hero-bolt-wrap{
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  margin-bottom:20px;
+  /* extra space for rings */
+  padding:40px;
+}
+/* Main bolt emoji */
 .hero-bolt{
-  font-size:clamp(64px,12vw,110px);
+  position:relative;
+  z-index:10;
+  font-size:clamp(72px,14vw,120px);
   line-height:1;
-  margin-bottom:16px;
-  animation:bolt-drop 1s cubic-bezier(0.16,1,0.3,1) 0.2s both;
-  filter:drop-shadow(0 0 40px rgba(245,197,24,0.5));
+  display:block;
+  animation:bolt-drop 1s cubic-bezier(0.16,1,0.3,1) 0.2s both,
+             bolt-throb 3s ease-in-out 1.2s infinite;
+  filter:
+    drop-shadow(0 0 20px rgba(245,197,24,1))
+    drop-shadow(0 0 50px rgba(245,197,24,0.8))
+    drop-shadow(0 0 100px rgba(245,197,24,0.5))
+    drop-shadow(0 0 160px rgba(245,197,24,0.3));
 }
 @keyframes bolt-drop{
-  from{opacity:0;transform:translateY(-40px) scale(0.8)}
+  from{opacity:0;transform:translateY(-60px) scale(0.6)}
   to{opacity:1;transform:translateY(0) scale(1)}
+}
+@keyframes bolt-throb{
+  0%,100%{
+    filter:
+      drop-shadow(0 0 20px rgba(245,197,24,1))
+      drop-shadow(0 0 50px rgba(245,197,24,0.8))
+      drop-shadow(0 0 100px rgba(245,197,24,0.5))
+      drop-shadow(0 0 160px rgba(245,197,24,0.3));
+    transform:scale(1);
+  }
+  50%{
+    filter:
+      drop-shadow(0 0 30px rgba(255,220,80,1))
+      drop-shadow(0 0 80px rgba(245,197,24,0.9))
+      drop-shadow(0 0 140px rgba(245,197,24,0.6))
+      drop-shadow(0 0 220px rgba(245,197,24,0.35));
+    transform:scale(1.06);
+  }
+}
+/* Pulse rings - expand outward and fade */
+.bolt-ring{
+  position:absolute;
+  border-radius:50%;
+  border:2px solid rgba(245,197,24,0.6);
+  animation:ring-expand 3s ease-out infinite;
+  pointer-events:none;
+  z-index:5;
+}
+.bolt-ring:nth-child(1){width:80px;height:80px;animation-delay:0s;border-color:rgba(245,197,24,0.7)}
+.bolt-ring:nth-child(2){width:80px;height:80px;animation-delay:0.8s;border-color:rgba(245,197,24,0.5)}
+.bolt-ring:nth-child(3){width:80px;height:80px;animation-delay:1.6s;border-color:rgba(245,197,24,0.35)}
+.bolt-ring:nth-child(4){width:80px;height:80px;animation-delay:2.4s;border-color:rgba(245,197,24,0.2)}
+@keyframes ring-expand{
+  0%{transform:scale(0.8);opacity:0.8;border-width:2.5px}
+  70%{opacity:0.3}
+  100%{transform:scale(4.5);opacity:0;border-width:0.5px}
+}
+/* Corona glow orb behind the bolt */
+.bolt-corona{
+  position:absolute;
+  width:120px;height:120px;
+  border-radius:50%;
+  background:radial-gradient(circle,
+    rgba(255,230,80,0.35) 0%,
+    rgba(245,197,24,0.25) 25%,
+    rgba(245,197,24,0.1) 55%,
+    transparent 75%
+  );
+  animation:corona-pulse 3s ease-in-out infinite;
+  z-index:4;
+  pointer-events:none;
+}
+@keyframes corona-pulse{
+  0%,100%{transform:scale(1);opacity:0.8}
+  50%{transform:scale(1.5);opacity:1}
+}
+/* Crackle sparks - tiny bolts that shoot out */
+.bolt-spark{
+  position:absolute;
+  width:3px;
+  background:linear-gradient(to bottom,rgba(255,240,100,0.9),transparent);
+  border-radius:2px;
+  transform-origin:bottom center;
+  animation:spark-shoot 2.5s ease-in-out infinite;
+  z-index:6;
+  pointer-events:none;
+}
+.bolt-spark:nth-child(5){height:24px;top:10px;left:50%;transform:translateX(-50%) rotate(-25deg);animation-delay:0s;animation-duration:2.2s}
+.bolt-spark:nth-child(6){height:18px;top:14px;left:50%;transform:translateX(-50%) rotate(30deg);animation-delay:0.4s;animation-duration:2.8s}
+.bolt-spark:nth-child(7){height:20px;top:8px;left:50%;transform:translateX(-50%) rotate(-50deg);animation-delay:0.9s;animation-duration:2.1s}
+.bolt-spark:nth-child(8){height:16px;top:12px;left:50%;transform:translateX(-50%) rotate(55deg);animation-delay:1.4s;animation-duration:3s}
+.bolt-spark:nth-child(9){height:22px;top:6px;left:50%;transform:translateX(-50%) rotate(5deg);animation-delay:1.9s;animation-duration:2.4s}
+@keyframes spark-shoot{
+  0%{opacity:0;transform:translateX(-50%) rotate(var(--r,0deg)) scaleY(0)}
+  15%{opacity:1;transform:translateX(-50%) rotate(var(--r,0deg)) scaleY(1)}
+  60%{opacity:0.4}
+  100%{opacity:0;transform:translateX(-50%) rotate(var(--r,0deg)) scaleY(0.2) translateY(-12px)}
+}
+/* Floor glow - light pool under the bolt */
+.bolt-floor{
+  position:absolute;
+  bottom:-20px;
+  width:160px;height:30px;
+  border-radius:50%;
+  background:radial-gradient(ellipse,rgba(245,197,24,0.25) 0%,transparent 70%);
+  animation:floor-pulse 3s ease-in-out infinite;
+  z-index:3;
+  pointer-events:none;
+}
+@keyframes floor-pulse{
+  0%,100%{opacity:0.5;transform:scaleX(1)}
+  50%{opacity:1;transform:scaleX(1.3)}
+}
+/* MOBILE - simplified, no rings, just glow + throb */
+@media(max-width:480px){
+  .hero-bolt-wrap{padding:20px}
+  .bolt-ring{display:none}
+  .bolt-spark{display:none}
+  .bolt-floor{display:none}
+  .bolt-corona{width:80px;height:80px}
+  .hero-bolt{
+    font-size:clamp(64px,18vw,90px);
+    animation:bolt-drop 1s cubic-bezier(0.16,1,0.3,1) 0.2s both,
+               bolt-throb-mobile 3s ease-in-out 1.2s infinite;
+    filter:
+      drop-shadow(0 0 16px rgba(245,197,24,1))
+      drop-shadow(0 0 40px rgba(245,197,24,0.7))
+      drop-shadow(0 0 80px rgba(245,197,24,0.4));
+  }
+  @keyframes bolt-throb-mobile{
+    0%,100%{filter:drop-shadow(0 0 16px rgba(245,197,24,1)) drop-shadow(0 0 40px rgba(245,197,24,0.7));transform:scale(1)}
+    50%{filter:drop-shadow(0 0 24px rgba(255,220,80,1)) drop-shadow(0 0 60px rgba(245,197,24,0.9));transform:scale(1.05)}
+  }
 }
 
 .hero-title{
@@ -305,7 +440,8 @@ nav{background:rgba(8,8,15,0.92);backdrop-filter:blur(12px);border-bottom:1px so
   font-size:13px;color:var(--gold);font-weight:600;
   margin-bottom:2px;
 }
-.letter-sig .sig-title{font-size:12px;color:var(--sub)}
+.letter-sig .sig-title{font-size:12px;color:var(--gold);font-weight:600;letter-spacing:0.3px}
+.letter-sig .sig-company{font-size:11px;color:var(--sub);margin-top:3px}
 
 /* -- Gift card -- */
 .gift-card{
@@ -579,7 +715,25 @@ footer p{font-size:12px;color:#333}
 <!-- HERO -->
 <section class="hero">
   <div class="badge-private">&#x26A1; Ambassador Access &nbsp;&mdash;&nbsp; Personal Invite Only</div>
-  <div class="hero-bolt">&#x26A1;</div>
+  <div class="hero-bolt-wrap">
+    <!-- Pulse rings -->
+    <div class="bolt-ring"></div>
+    <div class="bolt-ring"></div>
+    <div class="bolt-ring"></div>
+    <div class="bolt-ring"></div>
+    <!-- Corona glow -->
+    <div class="bolt-corona"></div>
+    <!-- Main bolt -->
+    <div class="hero-bolt">&#x26A1;</div>
+    <!-- Crackle sparks -->
+    <div class="bolt-spark"></div>
+    <div class="bolt-spark"></div>
+    <div class="bolt-spark"></div>
+    <div class="bolt-spark"></div>
+    <div class="bolt-spark"></div>
+    <!-- Floor glow -->
+    <div class="bolt-floor"></div>
+  </div>
   <h1 class="hero-title">
     This one&rsquo;s for <span class="name">You.</span>
   </h1>
@@ -635,8 +789,9 @@ footer p{font-size:12px;color:#333}
     </p>
     <div class="letter-sig">
       <div class="sig-name">Mitchell Faulkner II</div>
-      <div class="sig-aka">AKA Mason00g &nbsp;&#x26A1;&nbsp; AKA Masondogg</div>
-      <div class="sig-title">Founder &amp; CEO &mdash; Masondogg Studios, LLC</div>
+      <div class="sig-aka">AKA Mason00g &nbsp;&#x26A1;</div>
+      <div class="sig-title">Founder &amp; CEO &nbsp;&middot;&nbsp; Software Engineer &nbsp;&middot;&nbsp; Lead Developer &nbsp;&middot;&nbsp; Full-Stack Developer</div>
+      <div class="sig-company">Masondogg Studios, LLC</div>
     </div>
   </div>
 
