@@ -1,6 +1,13 @@
 {
   "version": "1.0b",
   "app_version": "V3.4c",
+  "latest_version": "V3.4c",
+  "update_message": "You are on the latest version.",
+  "update_urls": {
+    "founding": "",
+    "ambassadors": "",
+    "standard": ""
+  },
   "message": "Beta — Founding Member Release",
   "support_email": "shortsmintersupport@gmail.com",
   "urls": {
