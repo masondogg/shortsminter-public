@@ -253,7 +253,7 @@ footer p{font-size:12px;color:#333}
       <div class="faq-a">On first launch Windows Firewall may block ShortsMinter from accessing the internet. Follow these steps exactly:<br><br>
       1. <strong style="color:#fff">Close ShortsMinter completely first</strong> — firewall changes do not apply to a running app.<br>
       2. Open <strong style="color:#fff">Windows Security → Firewall &amp; network protection → Allow an app through firewall</strong>.<br>
-      3. Click <strong style="color:#fff">Change settings</strong> → <strong style="color:#fff">Allow another app</strong> → Browse → navigate to your ShortsMinter install folder. The default location is <strong style="color:#fff">C:\Program Files\Masondogg Studios\ShortsMinter\</strong> — select <strong style="color:#fff">ShortsMinter.exe</strong> and click Add. Note: do not select the desktop shortcut — you must browse to the actual .exe file in Program Files.<br>
+      3. Click <strong style="color:#fff">Change settings</strong> → <strong style="color:#fff">Allow another app</strong> → Browse → navigate to your ShortsMinter install folder. The default location is <strong style="color:#fff">C:\Program Files\Masondogg Studios\ShortsMinter\</strong> — select <strong style="color:#fff">ShortsMinter.exe</strong> and click Add. Note: do not browse to the desktop shortcut — you need the actual .exe in Program Files. If you are unsure of your install path: right-click the ShortsMinter desktop shortcut → <strong style="color:#fff">Properties</strong> → copy the path from the <strong style="color:#fff">Target</strong> field.<br>
       4. Make sure both <strong style="color:#fff">Private and Public</strong> boxes are checked for ShortsMinter.<br>
       5. Click OK to save.<br>
       6. <strong style="color:#fff">Reopen ShortsMinter</strong> and enter your license key.<br><br>
@@ -302,7 +302,7 @@ footer p{font-size:12px;color:#333}
   <hr class="divider">
 
   <!-- Credential Manager -->
-  <div class="section">
+  <div class="section" id="credential-manager">
     <div class="section-label">CREDENTIAL MANAGER</div>
     <h2>Windows Credential Manager — Required for ShortsMinter</h2>
     <p>ShortsMinter uses Windows Credential Manager to securely store your license key, API keys, and session data. If it is unavailable on your machine, activation will not work — full stop.</p>
@@ -320,18 +320,50 @@ footer p{font-size:12px;color:#333}
 
     <div class="card" style="border-color:var(--red)">
       <h3>🔴 Common causes and how to fix them</h3>
-      <p><strong style="color:#fff">1. Security software blocking it</strong><br>
-      Antivirus or security suites (Bitdefender, Kaspersky, some Norton configs) can block Credential Manager API calls as a security policy. Open your security software and add ShortsMinter.exe as a trusted application or exclusion, then relaunch ShortsMinter.<br><br>
-      <strong style="color:#fff">2. Windows optimization tools disabled it</strong><br>
+      <p><strong style="color:#fff">1. Service running but set to Manual startup</strong><br>
+      This is the most common cause — especially on VMs and debloated Windows installs. The service is technically running but was never configured to start automatically. To fix:<br>
+      &nbsp;&nbsp;1. Press <strong style="color:#fff">Windows + R</strong> → type <strong style="color:#fff">services.msc</strong> → press Enter<br>
+      &nbsp;&nbsp;2. Scroll down to <strong style="color:#fff">Credential Manager</strong><br>
+      &nbsp;&nbsp;3. Right-click → <strong style="color:#fff">Properties</strong><br>
+      &nbsp;&nbsp;4. Change Startup type to <strong style="color:#fff">Automatic</strong><br>
+      &nbsp;&nbsp;5. Click <strong style="color:#fff">Apply</strong> → <strong style="color:#fff">OK</strong> → close the window<br>
+      &nbsp;&nbsp;6. <strong style="color:#fff">Fully exit ShortsMinter</strong> — close it completely<br>
+      &nbsp;&nbsp;7. <strong style="color:#fff">Reboot your PC</strong><br>
+      &nbsp;&nbsp;8. Relaunch ShortsMinter and activate normally<br><br>
+      Note: If the service is already running you do not need to stop and restart it — changing to Automatic and rebooting is enough.<br><br>
+      <strong style="color:#fff">2. Service disabled entirely</strong><br>
       Popular "debloater" scripts and optimization tools sometimes disable the Windows Credential Manager service (called VaultSvc) without warning. To re-enable it:<br>
       &nbsp;&nbsp;1. Press <strong style="color:#fff">Windows + R</strong> → type <strong style="color:#fff">services.msc</strong> → press Enter<br>
       &nbsp;&nbsp;2. Scroll down to <strong style="color:#fff">Credential Manager</strong><br>
       &nbsp;&nbsp;3. Right-click → Properties → set Startup type to <strong style="color:#fff">Automatic</strong><br>
       &nbsp;&nbsp;4. Click <strong style="color:#fff">Start</strong> → OK<br>
-      &nbsp;&nbsp;5. Restart your PC and relaunch ShortsMinter<br><br>
-      <strong style="color:#fff">3. App needs administrator permission</strong><br>
+      &nbsp;&nbsp;5. Reboot your PC and relaunch ShortsMinter<br><br>
+      <strong style="color:#fff">3. Security software blocking it</strong><br>
+      Antivirus or security suites (Bitdefender, Kaspersky, some Norton configs) can block Credential Manager API calls as a security policy. Open your security software and add ShortsMinter.exe as a trusted application or exclusion, then relaunch ShortsMinter.<br><br>
+      <strong style="color:#fff">4. App needs administrator permission</strong><br>
       ShortsMinter will detect this automatically and offer a one-click relaunch as Administrator. If that does not resolve it, right-click the ShortsMinter desktop shortcut and select <strong style="color:#fff">Run as administrator</strong>.<br><br>
       If none of the above resolves the issue, use the bug report form below and include your system report — we will diagnose it fast.</p>
+    </div>
+
+    <div class="card" style="border-color:#5a5f72">
+      <h3>💻 Running ShortsMinter in a Virtual Machine?</h3>
+      <p>Credential Manager issues are more common in VM environments. Before contacting support try these steps in order — they cover the most common VM-specific causes:<br><br>
+      <strong style="color:#fff">Step 1 — Run as Administrator</strong><br>
+      Right-click the ShortsMinter shortcut → <strong style="color:#fff">Run as administrator</strong>. VMs often restrict credential access for non-elevated processes.<br><br>
+      <strong style="color:#fff">Step 2 — Verify VaultSvc from CMD as Admin</strong><br>
+      Open Command Prompt as Administrator and run:<br>
+      &nbsp;&nbsp;<strong style="color:#fff">sc query VaultSvc</strong> — confirm STATE shows RUNNING<br>
+      &nbsp;&nbsp;<strong style="color:#fff">sc config VaultSvc start= auto</strong> — set to Automatic<br>
+      &nbsp;&nbsp;<strong style="color:#fff">net start VaultSvc</strong> — start it (harmless if already running)<br><br>
+      <strong style="color:#fff">Step 3 — Test Credential Manager directly</strong><br>
+      Still in CMD as Admin run:<br>
+      &nbsp;&nbsp;<strong style="color:#fff">cmdkey /generic:SMTest /user:testuser /pass:testpass</strong><br>
+      &nbsp;&nbsp;<strong style="color:#fff">cmdkey /list</strong> — confirm SMTest appears<br>
+      &nbsp;&nbsp;<strong style="color:#fff">cmdkey /delete:SMTestGeneric</strong> — clean up<br>
+      If SMTest does not appear in the list, the VM's Credential Manager vault is restricted at the OS level — contact support with your VM software name and version.<br><br>
+      <strong style="color:#fff">Step 4 — Reboot and retest</strong><br>
+      Fully reboot the VM after making any service changes. Changes to VaultSvc startup type do not take effect until after a reboot.<br><br>
+      Note: ShortsMinter is designed and optimized for physical PC hardware. Full functionality in VMs is not guaranteed. See the VM disclaimer section above for details.</p>
     </div>
   </div>
 
@@ -433,7 +465,7 @@ footer p{font-size:12px;color:#333}
     <a href="founders_beta.html">Founders</a>
     <a href="support.html">Support</a>
     <a href="terms.html">Terms of Use</a>
-    <a href="support.html">Contact</a>
+    <a href="support.html#contact">Contact</a>
     <a href="https://www.youtube.com/@ShortsMinter" target="_blank">🎬 YouTube</a>
     <a href="https://x.com/ShortsMinter" target="_blank">🐦 Twitter/X</a>
     <a href="https://www.tiktok.com/@shortsminter" target="_blank">🎵 TikTok</a>
@@ -441,6 +473,10 @@ footer p{font-size:12px;color:#333}
   </div>
 </footer>
 
+<!-- ── BOLT JS — MUST BE LAST BEFORE </body> ──────────────────────────────
+     Cloudflare previously injected data-cfasync script here — removed.
+     Plain email in contact section prevents future injection.
+──────────────────────────────────────────────────────────────────────────── -->
 <script>
 (function(){
   var trigger=document.getElementById('boltTrigger');
