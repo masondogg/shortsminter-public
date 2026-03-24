@@ -242,9 +242,202 @@
 .bolt-socials a{color:#5a5f72;font-size:22px;text-decoration:none;transition:color 0.2s;transform:scale(1);display:inline-block}
 .bolt-socials a:hover{color:#f5c518;transform:scale(1.2)}
 @media(max-width:480px){.mob-trigger{display:flex}}
+
+  /* ============================================================
+     SHORTSMINTER - AMBIENT FX LAYER
+     All effects are position:fixed or pseudo-elements at z-index:0
+     or below. Nothing here touches existing layout or z-index values.
+     pointer-events:none on everything -- clicks pass through.
+     Mobile: reduced opacity, grid disabled for performance.
+     ============================================================ */
+
+  /* Glow orbs - soft ambient gold light pools */
+  .fx-orb{
+    position:fixed;border-radius:50%;pointer-events:none;z-index:0;
+    filter:blur(70px);
+  }
+  .fx-orb-1{
+    width:700px;height:700px;top:-250px;left:-200px;
+    background:radial-gradient(circle,rgba(245,197,24,0.18) 0%,transparent 65%);
+    animation:orb-drift-a 16s ease-in-out infinite;
+  }
+  .fx-orb-2{
+    width:550px;height:550px;bottom:-180px;right:-150px;
+    background:radial-gradient(circle,rgba(245,197,24,0.14) 0%,transparent 65%);
+    animation:orb-drift-b 20s ease-in-out infinite;
+  }
+  .fx-orb-3{
+    width:350px;height:350px;top:45%;left:55%;
+    background:radial-gradient(circle,rgba(245,197,24,0.09) 0%,transparent 65%);
+    animation:orb-drift-a 26s ease-in-out infinite 6s;
+  }
+  @keyframes orb-drift-a{
+    0%,100%{transform:translate(0,0)}
+    33%{transform:translate(40px,-30px)}
+    66%{transform:translate(-25px,35px)}
+  }
+  @keyframes orb-drift-b{
+    0%,100%{transform:translate(0,0)}
+    33%{transform:translate(-35px,25px)}
+    66%{transform:translate(30px,-40px)}
+  }
+
+  /* Electric grid - subtle gold lines across the whole page */
+  .fx-grid{
+    position:fixed;inset:0;z-index:0;pointer-events:none;
+    background-image:
+      linear-gradient(rgba(245,197,24,0.04) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(245,197,24,0.04) 1px,transparent 1px);
+    background-size:64px 64px;
+    animation:grid-breathe 8s ease-in-out infinite;
+  }
+  @keyframes grid-breathe{
+    0%,100%{opacity:0.6}
+    50%{opacity:1}
+  }
+
+  /* Hero radial bloom - lights up behind the headline */
+  .hero{position:relative;overflow:hidden}
+  .hero::before{
+    content:'';
+    position:absolute;inset:0;
+    background:radial-gradient(ellipse 80% 60% at 50% 0%,
+      rgba(245,197,24,0.16) 0%,
+      rgba(245,197,24,0.08) 40%,
+      transparent 70%);
+    pointer-events:none;z-index:0;
+    animation:hero-bloom 6s ease-in-out infinite;
+  }
+  /* Ensure hero content sits above the bloom */
+  .hero .badge,
+  .hero h1,
+  .hero p,
+  .hero-btns,
+  .hero .price-note,
+  .hero .founding-note,
+  .hero > div,
+  .hero > a{position:relative;z-index:1}
+  @keyframes hero-bloom{
+    0%,100%{opacity:0.7}
+    50%{opacity:1}
+  }
+
+  /* Hero bottom edge shimmer - one-time on load */
+  .hero::after{
+    content:'';
+    position:absolute;bottom:0;left:0;right:0;height:1px;
+    background:linear-gradient(90deg,
+      transparent 0%,
+      rgba(245,197,24,0.7) 30%,
+      rgba(245,197,24,1.0) 50%,
+      rgba(245,197,24,0.7) 70%,
+      transparent 100%);
+    animation:shimmer-line 3s ease-out 0.5s both;
+    background-size:200% auto;
+  }
+  @keyframes shimmer-line{
+    0%{opacity:0;background-position:200% center}
+    30%{opacity:1}
+    70%{opacity:0.6;background-position:-200% center}
+    100%{opacity:0.3;background-position:-200% center}
+  }
+
+  /* Founding note bolt glow - ⚡ in the hero already exists */
+  .founding-note{
+    animation:founding-pulse 4s ease-in-out infinite;
+  }
+  @keyframes founding-pulse{
+    0%,100%{text-shadow:none;opacity:.7}
+    50%{text-shadow:0 0 16px rgba(245,197,24,0.9),0 0 32px rgba(245,197,24,0.5);opacity:1}
+  }
+
+  /* Section entry glow - cards get subtle gold edge on scroll into view */
+  /* Using CSS only - no JS needed, relies on animation fill */
+  .feat-card,.price-card,.spec-card{
+    transition:border-color 0.4s ease,box-shadow 0.4s ease;
+  }
+  .feat-card:hover,.spec-card:hover{
+    border-color:rgba(245,197,24,0.25);
+    box-shadow:0 0 24px rgba(245,197,24,0.06),0 4px 20px rgba(0,0,0,0.3);
+  }
+  .price-card.featured:hover,.price-card:hover{
+    box-shadow:0 0 32px rgba(245,197,24,0.1),0 6px 24px rgba(0,0,0,0.3);
+  }
+
+  /* Floating background bolts - very faint, position:fixed */
+  .fx-bolt{
+    position:fixed;pointer-events:none;z-index:0;
+    opacity:0;animation:fx-bolt-flash 10s ease-in-out infinite;
+    filter:blur(0.3px);
+  }
+  .fx-bolt svg{display:block}
+  .fx-bolt-a{left:4%;top:12%;animation-delay:0s;animation-duration:9s}
+  .fx-bolt-b{right:6%;top:6%;animation-delay:3.5s;animation-duration:12s}
+  .fx-bolt-c{left:18%;bottom:25%;animation-delay:6.5s;animation-duration:8s}
+  .fx-bolt-d{right:4%;bottom:20%;animation-delay:1.8s;animation-duration:14s}
+  @keyframes fx-bolt-flash{
+    0%{opacity:0;transform:scaleY(0.85) translateY(-8px)}
+    4%{opacity:0.22;transform:scaleY(1) translateY(0)}
+    8%{opacity:0.12}
+    11%{opacity:0.26}
+    14%{opacity:0}
+    100%{opacity:0}
+  }
+
+  /* MOBILE - reduce everything, kill grid, simplify orbs */
+  @media(max-width:768px){
+    .fx-orb-1{width:400px;height:400px;opacity:0.7}
+    .fx-orb-2{width:300px;height:300px;opacity:0.7}
+    .fx-orb-3{display:none}
+    .fx-bolt-c,.fx-bolt-d{display:none}
+  }
+  @media(max-width:480px){
+    .fx-grid{display:none}
+    .fx-orb-1{width:280px;height:280px;top:-120px;left:-80px;opacity:0.5}
+    .fx-orb-2{width:220px;height:220px;bottom:-80px;right:-60px;opacity:0.5}
+    .fx-bolt-a,.fx-bolt-b{display:none}
+    .hero::before{
+      background:radial-gradient(ellipse 100% 50% at 50% 0%,
+        rgba(245,197,24,0.05) 0%,transparent 65%);
+    }
+  }
+  /* END AMBIENT FX LAYER */
+
 </style>
 </head>
 <body>
+
+<!-- FX LAYER - ambient effects, z-index:0, pointer-events:none, never blocks content -->
+<div class="fx-grid" aria-hidden="true"></div>
+<div class="fx-orb fx-orb-1" aria-hidden="true"></div>
+<div class="fx-orb fx-orb-2" aria-hidden="true"></div>
+<div class="fx-orb fx-orb-3" aria-hidden="true"></div>
+<!-- Background lightning bolts - very faint -->
+<div class="fx-bolt fx-bolt-a" aria-hidden="true">
+  <svg width="60" height="240" viewBox="0 0 32 140" fill="none">
+    <path d="M22 0 L6 70 L18 70 L3 140 L26 58 L14 58 L30 0Z" fill="url(#fxa)"/>
+    <defs><linearGradient id="fxa" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f5c518"/><stop offset="100%" stop-color="#f5c518" stop-opacity="0"/></linearGradient></defs>
+  </svg>
+</div>
+<div class="fx-bolt fx-bolt-b" aria-hidden="true">
+  <svg width="44" height="180" viewBox="0 0 22 100" fill="none">
+    <path d="M16 0 L4 50 L12 50 L1 100 L18 42 L10 42 L20 0Z" fill="url(#fxb)"/>
+    <defs><linearGradient id="fxb" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ffd84d"/><stop offset="100%" stop-color="#ffd84d" stop-opacity="0"/></linearGradient></defs>
+  </svg>
+</div>
+<div class="fx-bolt fx-bolt-c" aria-hidden="true">
+  <svg width="54" height="210" viewBox="0 0 28 120" fill="none">
+    <path d="M20 0 L5 60 L16 60 L2 120 L22 50 L12 50 L26 0Z" fill="url(#fxc)"/>
+    <defs><linearGradient id="fxc" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f5c518"/><stop offset="100%" stop-color="#f5c518" stop-opacity="0"/></linearGradient></defs>
+  </svg>
+</div>
+<div class="fx-bolt fx-bolt-d" aria-hidden="true">
+  <svg width="36" height="150" viewBox="0 0 18 80" fill="none">
+    <path d="M13 0 L3 40 L10 40 L1 80 L15 33 L8 33 L17 0Z" fill="url(#fxd)"/>
+    <defs><linearGradient id="fxd" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ffd84d"/><stop offset="100%" stop-color="#ffd84d" stop-opacity="0"/></linearGradient></defs>
+  </svg>
+</div>
+<!-- END FX LAYER -->
 
 <!-- NAV -->
 <nav>
