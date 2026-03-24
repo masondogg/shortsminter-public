@@ -179,7 +179,7 @@ footer p{font-size:12px;color:#333}
     <a href="founders_beta.html">Founders</a>
     <a href="support.html">Support</a>
     <a href="terms.html">Terms of Use</a>
-    <a href="support.html">Contact</a>
+    <a href="support.html#contact">Contact</a>
     <a href="https://www.youtube.com/@ShortsMinter" target="_blank">🎬 YouTube</a>
     <a href="https://x.com/ShortsMinter" target="_blank">🐦 Twitter/X</a>
     <a href="https://www.tiktok.com/@shortsminter" target="_blank">🎵 TikTok</a>
@@ -201,28 +201,47 @@ footer p{font-size:12px;color:#333}
 })();
 </script>
 
-
-// ── Live terms fetch from terms.json ─────────────────────────────
+<script>
+/* ── Live terms fetch from GitHub terms.json ─────────────────────────────
+   Tier 1: GitHub live fetch — updates meta + sections dynamically
+   Tier 2: Silent fallback — static HTML already in the page stays visible
+   No error shown to user on failure — static content always works.
+   NEVER put email address here — link to support.html#contact only.
+──────────────────────────────────────────────────────────────────────── */
 (function(){
   var TERMS_URL='https://raw.githubusercontent.com/masondogg/shortsminter-public/main/terms.json';
   fetch(TERMS_URL)
-    .then(function(r){return r.json()})
+    .then(function(r){
+      if(!r.ok) throw new Error('fetch failed');
+      return r.json();
+    })
     .then(function(data){
-      // Update meta
+      // ── Update effective date / publisher line ──
       var meta=document.getElementById('terms-meta');
-      if(meta&&data.effective_date&&data.published_by){
+      if(meta && data.effective_date && data.published_by){
         meta.innerHTML='Effective Date: '+data.effective_date
           +' &nbsp;·&nbsp; Published by: '+data.published_by;
       }
-      // Build sections
+      // ── Build sections from JSON ──
       var body=document.getElementById('terms-body');
-      if(body&&data.sections&&data.sections.length){
+      if(body && data.sections && data.sections.length){
         var html='';
         data.sections.forEach(function(s){
           html+='<h2>'+s.title+'</h2>';
-          // Split on double newlines for multiple paragraphs
+          // Split on double newlines for multiple paragraphs per section
           var paras=s.body.split('\n\n');
           paras.forEach(function(p){
+            p=p.trim();
+            if(p) html+='<p>'+p+'</p>';
+          });
+        });
+        body.innerHTML=html;
+      }
+    })
+    .catch(function(){
+      // Silent fallback — static HTML content in #terms-body stays visible
+      // No error shown to user
+    });
 })();
 </script>
 
