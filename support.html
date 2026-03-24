@@ -203,7 +203,48 @@ footer p{font-size:12px;color:#333}
     </div>
 
     <div class="faq-item">
-      <div class="faq-q">🔴 License key fails with "No internet connection" error</div>
+      <div class="faq-q">💡 Which GPUs support AI acceleration in ShortsMinter?</div>
+      <div class="faq-a">ShortsMinter uses NVIDIA CUDA for GPU-accelerated transcription. The table below shows what to expect based on your hardware. If your GPU is not supported, the app automatically falls back to CPU — no errors, no action needed, just slower transcription.<br><br>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-top:10px">
+
+        <div style="background:#0f2a0f;border:1px solid #22c55e;border-radius:8px;padding:14px">
+          <div style="font-size:11px;font-weight:700;color:#22c55e;letter-spacing:1.5px;margin-bottom:6px">✅ FULL GPU ACCELERATION</div>
+          <div style="font-size:12px;color:#dde1ec;line-height:1.8">
+            RTX 4090 / 4080 / 4070 Ti / 4070 / 4060 Ti / 4060<br>
+            RTX 3090 / 3080 Ti / 3080 / 3070 Ti / 3070 / 3060 Ti / 3060 / 3050<br>
+            RTX 2080 Ti / 2080 / 2070 / 2060<br>
+            <span style="color:#5a5f72;font-size:11px">Desktop and laptop variants of all the above</span>
+          </div>
+        </div>
+
+        <div style="background:#1a1a0a;border:1px solid #f59e0b;border-radius:8px;padding:14px">
+          <div style="font-size:11px;font-weight:700;color:#f59e0b;letter-spacing:1.5px;margin-bottom:6px">⏳ NOT YET SUPPORTED</div>
+          <div style="font-size:12px;color:#dde1ec;line-height:1.8">
+            RTX 5090 / 5080 / 5070 Ti / 5070 / 5060<br>
+            <span style="color:#5a5f72;font-size:11px">Blackwell architecture — PyTorch CUDA support is in development by NVIDIA and will be added in a future ShortsMinter Runtime update automatically.</span>
+          </div>
+        </div>
+
+        <div style="background:#1a0a0a;border:1px solid #ef4444;border-radius:8px;padding:14px">
+          <div style="font-size:11px;font-weight:700;color:#ef4444;letter-spacing:1.5px;margin-bottom:6px">❌ CPU MODE ONLY</div>
+          <div style="font-size:12px;color:#dde1ec;line-height:1.8">
+            GTX 1000 series and older<br>
+            AMD GPUs (all models)<br>
+            Intel integrated graphics<br>
+            No dedicated GPU<br>
+            <span style="color:#5a5f72;font-size:11px">Transcription works correctly — processing is slower. A fast CPU and NVMe SSD help significantly.</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div style="background:#0d0d14;border:1px solid #1e1e2e;border-radius:8px;padding:12px;margin-top:10px;font-size:12px;color:#5a5f72;line-height:1.7">
+        ⚠ <strong style="color:#dde1ec">Disclaimer:</strong> GPU acceleration support is determined by NVIDIA CUDA and PyTorch — not by ShortsMinter. Masondogg Studios does not control which GPU models are supported by these third-party systems and cannot guarantee GPU acceleration on any specific hardware configuration. Supported GPU lists may change as PyTorch releases updates. ShortsMinter will always fall back to CPU if GPU acceleration is unavailable.
+      </div>
+
+      </div>
+    </div>
       <div class="faq-a">ShortsMinter requires internet access to validate your license on first launch. If you have internet but still see this error, your firewall or security software is likely blocking the app. See the firewall fix below — allow ShortsMinter through Windows Firewall or your third party security software, then try again.</div>
     </div>
 
