@@ -168,7 +168,7 @@ footer p{font-size:12px;color:#333}
     <p>These Terms of Use are governed by the laws of the State of Georgia, United States. Any disputes shall be resolved in the courts of Georgia.</p>
 
     <h2>14. Contact</h2>
-    <p>For support, refund requests or legal inquiries visit <a href="https://shortsminter.com">shortsminter.com</a>, visit our <a href="support.html">support page</a>, or email <a href="mailto:shortsmintersupport@gmail.com">shortsmintersupport@gmail.com</a></p>
+    <p>For support, refund requests or legal inquiries visit <a href="https://shortsminter.com">shortsminter.com</a>, visit our <a href="support.html">support page</a>, or <a href="support.html#contact">contact us directly</a>.</p>
   </div>
 </div>
 
@@ -199,6 +199,8 @@ footer p{font-size:12px;color:#333}
   if(overlay)overlay.addEventListener('click',function(e){if(e.target===overlay)shut()});
   document.addEventListener('keydown',function(e){if(e.key==='Escape')shut()});
 })();
+</script>
+
 
 // ── Live terms fetch from terms.json ─────────────────────────────
 (function(){
@@ -221,15 +223,6 @@ footer p{font-size:12px;color:#333}
           // Split on double newlines for multiple paragraphs
           var paras=s.body.split('\n\n');
           paras.forEach(function(p){
-            if(p.trim()) html+='<p>'+p.trim()+'</p>';
-          });
-        });
-        body.innerHTML=html;
-      }
-    })
-    .catch(function(){
-      // Fetch failed — static fallback content already showing, do nothing
-    });
 })();
 </script>
 
