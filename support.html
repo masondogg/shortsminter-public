@@ -452,7 +452,7 @@ footer p{font-size:12px;color:#333}
     <div class="card">
       <h3>📧 Direct Email</h3>
       <p>For anything not covered by the forms above. We respond as soon as possible. Include your order number or license key hash and a description of your issue for fastest response.</p>
-      <p style="margin-top:12px;font-size:14px;color:#fff;font-weight:700">shortsmintersupport@gmail.com</p>
+      <p style="margin-top:12px;font-size:14px;color:#fff;font-weight:700"><a href="mailto:support@shortsminter.com">support@shortsminter.com</a></p>
     </div>
   </div>
 
@@ -485,11 +485,4 @@ footer p{font-size:12px;color:#333}
   function open(){overlay.classList.add('open');document.body.style.overflow='hidden'}
   function shut(){overlay.classList.remove('open');document.body.style.overflow=''}
   if(trigger)trigger.addEventListener('click',open);
-  if(close)close.addEventListener('click',shut);
-  if(overlay)overlay.addEventListener('click',function(e){if(e.target===overlay)shut()});
-  document.addEventListener('keydown',function(e){if(e.key==='Escape')shut()});
-})();
-</script>
-
-</body>
-</html>
+  if(close)
