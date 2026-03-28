@@ -8,7 +8,7 @@
     "ambassadors": "",
     "standard": ""
   },
-  "message": "Beta — Founding Member Release",
+  "message": "Beta \u2014 Founding Member Release",
   "support_email": "support@shortsminter.com",
   "urls": {
     "gumroad_verify": "https://api.gumroad.com/v2/licenses/verify",
@@ -28,29 +28,35 @@
     "instagram": "https://www.instagram.com/shortsminter/",
     "firewall_guide": "https://shortsminter.com/firewall_guide.html"
   },
+  "_migration_note": "Set these URLs when ready to move off GitHub CDN. Empty string = use GitHub fallback. No app update needed \u2014 existing installs switch on next launch.",
+  "version_json_url": "",
+  "blocked_keys_url": "",
+  "warnings_url": "",
+  "terms_url": "",
+  "founders_json_url": "",
   "tiers": {
     "founding": {
       "label": "Founding Member",
-      "badge": "⚡ Founding Member",
+      "badge": "\u26a1 Founding Member",
       "updates": "lifetime",
       "expires": false
     },
     "ambassadors": {
       "label": "Ambassador",
-      "badge": "🎖 Ambassador",
+      "badge": "\ud83c\udf96 Ambassador",
       "updates": "365days",
       "expires": true,
       "expiry_days": 365
     },
     "standard": {
       "label": "Licensed",
-      "badge": "✅ Licensed",
+      "badge": "\u2705 Licensed",
       "updates": "365days",
       "expires": false
     },
     "dev": {
       "label": "Developer",
-      "badge": "🔧 Developer",
+      "badge": "\ud83d\udd27 Developer",
       "updates": "unlimited",
       "expires": false
     }
