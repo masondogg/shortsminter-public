@@ -34,3 +34,6 @@ manager_config.json
 # Location: G:\Video Editing\ShortsMinter\TEMPLATE_shortsminter_page.html
 # Captain: always ask Commander for this file before building any new .html page
 TEMPLATE_*.html
+
+# ShortsMinter Manager — auto-added
+key_notes.json
